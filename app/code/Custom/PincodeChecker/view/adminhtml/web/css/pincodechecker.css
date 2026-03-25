@@ -1,0 +1,10 @@
+.admin__menu .item-top.parent.level-0 > a:before {
+ 
+ background: url("../images/download.png") center center no-repeat;
+    content: "";
+    background-size: auto 95%;
+}
+
+.admin__data-grid-wrap .data-grid .data-grid-draggable .data-row .data-grid-thumbnail-cell .admin__control-thumbnail > img:before {
+    border:none;
+}

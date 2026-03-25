@@ -1,0 +1,48 @@
+/*
+ * Copyright © 2018 Ideo. All rights reserved.
+ * @license GPLv3
+ */
+
+.store-locator-navigation,
+.store-locator-map {
+    height: 500px;
+}
+.store-locator-navigation {
+    width: 25%;
+    float: left;
+    padding-right: 20px;
+}
+.store-locator-map {
+    overflow: hidden;
+}
+.store-locator-results {
+    height: 468px;
+    overflow-y: auto;
+}
+.store-locator-result {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid #c2c2c2;
+}
+.store-locator-result-name {
+    margin: 0 0 5px;
+}
+.store-locator-result-desc {
+    display: block;
+}
+.store-locator-group-heading {
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 10px;
+}
+.store-locator-popup h4 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.store-locator-popup p {
+    margin-bottom: 0;
+}
+.store-locator-popup .result-email,
+.store-locator-popup .result-website {
+    display: block;
+}

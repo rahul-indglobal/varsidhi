@@ -1,0 +1,96 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 768px), print {
+        .column.main.pickupstoreinfo {
+            min-height: unset;
+        }
+    }
+
+    .left-border {
+        border-left: 1px solid lightgray;
+        width: 33.33%;
+    }
+
+    .text-darkgreen {
+        color: darkgreen;
+    }
+
+    .text-darkred {
+        color: darkred;
+    }
+
+    .googleMapDetails {
+        width: 100%;
+        height: 375px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<?php
+    $pickupStoreAddress = $block->getPickupStoreAddress();
+    $pickupStoreContact = $block->getPickupStoreContact();
+    $isOpen = $block->isStoreOpen();
+?>
+
+<div class="columns">
+    <div class="sidebar sidebar-main text-center">
+        <h2><?= /** @NoEscape */ __('Store Details')?></h2>
+    </div>
+    <div class="column main pickupstoreinfo">
+
+        <table>
+            <tr>
+                <td class="left-border">
+                    <?= $block->escapeHtml(__($pickupStoreAddress))?>
+                    <br><br>
+                    <?php
+                    if ($isOpen) {
+                        ?>
+                        <span class="text-darkgreen">
+                            <?= $block->escapeHtml(__('Store Open'))?>
+                        </span>
+                        <?php
+                    } else {
+                        ?>
+                        <span class="text-darkred">
+                            <?= $block->escapeHtml(__('Store Closed'))?>
+                        </span>
+                        <?php
+                    }
+                    ?>
+                </td>
+                <td class="left-border">
+                    <?= $block->escapeHtml(__('Call Us: '))?>
+                    <?= $block->escapeHtml(__($pickupStoreContact['mobile']))?>
+                    <br>
+
+                    <?= $block->escapeHtml(__('Email: '))?>
+                    <?= $block->escapeHtml(__($pickupStoreContact['email']))?>
+                    <br>
+
+                    <?= $block->escapeHtml(__('Fax: '))?>
+                    <?= $block->escapeHtml(__($pickupStoreContact['fax']))?>
+                    <br>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

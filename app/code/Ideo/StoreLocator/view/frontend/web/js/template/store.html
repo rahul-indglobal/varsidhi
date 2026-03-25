@@ -1,0 +1,25 @@
+<!--
+  ~ Copyright © 2018 Ideo. All rights reserved.
+  ~ @license GPLv3
+  -->
+<a href="javascript:void(0);" class="store-locator-result" ng-click="centerOnMarker()(store)">
+    <h4 class="store-locator-result-name">{{store.name}}</h4>
+    <span class="store-locator-result-desc" ng-show="store.address != ''">{{store.address}}</span>
+    <span class="store-locator-result-desc">
+        <span ng-show="store.city != '' && store.city != null">{{store.city}}, </span>
+        <span ng-show="store.country != '' && store.country != null">{{store.country}}</span>
+        <span ng-show="store.postcode != '' && store.postcode != null">{{store.postcode}}</span>
+    </span>
+    <span class="store-locator-result-desc">
+        <span ng-show="store.phone != '' && store.phone != null">{{langs.tel}}.: {{store.phone}}</span>
+    </span>
+    <span class="store-locator-result-desc">
+        <span ng-show="store.fax != '' && store.fax != null">{{langs.fax}}: {{store.fax}}</span>
+    </span>
+    <span class="store-locator-result-desc">
+        <span ng-show="store.email != '' && store.email != null">{{store.email}}</span>
+    </span>
+    <span class="store-locator-result-desc">
+        <span ng-show="store.website != '' && store.website != null">{{store.website}}</span>
+    </span>
+</a>

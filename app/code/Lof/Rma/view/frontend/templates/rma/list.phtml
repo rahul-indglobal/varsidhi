@@ -1,0 +1,60 @@
+<?php
+/* @var $block \Lof\Rma\Block\Rma\RmaList */
+  $helper_Rma = $this->helper('Lof\Rma\Helper\Help'); 
+
+?>
+<div>
+    <button onclick="window.location.href='<?= $block->getNewRmaUrl() ?>';" class="action primary new-rma-button" style="float: right; margin-top: -45px" >
+        <span ><?= __('New Return') ?></span>
+    </button>
+    <?php
+$list = $block->getRmaList();
+?>
+<?php if (count($list)): ?>
+    <div class="table-wrapper">
+        <table class="data table history">
+            <caption class="table-caption"><?=__('RMA') ?></caption>
+            <thead>
+            <tr class="first last">
+                <th scope="col" class="col"><?= __('RMA') ?></th>
+                <th scope="col" class="col"><?= __('Date') ?></th>
+                <th scope="col" class="col"><?= __('Order #') ?></th>
+                <th scope="col" class="col"><?= __('Status') ?></th>
+                <th scope="col" class="col actions"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($list as $rma): 
+
+            ?>
+                <tr>
+                    <td data-th="<?= __('RMA') ?>" class="col">
+                        <?= $rma->getIncrementId() ?>
+                       
+                    </td>
+                    <td data-th="<?= __('Date') ?>" class="col">
+                        <?= $block->formatDate($rma->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?>
+                    </td>
+                    <td data-th="<?= __('Order #') ?>" class="col">
+                        <a href="<?= $this->getUrl('sales/order/view', ['order_id' => $rma->getOrderId()]) ?>">
+                            <?php echo $rma["order_increment_id"] ?>
+                        </a>
+                    </td>
+                    <td data-th="<?= __('Status') ?>" class="col">
+                        <?php echo $block->GetStatusname($rma->getStatusId()) ?>
+                    </td>
+                    <td data-th="<?= __('Actions') ?>" class="col">
+                        <a href="<?php echo $this->getBaseUrl().'returns/rma/view/id/'.$rma["rma_id"]?>"><?= __('View Return') ?></a>
+                    </td>
+                </tr>
+            <?php endforeach?>
+            </tbody>
+        </table>
+    </div>
+<?php else: ?>
+    <div class="message info empty">
+        <span><?= __('There are no Returns') ?></span>
+    </div>
+<?php endif ?>
+
+</div>

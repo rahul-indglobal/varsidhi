@@ -1,0 +1,83 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<?php
+$isSecure = $block->isSecureServer();
+?>
+
+<div class="margin-left-to-form">
+    <div>
+        <input type="button"
+            class="action-btn <?= $block->escapeHtml(($isSecure == false) ? 'disabled-btn' : '')?>"
+            <?= $block->escapeHtml(($isSecure == false) ? 'disabled' : '')?>
+            id="latlong_btn"
+            name="latlong_btn"
+            value="<?= /** @NoEscape */ __('Get Current Location\'s Lat Long')?>">
+    </div>
+    <div>
+        <?php
+        if ($isSecure) {
+            ?>
+            <small><b>
+                <?= $block->escapeHtml(__('Note: Use if you want to get current location\'s latitude longitude.'))?>
+            </b></small>
+            <?php
+        } else {
+            ?>
+            <small><b>
+                <?= $block->escapeHtml(
+                    __('Note: This option is disabled because website is not running on ssl server.')
+                )?>
+            </b></small>
+            <?php
+        }
+        ?>
+    </div>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'Magento_Ui/js/modal/alert'
+    ], function($, alert) {
+        $(document).ready(function() {
+            $("#latlong_btn").click(function () {
+                $('body').trigger('processStart');
+                getLocation();
+            });
+        });
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    $("input[name='latitude']").val(position.coords.latitude).trigger('change');
+                    $("input[name='longitude']").val(position.coords.longitude).trigger('change');
+                    $('body').trigger('processStop');
+                }, function error (msg) {
+                    $('body').trigger('processStop');
+                    alert({
+                        title: $.mage.__('Store Pickup'),
+                        content: $.mage.__('Some issue occurring in getting latitude longitude.')
+                    });
+                }, {
+                    enableHighAccuracy: true
+                });
+            } else {
+                $('body').trigger('processStop');
+                alert({
+                    title: $.mage.__('Store Pickup'),
+                    content: $.mage.__('Geo Location is supported by your browser.')
+                });
+            }
+        }
+    });
+</script>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Webkul\StorePickup\Block\Widget\PickupStores" id="webkul_storepickup_pickup_stores">
+      	<label>Pickup Stores</label>
+      	<description>Pickup Stores</description>
+    </widget>
+    <widget class="Webkul\StorePickup\Block\Widget\PickupStoresDetails" id="webkul_storepickup_pickup_stores_details">
+        <label>Pickup Stores Details</label>
+        <description>Pickup Stores Details</description>
+    </widget>
+</widgets>

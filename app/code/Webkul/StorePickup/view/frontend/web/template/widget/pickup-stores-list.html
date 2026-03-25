@@ -1,0 +1,45 @@
+<!-- ko if: isCurrentLocationSet() -->
+<hr>
+<div class="main">
+    <div class="col main-section">
+        <div class="map-box">
+            <div id="googleMap"></div>
+        </div>
+    </div>
+    <div class="col side-section">
+        <div>
+            <div class="position-relative map-selector">
+                <div class="float-50 padding-left-10">
+                    <input type="radio" id="all_pickup_store" name="map_chooser" data-bind="click: showAllPickupStores"/>
+                    <label class="top-minus-2" for="all_pickup_store" data-bind="i18n: 'Show All Pickup Stores'"></label>
+                </div>
+                <div class="float-50">
+                    <input type="radio" id="single_pickup_store" name="map_chooser" data-bind="click: showPickupStoreDirection"/>
+                    <label class="top-minus-2" for="single_pickup_store" data-bind="i18n: 'Show Pickup Store Direction'"></label>
+                </div>
+            </div>
+
+            <div class="clear-float"></div>
+
+        </div>
+        <hr>
+
+        <div class="pickup-stores-box" data-bind="visible: isShowDirection">
+        <!-- ko foreach: pickupStores -->
+
+            <div data-bind="click: $parent.showMap.bind($parent, $data), attr: {'class': ($parent.activePickupStoreList() == $data.store.entity_id) ? 'list-box active-list-box': 'list-box'}">
+                <div>
+                    <div data-bind="html: $data.store.name"></div>
+                    <span data-bind="html: $data.distance"></span>
+                    <span data-bind="html: $data.distance_unit"></span>
+                </div>
+                <br>
+                <div data-bind="text: $data.is_open"></div>
+
+            </div>
+        <!-- /ko -->
+        </div>
+    </div>
+</div>
+
+<!-- /ko -->

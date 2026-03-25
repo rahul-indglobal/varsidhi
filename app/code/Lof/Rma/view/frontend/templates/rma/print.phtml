@@ -1,0 +1,200 @@
+<style type="text/css">
+    .rma-message-list{
+       list-style: none;
+        padding: 0;
+
+    }
+   .message-list .message-item{
+   background: #f4feff;
+    border: 1px solid #a2d7e1;
+    border-radius: 6px;
+    padding: 15px 10px;
+    margin-bottom: 15px;
+    position: relative;
+    width: 90%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    clear: both;
+}
+    .message-list .message-item.internal {
+    background: #6FA7D6;
+        }
+    .message-list .message-item.admin {
+    border: 1px solid #b5eaab;
+    float: right;
+        }
+</style>
+<?php
+/* @var $block \Lof\Rma\Block\Rma\View */
+$rma = $block->getRma();
+$order =  $this->getOrder();
+$items = $this->getOrder()->getAllItems(); 
+$helper_Rma = $this->helper('Lof\Rma\Helper\Data');
+ 
+?>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Request Information hhhhhhhhhhhhhh') ?></strong>
+    </div>
+    <div class="block-content">
+      <div class="box">
+           <div class="box-content">
+                <?php /* @escapeNotVerified */ echo __('<b>Order   : </b> # %1', $this->getOrder()->getRealOrderId()) ?> 
+          
+          <br>
+          <b><?php echo __('Order Date  ');?>:</b> <?php echo $this->getOrderDate(); ?>
+          <br>
+          <b><?php echo __('Order Status '); ?>:</b> <?php echo $this->getOrder()->getStatusLabel(); ?>
+          <br>
+          <b><?php echo __('Rma Status '); ?>:</b> <?php echo $this->GetStatusname($rma->getStatusId()); ?>
+          <br><b><?php echo __('Rma Date  '); ?>:</b> <?php echo $this->getRmaDate(); ?>
+                <br>
+          <?php
+          $fields = $helper_Rma->getVisibleFields($rma->getStatusId(), true,true);
+          foreach ($fields as $field){ 
+          ?>
+            <?php 
+            if ($value = $helper_Rma->getFieldValue($rma, $field)) {   
+             ?>
+                <b><?= __($field->getName()) ?> : </b>   <?= $value ?>
+             <?php } ?>
+          <?php } ?>
+          </div>
+       </div>
+			<?php 
+				$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+				$blockCustomer = $objectManager->get("Magento\Customer\Block\Account\Dashboard\Address");
+			?>
+            <div class="box box-order-shipping-information">
+                  <strong class="box-title">
+                      <?= __('Shipping Address') ?>:
+                      <div class="actions pr-di"><a id="address-edit" href="<?= $blockCustomer->escapeUrl($blockCustomer->getPrimaryBillingAddressEditUrl()) ?>"><?php echo __("Edit");?></a></div>
+                  </strong>
+
+                  <div class="box-content">
+                      <?php echo $this->getFormattedAddress(); ?>
+                  </div>
+            </div>
+    </div>
+</div>
+<div class="block">
+    <div class="block-title">
+        <strong><?= __('Items ') ?></strong>
+    </div>
+    <div class="block-content">
+        <div class="table-wrapper">
+            <table class="data table table-wrapper rma-items">
+                <thead>
+                <tr>
+                    <th scope="col" class="col name"><?= __('Product Information') ?></th>
+                    <th scope="col" class="col qty"><?= __('Quantity Return') ?></th>
+                    <th scope="col" class="col weight"><?= __('Weight') ?></th>        
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($items as $item){
+                  if ($item->getData('product_type') == 'bundle'){
+                ?>
+                    <tr class="even">                       
+                        <td><?= $item->getData('name') ?><?= __('(Bundled Product)') ?></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                <?php 
+                    continue;
+                  }
+                  $itemData =  $block->getRmaItemData($item);
+                  if(!isset($itemData['reason_id'])) continue;
+                ?>
+                    <tr>
+                        <td data-th="Product" class="col image">
+                            <div class="product-title"><?php echo $item->getData('name');?></div>
+                          <div class="product-sku-block"><span><?php echo __('SKU');?>:</span><?php echo $item->getData('sku');?></div>
+                          
+                          <?php 
+                          if(isset($item->getData('product_options')['attributes_info'])) {
+                            echo '<dl class="item-options">';
+                              foreach ($item->getData('product_options')['attributes_info'] as $key => $attributes_info) {
+                                echo '<dt>'.$attributes_info['label'].'</dt>';
+                                echo '<dd>'.$attributes_info['value'].'</dd>';
+                              }
+                            echo '</dl>';
+                          }
+                          ?>
+                            <img id="image"
+                                 src="<?= $block->initImage($item)->resize(150)->getUrl() ?>"
+                                 width="150px"/>
+                        </td>
+                        <td data-th="<?= __('QTY') ?>" class="col qty">
+                            <?= $itemData['qty_requested'] ?>
+                        </td>
+                        <td data-th="<?= __('Weight') ?>" class="col resolution">
+                                <?php 
+                                if($item->getData('weight'))
+                                  echo ($item->getData('weight')*$itemData['qty_requested']);
+                                else
+                                  echo __('unknow');
+                                ?>
+                        </td>
+                    </tr>
+                <?php } ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--<div class="block">-->
+<!--    <div class="block-title">-->
+<!--        <strong>--><?//= __('Comment') ?><!--</strong>-->
+<!--    </div>-->
+<!--    <div class="block-content">-->
+<!---->
+<!--    <legend class="admin__legend legend">-->
+<!--        <span>--><?//= __('RMA Message') ?><!--</span>-->
+<!--    </legend>-->
+<!---->
+<!--    <div class="message-list">-->
+<!--    --><?php
+//    $messages = $helper_Rma->getMessages($rma);
+//    foreach ($messages as $message){
+//    ?>
+<!--        <div class="message-item --><?//= $block->getMessageType($message) ?><!-- --><?//= $block->getSender($message)?><!--">-->
+<!--            <div class="rma-message__header">-->
+<!--                <strong>-->
+<!--                  --><?php //
+//                   if ($message->getCustomerId()){
+//                      echo $message->getCustomerName();
+//                      if ($helper_Rma->getCustomerEmail($message->getCustomerId()) != ''){
+//                        echo ", ";
+//                        echo $helper_Rma->getCustomerEmail($message->getCustomerId());
+//                      }
+//                   } elseif($message->getUserId()) {
+//                      echo $helper_Rma->getUserName($message->getUserId());
+//                    }
+//                  ?>
+<!--                </strong>-->
+<!--                <span  style="float: right;" >--><?//= $block->formatDate($message->getCreatedAt(), \IntlDateFormatter::MEDIUM) ?><!-- --><?//= $block->formatTime($message->getCreatedAt(), \IntlDateFormatter::SHORT) ?><!--</span>-->
+<!--            </div>-->
+<!---->
+<!--            <div-->
+<!--                class="rma-message__body">-->
+<!--              --><?php //
+//                if ($message->getText()){
+//                  if ($message->getIsHtml()){
+//                     echo $message->getText();
+//                   } else {
+//                    echo nl2br($message->getText());
+//                   }
+//                }
+//              ?>
+<!--            </div>-->
+<!--        </div>-->
+<!--    --><?php //} ?>
+<!--     </div>-->
+<!--   </div>-->
+<!--</div>-->

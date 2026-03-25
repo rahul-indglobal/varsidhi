@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Ideo. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Ideo\StoreLocator\Api\StoreRepositoryInterface" type="Ideo\StoreLocator\Model\StoreRepository" />
+    <preference for="Ideo\StoreLocator\Api\CategoryRepositoryInterface" type="Ideo\StoreLocator\Model\CategoryRepository" />
+
+    <preference for="Ideo\StoreLocator\Api\Data\StoreInterface" type="Ideo\StoreLocator\Model\Store" />
+    <preference for="Ideo\StoreLocator\Api\Data\CategoryInterface" type="Ideo\StoreLocator\Model\Category" />
+
+    <virtualType name="StoreLocatorStoresGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="StoreLocatorCategoriesGridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="StoreLocatorStoresGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Ideo\StoreLocator\Model\ResourceModel\Store\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">StoreLocatorStoresGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="StoreLocatorCategoriesGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Ideo\StoreLocator\Model\ResourceModel\Category\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">StoreLocatorCategoriesGridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Ideo\StoreLocator\Model\ResourceModel\Store\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ideo_storelocator_store</argument>
+            <argument name="resourceModel" xsi:type="string">Ideo\StoreLocator\Model\ResourceModel\Store</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Ideo\StoreLocator\Model\ResourceModel\Category\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">ideo_storelocator_category</argument>
+            <argument name="resourceModel" xsi:type="string">Ideo\StoreLocator\Model\ResourceModel\Category</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="storelocator_stores_grid_data_source" xsi:type="string">Ideo\StoreLocator\Model\ResourceModel\Store\Grid\Collection</item>
+                <item name="storelocator_categories_grid_data_source" xsi:type="string">Ideo\StoreLocator\Model\ResourceModel\Category\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\GraphQl\Query\QueryProcessor">
+        <plugin
+            name="Magefan_WebP_Plugin_Magento_Framework_GraphQl_Query_QueryProcessor"
+            type="Magefan\WebP\Plugin\Magento\Framework\GraphQl\Query\QueryProcessorPlugin"
+            sortOrder="10"
+            disabled="false"
+        />
+    </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin
+            name="Magefan_WebP_Plugin_Magento_Framework_App_Http_Context_GraphQl"
+            type="Magefan\WebP\Plugin\Magento\Framework\App\Http\GraphqlContextPlugin"
+            sortOrder="20"
+            disabled="false"
+        />
+    </type>
+</config>

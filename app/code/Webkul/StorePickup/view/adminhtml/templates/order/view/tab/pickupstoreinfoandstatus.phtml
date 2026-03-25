@@ -1,0 +1,395 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<?php
+$order = $block->getOrder();
+$scheduledOrderAt = $order->getPickupScheduledAt();
+$scheduled = $scheduledOrderDatetime = $order->getPickupScheduledDatetime();
+$scheduledOrderDate = '';
+$scheduledOrderTime = '';
+$orderId = $order->getId();
+$pickupStore = $block->getPickupStore($order->getPickupStore());
+$address = $block->getAddressFromPickupStore($order->getPickupStore());
+$contact = $block->getContactsOfPickupStore($order->getPickupStore());
+$isStoreUrgentlyClosed = false;
+
+$storeTimings = $pickupStore->getStoresTimings();
+if (isset($storeTimings['is_urgent_close'])) {
+    if ($storeTimings['is_urgent_close'] == true) {
+        $isStoreUrgentlyClosed = true;
+    }
+}
+
+$storeHolidaysWithName = $block->getStoreHolidaysWithName($pickupStore);
+if ($storeHolidaysWithName == '') {
+    $storeHolidaysWithName = '[]';
+}
+$storeWeeklyHolidays = $block->getStoreWeeklyHolidays($pickupStore);
+$storeTimingDayWise = $block->getStoreTimingDayWise($pickupStore);
+$saveScheduleUrl = $block->getUrl('storepickup/ajax/saveorderschedule');
+?>
+    <br>
+    <h3><?= $block->escapeHtml(__('Pickup Store Details'))?></h3>
+    <hr><br>
+    <div>
+        <h1>
+            <span class="text-darkcyan">
+                <?= $block->escapeHtml(__($pickupStore->getName()))?>
+            </span>
+        </h1>
+    </div>
+
+    <?php
+    if ($scheduledOrderDatetime) {
+        $scheduledOrderDatetime = date('D, d M Y h:i A', strtotime($scheduledOrderDatetime));
+        $scheduledOrderDate = date('D, d M Y', strtotime($scheduledOrderDatetime));
+        $scheduledOrderTime = date('H:i', strtotime($scheduledOrderDatetime));
+        ?>
+        <div>
+            <h3><?= $block->escapeHtml(__('Pickup Scheduled At'))?></h3>
+            <b>
+                <span class="text-green">
+                <?= $block->escapeHtml(
+                    __($scheduledOrderDatetime)
+                )
+                ?>
+                </span>
+            </b>
+        </div>
+        <br>
+        <?php
+    } else {
+        ?>
+        <div>
+            <h3><?= $block->escapeHtml(__('Pickup Scheduled At'))?></h3>
+            <b>
+                <span class="text-darkorange">
+                <?= $block->escapeHtml(
+                    __('Pending')
+                )
+                ?>
+                </span>
+            </b>
+        </div>
+        <br>
+        <?php
+    }
+    ?>
+
+
+    <h3><?= $block->escapeHtml(__('Pickup Store Address'))?></h3>
+    <span><?= $block->escapeHtml(__($address))?></span>
+
+    <br><br>
+    <div>
+        <h3><?= $block->escapeHtml(__('Contact'))?></h3>
+        <span>
+            <?= $block->escapeHtml(__('Name: '))?>
+            <?= $block->escapeHtml(__($contact['name']))?>
+            <br>
+            <?= $block->escapeHtml(__('Email: '))?>
+            <?= $block->escapeHtml(__($contact['email']))?>
+            <br>
+            <?= $block->escapeHtml(__('Mobile: '))?>
+            <?= $block->escapeHtml(__($contact['mobile']))?>
+            <br>
+            <?= $block->escapeHtml(__('Fax: '))?>
+            <?= $block->escapeHtml(__($contact['fax']))?>
+        </span>
+    </div>
+
+    <?php
+    if ($scheduledOrderAt) {
+        $scheduledOrderAt = date('D, d M Y h:i A', strtotime($scheduledOrderAt));
+        ?>
+        <br>
+        <div>
+            <small>
+                <h3><?= $block->escapeHtml(__('Pickup Created On'))?></h3>
+                <span>
+                <?= $block->escapeHtml(
+                    __($scheduledOrderAt)
+                )
+                ?>
+                </span>
+            </small>
+        </div>
+        <?php
+    }
+
+    ?>
+    <br>
+    <br>
+    <?php
+    $orderStatus = $order->getStatus();
+    if ($orderStatus == 'processing' || $orderStatus == 'pending') {
+        ?>
+        <h3><?= $block->escapeHtml(__('Order Pickup Scheduling'))?></h3>
+        <hr>
+        <br>
+        <?php
+        if (!$isStoreUrgentlyClosed) {
+            ?>
+        <form id="schedule-form" method="POST" class="form" name="schedule-form">
+            <fieldset class="admin__fieldset">
+                <div class="admin__field">
+                    <div class="admin__field-label">
+                        <label><?= /** @NoEscape */ __('Schedule Date')?></label>
+                    </div>
+
+                    <div class="admin__field-control">
+                        <div class="admin__field">
+                           <input
+                              type="text"
+                              placeholder="<?= $block->escapeHtml(__('Schedule Date'))?>"
+                              readOnly
+                              class="admin__control-text required-entry"
+                              id="schedule-date"
+                              name="schedule-date"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="admin__fieldset">
+                <div class="admin__field">
+                    <div class="admin__field-label">
+                        <label><?= /** @NoEscape */__('Schedule Time')?></label>
+                    </div>
+
+                    <div class="admin__field-control">
+                        <div class="admin__field">
+                           <input
+                              type="text"
+                              placeholder="<?= $block->escapeHtml(__('Schedule Time'))?>"
+                              readOnly
+                              disabled
+                              class="admin__control-text required-entry"
+                              id="schedule-time"
+                              name="schedule-time"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset class="admin__fieldset">
+                <div class="admin__field">
+                    <div class="admin__field-label">
+                        <label><?= /** @NoEscape */ __(' ')?></label>
+                    </div>
+
+                    <div class="admin__field-control">
+                        <div class="admin__field">
+                           <input type="submit"
+                              class="button-primary"
+                              id="schedule-btn"
+          value="<?= ($scheduled == true) ? /** @NoEscape */ __('Re-Schedule') : /** @NoEscape */ __('Schedule') ?>"/>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+            <?php
+        } else {
+            $msg = __('This pickup store is temporarily closed. You can\'t schedule this order for pickup.');
+            echo /** @NoEscape */ $msg;
+        }
+    }
+
+    $contact = $block->encode($contact);
+    ?>
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'Magento_Ui/js/modal/alert',
+            'Magento_Ui/js/modal/confirm',
+            'mage/mage',
+            'mage/translate',
+            'jquery/validate',
+            'mage/calendar'
+        ], function ($, alert, confirmation) {
+            'use strict';
+
+            $(document).ready(function () {
+                var saveScheduleUrl = '<?= $block->escapeHtml($saveScheduleUrl)?>';
+                var storeHolidays = JSON.parse('<?= /** @NoEscape */ $storeHolidaysWithName?>');
+                var storeWeeklyHolidays = JSON.parse('<?= /** @NoEscape */ $storeWeeklyHolidays?>');
+                var storeTimingDayWise = JSON.parse('<?= /** @NoEscape */ $storeTimingDayWise?>');
+                var scheduledOrderDate = '<?= /** @NoEscape */ $scheduledOrderDate?>';
+                var scheduledOrderTime = '<?= /** @NoEscape */ $scheduledOrderTime?>';
+                var pickupStoreName = '<?= $block->escapeHtml(__($pickupStore->getName()))?>';
+                var pickupStoreId = '<?= $block->escapeHtml(__($order->getPickupStore()))?>';
+                var address = '<?= $block->escapeHtml(__($address))?>';
+                var contact = '<?= /** @NoEscape */ $contact?>';
+                var orderId = <?= /** @NoEscape */ $orderId?>;
+
+                $("#schedule-date").calendar({
+                    changeYear: true,
+                    changeMonth: true,
+                    minDate: 'today',
+                    buttonText: 'Select Date',
+
+                    onSelect: function (date) {
+                        $("#schedule-time").val('');
+                        var minHours = 0;
+                        var maxHours = 23;
+                        var minMinutes = 0;
+                        var maxMinutes = 59;
+
+                        if (storeTimingDayWise.type == 1) {
+                            var timeStart = storeTimingDayWise['time_start'].split(':');
+                            minHours = timeStart[0];
+                            minMinutes = timeStart[1];
+
+                            var timeEnd = storeTimingDayWise['time_end'].split(':');
+                            maxHours = timeEnd[0];
+                            maxMinutes = timeEnd[1];
+                        } else if (storeTimingDayWise.type == 2) {
+                            var day = date.toString().substring(0, 3);
+                            var timeStart = storeTimingDayWise['data'][day]['time_start'].split(':');
+
+                            minHours = timeStart[0];
+                            minMinutes = timeStart[1];
+
+                            var timeEnd = storeTimingDayWise['data'][day]['time_end'].split(':');
+                            maxHours = timeEnd[0];
+                            maxMinutes = timeEnd[1];
+                        }
+
+                        if ($("#schedule-date").val().length) {
+                            $("#schedule-time").prop('disabled', false);
+
+                            $("#schedule-time").timepicker('destroy');
+                            $("#schedule-time").timepicker({
+                                'timeFormat': 'HH:mm',
+                                'showButtonPanel': true,
+                                'showOn': "button",
+                                'buttonImage': null,
+                                'buttonImageOnly': null,
+                                'buttonText': '',
+                                'minDateTime': new Date(2018, 11, 11, minHours, minMinutes),
+                                'maxDateTime': new Date(2018, 11, 11, maxHours, maxMinutes)
+                            });
+                        }
+                    },
+
+                    beforeShowDay: function(date){
+                        var string = $.datepicker.formatDate('yy-mm-dd', date);
+                        var result = storeHolidays.indexOf(string) == -1;
+                        var label = [];
+                        $.each(storeHolidays, function (index, val) {
+                            if (val.date == string) {
+                                label.push(val.name);
+                            }
+                        });
+
+                        if (label.length) {
+                            label = label.join(', ');
+                            return [false, 'festival', $.mage.__(label)];
+                        }
+
+                        var day = date.toString().substring(0, 3);
+                        if (storeWeeklyHolidays.includes(day)) {
+                            return [false, 'weeklyoff', $.mage.__('Weekly Off')];
+                        }
+
+                        return [true];
+                    }
+                });
+
+                if (scheduledOrderDate.length && scheduledOrderTime.length) {
+                    $("#schedule-date").val(scheduledOrderDate);
+                    $("#schedule-time").prop('disabled', false);
+
+                    var minHours = 0;
+                    var maxHours = 23;
+                    var minMinutes = 0;
+                    var maxMinutes = 59;
+
+                    if (storeTimingDayWise.type == 1) {
+                        var timeStart = storeTimingDayWise['time_start'].split(':');
+                        minHours = timeStart[0];
+                        minMinutes = timeStart[1];
+
+                        var timeEnd = storeTimingDayWise['time_end'].split(':');
+                        maxHours = timeEnd[0];
+                        maxMinutes = timeEnd[1];
+                    } else if (storeTimingDayWise.type == 2) {
+                        var day = scheduledOrderDate.substring(0, 3);
+                        var timeStart = storeTimingDayWise['data'][day]['time_start'].split(':');
+
+                        minHours = timeStart[0];
+                        minMinutes = timeStart[1];
+
+                        var timeEnd = storeTimingDayWise['data'][day]['time_end'].split(':');
+                        maxHours = timeEnd[0];
+                        maxMinutes = timeEnd[1];
+                    }
+
+                    $("#schedule-time").timepicker({
+                        'timeFormat': 'HH:mm',
+                        'showButtonPanel': true,
+                        'showOn': "button",
+                        'buttonImage': null,
+                        'buttonImageOnly': null,
+                        'buttonText': '',
+                        'minDateTime': new Date(2018, 11, 11, minHours, minMinutes),
+                        'maxDateTime': new Date(2018, 11, 11, maxHours, maxMinutes)
+                    });
+
+                    $("#schedule-time").val(scheduledOrderTime);
+                }
+
+                var dataForm = $('#schedule-form');
+                dataForm.mage('validation', {
+                    submitHandler: function(form, event) {
+                        var msg = 'Are you sure want to schedule order for pickup ?';
+                        if (scheduledOrderDate.length) {
+                            msg = 'You have already scheduled order for pickup.'+
+                                  ' Are you really want to re-schedule it ?';
+                        }
+
+                        confirmation({
+                            title: $.mage.__('Order Pickup Scheduling'),
+                            content: $.mage.__(msg),
+                            actions: {
+                                confirm: function() {
+                                    $('body').trigger('processStart');
+                                    var scheduledDate = $("#schedule-date").val();
+                                    var scheduledTime = $("#schedule-time").val();
+                                    $("#schedule-btn").prop('disabled', true);
+                                    new Ajax.Request(saveScheduleUrl, {
+                                        method: 'POST',
+                                        parameters: {
+                                            id: orderId,
+                                            scheduledDate: scheduledDate,
+                                            scheduledTime: scheduledTime,
+                                            storeName: pickupStoreName,
+                                            storeId: pickupStoreId,
+                                            address: address,
+                                            contact: contact
+                                        },
+                                        onSuccess: function(transport) {
+                                            $('body').trigger('processStop');
+                                            window.location.reload();
+                                        },
+                                        onFailure: function() {
+                                            $('body').trigger('processStop');
+                                            window.location.reload();
+                                        }
+                                    });
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>

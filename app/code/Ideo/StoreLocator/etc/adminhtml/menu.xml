@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Ideo. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Ideo_StoreLocator::storelocator" title="Store Locator" module="Ideo_StoreLocator" sortOrder="50" parent="Magento_Backend::content" resource="Ideo_StoreLocator::configuration" />
+        <add id="Ideo_StoreLocator::configuration" title="Configuration" module="Ideo_StoreLocator" sortOrder="10" parent="Ideo_StoreLocator::storelocator" action="adminhtml/system_config/edit/section/storelocator" resource="Ideo_StoreLocator::configuration" />
+        <add id="Ideo_StoreLocator::categories" title="Categories" module="Ideo_StoreLocator" sortOrder="20" parent="Ideo_StoreLocator::storelocator" action="storelocator/categories" resource="Ideo_StoreLocator::categories" />
+        <add id="Ideo_StoreLocator::stores_list" title="Stores" module="Ideo_StoreLocator" sortOrder="30" parent="Ideo_StoreLocator::storelocator" action="storelocator/stores" resource="Ideo_StoreLocator::stores" />
+    </menu>
+</config>

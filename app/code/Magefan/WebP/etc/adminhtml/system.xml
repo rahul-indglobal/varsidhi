@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="mfwebp" translate="label" sortOrder="342" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>WebP Optimized Images</label>
+            <tab>magefan</tab>
+            <resource>Magefan_WebP::config</resource>
+            <group id="general" translate="label" type="text" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General</label>
+                <attribute type="expanded">1</attribute>
+                <field id="version" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Magefan\WebP\Block\Adminhtml\System\Config\Form\Info</frontend_model>
+                </field>
+                <field id="enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="key" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Product Key</label>
+                    <frontend_model>Magefan\Community\Block\Adminhtml\System\Config\Form\ProductKeyField</frontend_model>
+                </field>
+                <field id="quality" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Quality (1-100)</label>
+                    <comment><![CDATA[
+                        If you use high value (90-100) you will get the best quality but also these images will have bigger size<br>
+                        Don't forget to clean WebP cache after change  value of quality!
+                        ]]>
+                    </comment>
+                </field>
+                <field id="metadata" translate="label comment" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Image Metadata</label>
+                    <comment><![CDATA[
+                        A comma-separated list of metadata to copy from the original image to the webp.
+                        Valid values: all, none, exif, icc, xmp. The default is none.
+                        Note that the more metadata you include the bigger size of webp image.
+                        Find more information <a href="https://developers.google.com/speed/webp/docs/cwebp" target="_blank" rel="nofollow noopener">here</a>.
+                        ]]>
+                    </comment>
+                </field>
+                <field id="creation_options" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>WebP Generation Mode</label>
+                    <source_model>Magefan\WebP\Model\Config\Source\CreationOptions</source_model>
+                </field>
+                <field id="skip_by_time" translate="label comment" type="text" sortOrder="46" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Skip Images Created More Than (Days)</label>
+                    <comment><![CDATA[
+                        Using this option you can skip old images when converting by cron or manually. Leave blank to not skip old images.
+                        ]]>
+                    </comment>
+                    <depends>
+                        <field id="creation_options" separator=",">1,2,3</field>
+                    </depends>
+                </field>
+                <field id="skip_media_folders" translate="label comment" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Skip Media Folders</label>
+                    <comment><![CDATA[
+                        List of files and folders that wil not be converted<br>
+                        E.g.: media/magefan_webp/wysiwyg<br>
+                        E.g.: media/catalog/product/3/4/example.png<br>
+                        ]]>
+                    </comment>
+                </field>
+                <field id="skip_static_folders" translate="label comment" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Skip Static Folders</label>
+                    <comment><![CDATA[
+                        List of files and folders that wil not be converted<br>
+                        E.g.:  Magento_Catalog/images/product.png
+                        E.g.:  static/adminhtml
+                        ]]>
+                    </comment>
+                </field>
+                <field id="convert_button" translate="label" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label></label>
+                    <frontend_model>Magefan\WebP\Block\Adminhtml\System\Config\Form\Button</frontend_model>
+                    <comment>This action will clean all generated WebP images cache</comment>
+                </field>
+            </group>
+            <group id="advanced_settings" translate="label" type="text" sortOrder="34" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Advanced WebP Conversion Settings</label>
+                <field id="convert_exists_picture" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0" >
+                    <label>Convert HTML Picture Tag Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If you use picture HTML tags that contain no WebP images, enable this option to convert them properly.</comment>
+                </field>
+                <field id="convert_background_images" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Convert CSS Background Images</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If you use CSS background images in an HTML tag style attribute, you may enable this option to convert these images to WebP.</comment>
+                </field>
+                <field id="convert_images_inserted_via_page_builder" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Convert Images and Sliders inserted via Magento Page Builder</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="convert_images_in_graphql_requests" translate="label" type="select" sortOrder="140" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Convert Images In GraphQL Requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="convert_images_in_rest_api_requests" translate="label" type="select" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1" >
+                    <label>Convert Images in REST API Requests</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="external_websites" translate="label comment" type="textarea" sortOrder="150" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Convert Images From External Websites</label>
+                    <comment><![CDATA[
+                        If for some reason you insert images with URLs from other websites and want them to be converted to WebP as well, please insert these websites' base URL in this textarea (each one in a new line).<br/>
+                        E.g.:<br/>
+                        https://other-website.com/<br/>
+                        https://some-blog.com/ <br/><br/>
+                        Note that for the converting an image will be downloaded to your server.
+                        ]]>
+                    </comment>
+                </field>
+
+
+            </group>
+        </section>
+    </system>
+</config>

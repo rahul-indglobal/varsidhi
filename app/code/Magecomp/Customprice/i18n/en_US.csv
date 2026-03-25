@@ -1,0 +1,15 @@
+No,No
+Yes,Yes
+Global,Global
+"Product Wise","Product Wise"
+"Add to Cart","Add to Cart"
+Qty,Qty
+customprice,customprice
+"Please Enter Your Price","Please Enter Your Price"
+"Custom Price","Custom Price"
+Configuration,Configuration
+"Product Option","Product Option"
+"Minimum Custom Price","Minimum Custom Price"
+"Frontend Label","Frontend Label"
+"Frontend Error Message","Frontend Error Message"
+"Use Variable {{price}} for Error Notification Message","Use Variable {{price}} for Error Notification Message"

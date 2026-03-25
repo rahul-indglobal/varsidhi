@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Magecomp_Sms::css/sms.css"/>
+		<link src="Magecomp_Sms::countryflag/js/intlTelInput.js"/>
+		<css src="Magecomp_Countryflag/css/intlTelInput.css"/>
+		<css src="Magecomp_Countryflag/css/main.css"/>
+		<css src="Magecomp_Countryflag/css/validation.css"/>
+	</head>
+	<body>
+		<referenceContainer name="content">
+			<block class="Magecomp\Sms\Block\Customer\Checkout" name="sms_customer_checkout_update" as="checkout_mobile_update" template="Magecomp_Sms::customer/checkout.phtml" cacheable="false" />
+			<block name="magecomp_countryflag_checkout_intphoneinput" class="Magecomp\Countryflag\Block\IntPhoneInput" before="-" template="Magecomp_Countryflag::checkoutphoneInput.phtml" ifconfig="sms/general/enable"/>
+		</referenceContainer>
+	</body>
+</page>

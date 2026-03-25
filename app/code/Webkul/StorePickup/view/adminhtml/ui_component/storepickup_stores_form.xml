@@ -1,0 +1,543 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+		<argument name="data" xsi:type="array">
+				<item name="js_config" xsi:type="array">
+						<item name="provider" xsi:type="string">storepickup_stores_form.stores_form_data_source</item>
+				</item>
+				<item name="label" translate="true" xsi:type="string">General Information</item>
+				<item name="template" xsi:type="string">templates/form/collapsible</item>
+		</argument>
+		<settings>
+				<buttons>
+						<button class="Webkul\StorePickup\Block\Adminhtml\Stores\Edit\BackButton" name="back"/>
+						<button class="Webkul\StorePickup\Block\Adminhtml\Stores\Edit\DeleteButton" name="delete"/>
+						<button class="Webkul\StorePickup\Block\Adminhtml\Stores\Edit\SaveButton" name="save"/>
+						<button class="Webkul\StorePickup\Block\Adminhtml\Stores\Edit\SaveAndContinueButton" name="save_and_continue"/>
+				</buttons>
+				<namespace>storepickup_stores_form</namespace>
+				<dataScope>data</dataScope>
+				<deps>
+						<dep>storepickup_stores_form.stores_form_data_source</dep>
+				</deps>
+		</settings>
+		<dataSource name="stores_form_data_source">
+				<argument name="data" xsi:type="array">
+						<item name="js_config" xsi:type="array">
+								<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+						</item>
+				</argument>
+				<settings>
+						<submitUrl path="*/*/save"/>
+				</settings>
+				<dataProvider class="Webkul\StorePickup\Ui\DataProvider\Stores\Form\DataProvider" name="stores_form_data_source">
+						<settings>
+								<requestFieldName>id</requestFieldName>
+								<primaryFieldName>entity_id</primaryFieldName>
+						</settings>
+				</dataProvider>
+		</dataSource>
+
+		<fieldset name="store_info">
+				<settings>
+						<label translate="true">Store Info</label>
+				</settings>
+				<field formElement="checkbox" name="is_enabled" sortOrder="10">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Enabled</item>
+										<item name="default" xsi:type="number">1</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Enabled</label>
+								<dataScope>is_enabled</dataScope>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">false</rule>
+								</validation>
+						</settings>
+						<formElements>
+	              <checkbox>
+	                  <settings>
+	                      <valueMap>
+	                          <map name="false" xsi:type="number">0</map>
+	                          <map name="true" xsi:type="number">1</map>
+	                      </valueMap>
+	                  		<prefer>toggle</prefer>
+										</settings>
+	              </checkbox>
+          	</formElements>
+				</field>
+
+				<field formElement="input" name="name" sortOrder="20">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Stores</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Store Name</label>
+								<dataScope>name</dataScope>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">true</rule>
+								</validation>
+						</settings>
+				</field>
+
+				<htmlContent name="form-line-1">
+						<block class="Magento\Backend\Block\Template" name="form-line-1" template="Webkul_StorePickup::form/formline.phtml"/>
+				</htmlContent>
+
+				<field formElement="input" name="latitude" sortOrder="30">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Stores</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Latitude</label>
+								<dataScope>latitude</dataScope>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">true</rule>
+										<rule name="validate-number" xsi:type="string">true</rule>
+								</validation>
+						</settings>
+				</field>
+
+				<field formElement="input" name="longitude" sortOrder="40">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Stores</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Longitude</label>
+								<dataScope>longitude</dataScope>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">true</rule>
+										<rule name="validate-number" xsi:type="string">true</rule>
+								</validation>
+						</settings>
+				</field>
+
+				<htmlContent name="geolocation_button">
+						<block class="Webkul\StorePickup\Block\Adminhtml\GeoLocation\LatLong" name="geolocation_latlong"/>
+				</htmlContent>
+
+				<htmlContent name="form-line-2">
+						<block class="Magento\Backend\Block\Template" name="form-line-2" template="Webkul_StorePickup::form/formline.phtml"/>
+				</htmlContent>
+
+				<field formElement="textarea" name="description" sortOrder="50">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Stores</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Description</label>
+								<dataScope>description</dataScope>
+								<notice translate="true">Description will not show on frontend.</notice>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">false</rule>
+								</validation>
+						</settings>
+				</field>
+		</fieldset>
+
+		<fieldset name="store_timing" sortOrder="1">
+        <settings>
+            <label translate="true">Store Timing</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope>stores_timings</dataScope>
+        </settings>
+
+				<htmlContent name="form-line-1">
+						<block class="Magento\Backend\Block\Template" name="form-line-1" template="Webkul_StorePickup::form/formline.phtml"/>
+				</htmlContent>
+
+				<field formElement="checkbox" name="is_urgent_close" sortOrder="10">
+						<argument name="data" xsi:type="array">
+								<item name="config" xsi:type="array">
+										<item name="source" xsi:type="string">Urgent Closed</item>
+										<item name="default" xsi:type="number">0</item>
+								</item>
+						</argument>
+						<settings>
+								<dataType>text</dataType>
+								<label translate="true">Urgent Closed</label>
+								<notice translate="true">This option will show store as "Closed" to customers. Use this option, if you are closing your store at un-scheduled timing. This option will keep your store closed until you turn off this option.</notice>
+								<validation>
+										<rule name="required-entry" xsi:type="boolean">false</rule>
+								</validation>
+						</settings>
+						<formElements>
+	              <checkbox>
+	                  <settings>
+	                      <valueMap>
+	                          <map name="false" xsi:type="number">0</map>
+	                          <map name="true" xsi:type="number">1</map>
+	                      </valueMap>
+	                  		<prefer>toggle</prefer>
+										</settings>
+	              </checkbox>
+          	</formElements>
+				</field>
+
+				<htmlContent name="form-line-2">
+						<block class="Magento\Backend\Block\Template" name="form-line-2" template="Webkul_StorePickup::form/formline.phtml"/>
+				</htmlContent>
+
+				<htmlContent>
+						<block class="Webkul\StorePickup\Block\Adminhtml\StoreTiming\TimingDetails" name="timing-details"/>
+				</htmlContent>
+
+		</fieldset>
+
+		<fieldset name="store_holidays" sortOrder="10">
+        <settings>
+            <label translate="true">Store Holidays</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope>stores_holidays</dataScope>
+        </settings>
+
+				<field name="holidays" formElement="multiselect" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Holidays List</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <multiselect>
+                    <settings>
+                        <options class="Webkul\StorePickup\Ui\Component\Listing\Options\HolidaysList"/>
+                    </settings>
+                </multiselect>
+            </formElements>
+        </field>
+
+		</fieldset>
+
+		<fieldset name="contact_info" sortOrder="20">
+        <settings>
+            <label translate="true">Contact Info</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope>stores_details</dataScope>
+        </settings>
+        <field name="person_name" formElement="input" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Person Name</label>
+            </settings>
+        </field>
+        <field name="email" formElement="input" sortOrder="20">
+            <settings>
+                <validation>
+                    <rule name="validate-email" xsi:type="boolean">true</rule>
+                </validation>
+                <dataType>text</dataType>
+                <label translate="true">Email</label>
+            </settings>
+        </field>
+        <field name="mobile" formElement="input" sortOrder="30">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Mobile</label>
+            </settings>
+        </field>
+        <field name="fax" formElement="input" sortOrder="40">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Fax</label>
+            </settings>
+        </field>
+    </fieldset>
+
+    <fieldset name="address" sortOrder="30">
+        <settings>
+            <label translate="true">Address Data</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope>stores_details</dataScope>
+        </settings>
+        <field name="country_id" formElement="select" sortOrder="10">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Country</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\Directory\Model\Config\Source\Country"/>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="region_id"
+						component="Webkul_StorePickup/js/form/element/region"
+		       	formElement="select" sortOrder="20">
+
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">State/Province</label>
+					  </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="Magento\InventoryAdminUi\Model\OptionSource\RegionSource"/>
+                        <filterBy>
+                            <field>country_id</field>
+                            <target>${ $.provider }:${ $.parentScope }.country_id</target>
+                        </filterBy>
+                        <customEntry>region</customEntry>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+
+        <field name="region" formElement="input" sortOrder="30">
+						<settings>
+                <dataType>text</dataType>
+                <label translate="true">State/Province</label>
+                <visible>false</visible>
+				    </settings>
+        </field>
+        <field name="city" formElement="input" sortOrder="40">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">City</label>
+            </settings>
+        </field>
+        <field name="street" formElement="input" sortOrder="50">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Street</label>
+            </settings>
+        </field>
+        <field name="postcode" formElement="input" sortOrder="60">
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Postcode</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+
+		<fieldset name="product_assignment" sortOrder="40">
+        <settings>
+            <label translate="true">Product Assignment</label>
+            <collapsible>true</collapsible>
+            <opened>true</opened>
+            <dataScope>product_assignment</dataScope>
+        </settings>
+
+				<container name="assign_products_container" component="Magento_Ui/js/form/components/group" template="ui/form/components/complex" sortOrder="10">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">container</item>
+                    <item name="breakLine" xsi:type="boolean">false</item>
+                    <item name="dataScope" xsi:type="string" />
+                    <item name="label" xsi:type="string" />
+                </item>
+            </argument>
+
+						<container name="assign_products_button" component="Magento_Ui/js/form/components/button">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="formElement" xsi:type="string">container</item>
+                        <item name="actions" xsi:type="array">
+                            <item name="0" xsi:type="array">
+                                <item name="targetName" xsi:type="string">storepickup_stores_form.storepickup_stores_form.product_assignment.assign_products_modal</item>
+                                <item name="actionName" xsi:type="string">toggleModal</item>
+                            </item>
+                        </item>
+                        <item name="title" xsi:type="string" translate="true">Assign Products</item>
+                        <item name="additionalForGroup" xsi:type="boolean">true</item>
+                        <item name="additionalClasses" xsi:type="string">admin__field-medium</item>
+                        <item name="dataScope" xsi:type="string"/>
+                    </item>
+                </argument>
+            </container>
+        </container>
+
+				<dynamicRows name="assigned_products" component="Magento_Ui/js/dynamic-rows/dynamic-rows-grid" template="ui/dynamic-rows/templates/grid" sortOrder="20">
+						<argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsHeaderAfterRender" xsi:type="boolean">true</item>
+                    <item name="renderDefaultRecord" xsi:type="boolean">false</item>
+                    <item name="deleteButtonLabel" xsi:type="string">Unassign</item>
+										<item name="dataProvider" xsi:type="string">data.product_assignment.assign_products_grid</item>
+                    <item name="map" xsi:type="array">
+                        <item name="entity_id" xsi:type="string">entity_id</item>
+                        <item name="name" xsi:type="string">name</item>
+												<item name="status" xsi:type="string">status</item>
+												<item name="sku" xsi:type="string">sku</item>
+												<item name="price" xsi:type="string">price</item>
+									  </item>
+                    <item name="identificationDRProperty" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+
+						<settings>
+		            <additionalClasses>
+		                <class name="admin__field-wide">true</class>
+		            </additionalClasses>
+		            <defaultRecord>false</defaultRecord>
+								<addButton>false</addButton>
+		            <deleteProperty>true</deleteProperty>
+		            <recordTemplate>record</recordTemplate>
+		            <identificationProperty>entity_id</identificationProperty>
+		            <links>
+		                <link name="insertData">${ $.provider }:${ $.dataProvider }</link>
+		            </links>
+		            <dndConfig>
+		                <param name="enabled" xsi:type="boolean">true</param>
+		            </dndConfig>
+		            <columnsHeader>false</columnsHeader>
+		        </settings>
+
+						<container name="record" component="Magento_Ui/js/dynamic-rows/record">
+		            <argument name="data" xsi:type="array">
+		                <item name="config" xsi:type="array">
+		                    <item name="isTemplate" xsi:type="boolean">true</item>
+		                    <item name="is_collection" xsi:type="boolean">true</item>
+		                    <item name="dataScope" xsi:type="string" />
+		                </item>
+		            </argument>
+								<field name="entity_id" formElement="input" sortOrder="20" template="Magento_InventoryCatalogAdminUi/dynamic-rows/cells/text">
+		                <settings>
+		                    <dataType>text</dataType>
+		                    <dataScope>entity_id</dataScope>
+		                    <label translate="true">Id</label>
+		                </settings>
+		            </field>
+
+								<field name="name" formElement="input" sortOrder="30" template="Magento_InventoryCatalogAdminUi/dynamic-rows/cells/text">
+		                <settings>
+		                    <dataType>text</dataType>
+		                    <dataScope>name</dataScope>
+		                    <label translate="true">Name</label>
+		                </settings>
+		            </field>
+
+								<field name="sku" formElement="input" sortOrder="40" template="Magento_InventoryCatalogAdminUi/dynamic-rows/cells/text">
+		                <settings>
+		                    <dataType>text</dataType>
+		                    <dataScope>sku</dataScope>
+		                    <label translate="true">SKU</label>
+		                </settings>
+		            </field>
+
+								<field name="price" formElement="input" sortOrder="50" template="Magento_InventoryCatalogAdminUi/dynamic-rows/cells/text">
+		                <settings>
+		                    <dataType>text</dataType>
+		                    <dataScope>price</dataScope>
+		                    <label translate="true">Price</label>
+		                </settings>
+		            </field>
+
+								<field name="status" formElement="input" sortOrder="70">
+										<settings>
+												<elementTmpl>Magento_InventoryCatalogAdminUi/product/form/cell-status</elementTmpl>
+												<dataType>text</dataType>
+												<dataScope>status</dataScope>
+												<label translate="true">Status</label>
+										</settings>
+								</field>
+
+		            <field name="actionDelete" formElement="actionDelete" sortOrder="80" template="Magento_InventoryCatalogAdminUi/product/form/stock/assign-sources/action-delete">
+		                <argument name="data" xsi:type="array">
+		                    <item name="config" xsi:type="array">
+		                        <item name="fit" xsi:type="boolean">true</item>
+		                    </item>
+		                </argument>
+		                <settings>
+		                    <label translate="true">Actions</label>
+		                </settings>
+		            </field>
+		        </container>
+				</dynamicRows>
+
+				<modal name="assign_products_modal">
+            <settings>
+                <options>
+                    <option name="title" xsi:type="string" translate="true">Assign Products</option>
+                    <option name="buttons" xsi:type="array">
+                        <item name="0" xsi:type="array">
+                            <item name="text" xsi:type="string">Cancel</item>
+                            <item name="class" xsi:type="string">action-secondary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionCancel</item>
+                                </item>
+                            </item>
+                        </item>
+                        <item name="1" xsi:type="array">
+                            <item name="text" xsi:type="string" translate="true">Add Products</item>
+                            <item name="class" xsi:type="string">action-primary</item>
+                            <item name="actions" xsi:type="array">
+                                <item name="0" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">index = assign_products_grid</item>
+                                    <item name="actionName" xsi:type="string">save</item>
+                                </item>
+                                <item name="1" xsi:type="array">
+                                    <item name="targetName" xsi:type="string">${ $.name }</item>
+                                    <item name="actionName" xsi:type="string">actionDone</item>
+                                </item>
+                            </item>
+                        </item>
+                    </option>
+                </options>
+            </settings>
+
+            <insertListing name="assign_products_grid">
+                <argument name="data" xsi:type="array">
+                    <item name="config" xsi:type="array">
+                        <item name="cssclass" xsi:type="string">noclass</item>
+                    </item>
+                </argument>
+                <settings>
+                    <autoRender>true</autoRender>
+                    <dataScope>assign_products_grid</dataScope>
+                    <ns>storepickup_products_assign_listing</ns>
+                    <externalProvider>storepickup_products_assign_listing.storepickup_products_assign_listing_x_data_source</externalProvider>
+                    <selectionsProvider>storepickup_products_assign_listing.storepickup_products_assign_listing.product_columns.ids</selectionsProvider>
+                    <dataLinks>
+                        <imports>false</imports>
+                        <exports>true</exports>
+                    </dataLinks>
+										<realTimeLink>true</realTimeLink>
+										<behaviourType>simple</behaviourType>
+                    <externalFilterMode>true</externalFilterMode>
+                </settings>
+            </insertListing>
+        </modal>
+    </fieldset>
+</form>

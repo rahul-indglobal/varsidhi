@@ -1,0 +1,360 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    .main {
+        width: 100%;
+        position: relative;
+    }
+
+    .col {
+        float: left;
+    }
+
+    .main-section {
+        width: 70%;
+        padding: 8px;
+    }
+
+    .side-section {
+        width: 30%;
+        padding: 8px;
+    }
+
+    .map-box {
+        position: relative;
+        border:1px solid lightgray;
+        padding: 8px;
+    }
+
+    #googleMap {
+        width: 100%;
+        height: 500px;
+    }
+
+    .map-selector {
+        text-align: center;
+        padding-top: 18px;
+    }
+
+    .position-relative {
+        position: relative;
+    }
+
+    .float-50 {
+        float: left;
+        width: 50%;
+    }
+
+    .top-minus-2 {
+        position: relative;
+        top: -2px;
+    }
+
+    .clear-float {
+        clear: both;
+    }
+
+    .set-lat-lng-btn  {
+        height: 32px;
+        width: 476px;
+    }
+
+    .padding-8 {
+        padding: 8px;
+    }
+
+    #manual_location_content, #address_location_content {
+        padding: 8px 23px;
+    }
+
+    .width-px-100 {
+        width: 156px!important;
+    }
+
+    .inline-px-30 {
+        display: inline-block;
+        width: 30px;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .padding-left-10 {
+        padding-left: 10px;
+    }
+
+    .pickup-stores-box {
+        overflow-y: auto;
+        max-height: 418px;
+        border: 1px solid lightgray;
+    }
+
+    .list-box {
+        padding: 16px;
+        border:1px solid lightgray;
+        margin: 8px;
+        background-color: #f7f7f7;
+        border-radius: 8px;
+        transition: .5s;
+    }
+
+    .list-box:hover {
+        background-color: #eaeaea;
+        cursor: pointer;
+    }
+
+    .active-list-box {
+        background-color: #e0e0e0!important;
+    }
+
+    .active-list-box:hover {
+        background-color: #d0d0d0!important;
+    }
+
+    .page-products .columns {
+        position: static!important;
+    }
+
+    @media (min-width: 768px), print {
+        .page-products .columns {
+            position: static!important;
+        }
+    }
+
+    @media (min-width: 768px), print {
+        .page-layout-1column.page-with-filter .column.main {
+            position: static!important;
+        }
+    }
+</style>
+
+<?php
+    $isSecure = $block->isSecureServer();
+    $isPickupStoresPageEnabled = $block->isPickupStoresPageEnabled();
+    $isAddressSearchEnabled = $block->isAddressSearchEnabled();
+    $getWithinRange = $block->getWithinRange();
+
+if ($isPickupStoresPageEnabled):
+    ?>
+
+<h3><?= /** @NoEscape */ __('Your Location')?></h3>
+<hr>
+    <?php
+    if ($isAddressSearchEnabled):
+        ?>
+<p>
+            <?= /** @NoEscape */ __(
+                'To find the nearest pickup stores you need to provide your location (latitude & longitude).'
+            );?>
+            <?php
+            if ($isSecure) {
+                echo /** @NoEscape */ __(
+                    ' There are three ways to provide your location.'
+                );
+            } else {
+                echo /** @NoEscape */ __(
+                    ' There are two ways to provide your location.'
+                );
+            }
+            ?>
+
+            <?= /** @NoEscape */ __(
+                ' You can give your location manually or by searching address.'
+            );?>
+
+            <?php
+            if ($isSecure) {
+                echo /** @NoEscape */ __(' Also you can click on "Automatically Find & Set Your Location" button.');
+            }
+            ?>
+</p>
+<div id="location-section">
+    <div>
+        <input type="radio" name="current_location" checked id="manual_location">
+        <label class="top-minus-2" for="manual_location"><?= /** @NoEscape */ __('Manual Location')?></label>
+    </div>
+
+    <div id="manual_location_content">
+        <div>
+            <?= /** @NoEscape */ __('Your location is: ')?>
+            <b class="show-set-location"><?= /** @NoEscape */ __('N/A')?></b>
+        </div>
+        <div class="padding-8"></div>
+        <span><?= /** @NoEscape */__('Latitude')?></span>
+        <input
+            type="text"
+            name="latitude"
+            placeholder="<?= /** @NoEscape */ __('Latitude')?>"
+            id="latitude"
+            class="width-px-100">
+        <span class="inline-px-30"></span>
+        <span><?= /** @NoEscape */__('Longitude')?></span>
+        <input
+            type="text"
+            name="longitude"
+            placeholder="<?= /** @NoEscape */ __('Longitude')?>"
+            id="longitude"
+            class="width-px-100">
+
+        <div class="padding-8"></div>
+        <input
+            type="button"
+            id="set-lat-lng-btn"
+            class="set-lat-lng-btn action-btn"
+            value="<?= /** @NoEscape */ __('Set Lat-Long as your current location')?>" />
+
+        <?php
+        if ($isSecure) {
+            ?>
+            <div class="padding-8"></div>
+            <input
+                type="button"
+                id="find-n-set-lat-lng-btn"
+                class="set-lat-lng-btn action-btn"
+                value="<?= /** @NoEscape */ __('Automatically Find & Set Your Location')?>" />
+            <?php
+        }
+        ?>
+
+        <hr>
+    </div>
+
+    <div>
+        <input type="radio" name="current_location" id="address_location">
+        <label class="top-minus-2" for="address_location"><?= /** @NoEscape */ __('Address Search')?></label>
+    </div>
+
+    <div id="address_location_content" class="hide">
+        <div>
+            <?= /** @NoEscape */ __('Your location is: ')?>
+            <b class="show-set-location"><?= /** @NoEscape */ __('N/A')?></b>
+        </div>
+        <div class="padding-8"></div>
+        <input type="text" id="autocomplete" placeholder="<?= /** @NoEscape */ __('Search Address')?>"/>
+        <hr>
+    </div>
+</div>
+            <?php
+    else:
+        ?>
+        <p>
+        <?= /** @NoEscape */ __(
+            'To find the nearest pickup stores you need to provide your location (latitude & longitude).'
+        );
+        ?>
+
+        <?php
+        if ($isSecure) {
+            echo /** @NoEscape */ __(' Also you can click on "Automatically Find & Set Your Location" button.');
+        }
+        ?>
+        </p>
+        <div id="location-section">
+            <div id="manual_location_content">
+                <div>
+                    <?= /** @NoEscape */ __('Your location is: ')?>
+                    <b class="show-set-location"><?= /** @NoEscape */ __('N/A')?></b>
+                </div>
+                <div class="padding-8"></div>
+                <span><?= /** @NoEscape */ __('Latitude')?></span>
+                <input
+                    type="text"
+                    name="latitude"
+                    placeholder="<?= /** @NoEscape */ __('Latitude')?>"
+                    id="latitude"
+                    class="width-px-100">
+                <span class="inline-px-30"></span>
+                <span><?= /** @NoEscape */ __('Longitude')?></span>
+                <input
+                    type="text"
+                    name="longitude"
+                    placeholder="<?= /** @NoEscape */ __('Longitude')?>"
+                    id="longitude"
+                    class="width-px-100">
+                <div class="padding-8"></div>
+                <input
+                    type="button"
+                    id="set-lat-lng-btn"
+                    class="set-lat-lng-btn action-btn"
+                    value="<?= /** @NoEscape */ __('Set Lat-Long as your current location')?>" />
+
+                <?php
+                if ($isSecure) {
+                    ?>
+                    <div class="padding-8"></div>
+                    <input
+                        type="button"
+                        id="find-n-set-lat-lng-btn"
+                        class="set-lat-lng-btn action-btn"
+                        value="<?= /** @NoEscape */ __('Automatically Find & Set Your Location')?>" />
+                    <?php
+                }
+                ?>
+                <hr>
+            </div>
+        </div>
+        <?php
+    endif;
+    ?>
+
+<div id="pickup-stores-component" data-bind="scope:'pickup_stores_component'">
+    <!-- ko template: getTemplate() --><!-- /ko -->
+</div>
+
+    <?php
+    if ($block->isGoogleMapEnabled()) {
+        $googleKey = $block->getGoogleApiKey();
+        ?>
+        <script>
+            var GOOGLE_MAP_KEY = "<?= /** @NoEscape **/ $googleKey ?>";
+            function loadScript () {
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = 'https://maps.googleapis.com/maps/api/js?key='+GOOGLE_MAP_KEY+"&libraries=places";
+                document.body.appendChild(script);
+            }
+
+            loadScript();
+        </script>
+        <?php
+    }
+    ?>
+
+<script type="text/x-magento-init">
+{
+    "#pickup-stores-component": {
+        "Magento_Ui/js/core/app": {
+            "components": {
+                "pickup_stores_component": {
+                    "component": "Webkul_StorePickup/js/widget/pickupstores",
+                    "baseUrl": "<?= /** @NoEscape **/ $block->escapeHtml($block->getUrl())?>",
+                    "isAddressSearchEnabled": "<?= /** @NoEscape **/ $isAddressSearchEnabled ?>",
+                    "isSecure": "<?= /** @NoEscape **/ $isSecure ?>",
+                    "getWithinRange": "<?= /** @NoEscape **/ $getWithinRange?>"
+                }
+            }
+        }
+    }
+}
+</script>
+
+    <?php
+    else:
+        echo /** @NoEscape */ __('Feature is disabled by administrator');
+    endif;
+    ?>

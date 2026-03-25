@@ -1,0 +1,19 @@
+Legend
+
++ Features
+
+-------------------------------- Version 3.0.0 --------------------------------------
+	+ Customer can see all nearest pickup stores on google map.
+	+ Customer can see distance and route to the pickup store from his location on google map.
+	+ Customer can choose nearest pickup store where from he/she can pick his/her order.
+	+ Customer will get notify by email when order is scheduled/re-scheduled by Admin.
+	+ Admin can create multiple pickup stores.
+	+ Admin can set holidays on specific dates as well as in date range.
+	+ Admin can set stores timings in different modes.
+	+ Admin can see a list of pickup stores order.
+	+ Admin can set a specific range in kilometers for nearest pickup stores.
+	+ Admin can assign multiple products to pickup stores.
+	+ Admin can assign multiple pickup stores to products.
+	+ Admin has an option to close the store urgently.
+	+ Module uses MSI Distance algorithm for calculating distance.
+	+ Module can calculate distance in offline mode also.

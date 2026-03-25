@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!--DATA-->
+    <preference for="Lof\Rma\Api\Data\RmaInterface" type="Lof\Rma\Model\Rma" />
+    <preference for="Lof\Rma\Api\Data\ItemInterface" type="Lof\Rma\Model\Item" />
+    <preference for="Lof\Rma\Api\Data\MessageInterface" type="Lof\Rma\Model\Message" />
+    <preference for="Lof\Rma\Api\Data\AttachmentInterface" type="Lof\Rma\Model\Attachment" />
+    <preference for="Lof\Rma\Api\Data\StatusInterface" type="Lof\Rma\Model\Status" />
+    <preference for="Lof\Rma\Api\Data\ResolutionInterface" type="Lof\Rma\Model\Resolution" />
+    <preference for="Lof\Rma\Api\Data\ConditionInterface" type="Lof\Rma\Model\Condition" />
+    <preference for="Lof\Rma\Api\Data\ReasonInterface" type="Lof\Rma\Model\Reason" />
+    <preference for="Lof\Rma\Api\Data\QuickResponseInterface" type="Lof\Rma\Model\QuickResponse" />
+    <preference for="Lof\Rma\Api\Data\AddressInterface" type="Lof\Rma\Model\Address" />
+    <preference for="Lof\Rma\Api\Data\OrderStatusHistoryInterface" type="Lof\Rma\Model\OrderStatusHistory" />
+
+
+    <!--REPOSITORY-->
+    <preference for="Lof\Rma\Api\Repository\RmaRepositoryInterface" type="Lof\Rma\Model\RmaRepository" />
+    <preference for="Lof\Rma\Api\Data\RmaSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\ItemRepositoryInterface" type="Lof\Rma\Model\ItemRepository" />
+    <preference for="Lof\Rma\Api\Data\ItemSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\StatusRepositoryInterface" type="Lof\Rma\Model\StatusRepository" />
+    <preference for="Lof\Rma\Api\Data\StatusSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\ReasonRepositoryInterface" type="Lof\Rma\Model\ReasonRepository" />
+    <preference for="Lof\Rma\Api\Data\ReasonSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\ConditionRepositoryInterface" type="Lof\Rma\Model\ConditionRepository" />
+    <preference for="Lof\Rma\Api\Data\ConditionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\ResolutionRepositoryInterface" type="Lof\Rma\Model\ResolutionRepository" />
+    <preference for="Lof\Rma\Api\Data\ResolutionSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\MessageRepositoryInterface" type="Lof\Rma\Model\MessageRepository" />
+    <preference for="Lof\Rma\Api\Data\MessageSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\AttachmentRepositoryInterface" type="Lof\Rma\Model\AttachmentRepository" />
+    <preference for="Lof\Rma\Api\Data\AttachmentSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\FieldRepositoryInterface" type="Lof\Rma\Model\FieldRepository" />
+    <preference for="Lof\Rma\Api\Data\FieldSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\RuleRepositoryInterface" type="Lof\Rma\Model\RuleRepository" />
+    <preference for="Lof\Rma\Api\Data\RuleSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\QuickResponseRepositoryInterface" type="Lof\Rma\Model\QuickResponseRepository" />
+    <preference for="Lof\Rma\Api\Data\QuickResponseSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\AddressRepositoryInterface" type="Lof\Rma\Model\AddressRepository" />
+    <preference for="Lof\Rma\Api\Data\AddressSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+
+    <preference for="Lof\Rma\Api\Repository\OrderStatusHistoryRepositoryInterface" type="Lof\Rma\Model\OrderStatusHistoryRepository" />
+    <!--MAIL-->
+    <preference for="\Magento\Framework\Mail\Template\TransportBuilder" type="Lof\Rma\Model\Mail\TransportBuilder" />
+
+    
+    
+</config>

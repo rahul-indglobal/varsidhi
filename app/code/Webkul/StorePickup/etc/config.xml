@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+      	<carriers>
+        		<storepickup>
+                <active>1</active>
+                <sallowspecific>0</sallowspecific>
+                <model>Webkul\StorePickup\Model\Carrier</model>
+                <name>Store Pickup</name>
+                <title>Store Pickup</title>
+                <show_all_pickup_stores_page>0</show_all_pickup_stores_page>
+                <specificerrmsg>This shipping method is not available. To use this shipping method, please contact us.</specificerrmsg>
+                <handling_type>F</handling_type>
+                <within_range>25</within_range>
+                <enable_scheduling_emails>1</enable_scheduling_emails>
+                <order_scheduling_template>carriers_storepickup_order_scheduling_template</order_scheduling_template>
+          	</storepickup>
+      	</carriers>
+    </default>
+</config>

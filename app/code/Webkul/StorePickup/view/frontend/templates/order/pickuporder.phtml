@@ -1,0 +1,113 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<?php
+$order = $block->getOrder();
+$scheduledOrderAt = $order->getPickupScheduledAt();
+$scheduledOrderDatetime = $order->getPickupScheduledDatetime();
+$pickupStore = $block->getPickupStore($order->getPickupStore());
+$address = $block->getAddressFromPickupStore($order->getPickupStore());
+$contact = $block->getContactsOfPickupStore($order->getPickupStore());
+?>
+
+<div class="pickup-order-body order-details-items">
+
+    <div>
+        <h2>
+            <span class="text-darkcyan">
+                <?= $block->escapeHtml(__($pickupStore->getName()))?>
+            </span>
+        </h2>
+    </div>
+
+<?php
+if ($scheduledOrderDatetime) {
+    $scheduledOrderDatetime = date('D, d M Y h:i A', strtotime($scheduledOrderDatetime));
+    ?>
+    <div>
+        <h3><?= $block->escapeHtml(__('Pickup Scheduled At'))?></h3>
+
+        <b>
+        <span class="text-green">
+        <?= $block->escapeHtml(
+            __($scheduledOrderDatetime)
+        )
+        ?>
+        </span>
+        </b>
+    </div>
+    <?php
+} else {
+    ?>
+    <div>
+        <h3><?= $block->escapeHtml(__('Pickup Scheduled At'))?></h3>
+
+        <b>
+        <span class="text-darkorange">
+        <?= $block->escapeHtml(
+            __('Pending')
+        )
+        ?>
+        </span>
+        </b>
+    </div>
+    <?php
+}
+?>
+
+    <div>
+        <h3><?= $block->escapeHtml(__('Pickup Store Address'))?></h3>
+        <span>
+        <?= $block->escapeHtml(
+            __($address)
+        )
+?>
+        </span>
+    </div>
+
+
+    <div>
+        <h3><?= $block->escapeHtml(__('Contact'))?></h3>
+        <span>
+            <?= $block->escapeHtml(__('Name: '))?>
+            <?= $block->escapeHtml(__($contact['name']))?>
+            <br>
+            <?= $block->escapeHtml(__('Email: '))?>
+            <?= $block->escapeHtml(__($contact['email']))?>
+            <br>
+            <?= $block->escapeHtml(__('Mobile: '))?>
+            <?= $block->escapeHtml(__($contact['mobile']))?>
+            <br>
+            <?= $block->escapeHtml(__('Fax: '))?>
+            <?= $block->escapeHtml(__($contact['fax']))?>
+        </span>
+    </div>
+
+    <?php
+    if ($scheduledOrderAt) {
+        $scheduledOrderAt = date('D, d M Y h:i A', strtotime($scheduledOrderAt));
+        ?>
+        <div>
+            <small>
+                <h3><?= $block->escapeHtml(__('Pickup Created On'))?></h3>
+                <span>
+                <?= $block->escapeHtml(
+                    __($scheduledOrderAt)
+                )
+                ?>
+                </span>
+            </small>
+        </div>
+        <?php
+    }
+    ?>
+</div>

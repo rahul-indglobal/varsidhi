@@ -1,0 +1,32 @@
+<?xml version="1.0" standalone="yes"?>  
+<bannerslider>
+	<records>
+		<record> 
+			<name>Cold Process Organic</name>
+			<title1>Savon Stories</title1>
+			<title2></title2>
+			<click_url>#</click_url> 
+			<image><![CDATA[Plazathemes/bannerslider/images/b/a/banner1_home1.jpg]]></image>
+			<image_alt><![CDATA[Plazathemes/bannerslider/images/b/a/banner1_home1.jpg]]></image_alt>
+			<description>We believe that healthy eating, clean air, and gentle character
+	is the best start to genuine wellbeing. </description>
+			<order>1</order>
+			<store_id>1</store_id> 
+			<status>1</status> 
+		</record>
+		<record> 
+			<name>Healthy life with</name>
+			<title1>Nature Organic</title1>
+			<title2></title2>
+			<click_url>#</click_url>
+			<image><![CDATA[Plazathemes/bannerslider/images/b/a/banner2_home1.jpg]]></image>
+			<image_alt><![CDATA[Plazathemes/bannerslider/images/b/a/banner2_home1.jpg]]></image_alt>
+			<description>Vegetables are the edible parts of a plant that is used in cooking
+	or can be eaten raw. </description>
+			<order>1</order>
+			<store_id>1</store_id> 
+			<status>1</status> 
+		</record>
+
+	</records>
+</bannerslider>

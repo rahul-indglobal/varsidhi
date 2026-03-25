@@ -1,0 +1,73 @@
+.recent_sales_notificationtext {
+  background-color: #f4f4f4;
+  padding: 0;
+  position: fixed;
+  z-index: 99999;
+  width: 450px;
+  background-size: 100% 103% !important;
+}
+.recent_salesnotificationtext > span {
+  float: left;
+  margin-top: 12px;
+  width: calc(100% - 25px);
+}
+.recent_salesnotificationtext1 {
+    float: right;margin-right: 25px;margin-top: 3%;
+}
+.recent_sales_notificationtext .fa.fa-close {
+  font-size: 20px;
+}
+.v-middle {
+  float: left;
+  width: 100%;
+}
+.recent_salesnotificationcontent {
+  float: left;
+  width: 100%;
+}
+.recent_salesnotificationimg {
+  float: left;
+  width: 20%;
+}
+
+.producturl {
+  float: left;
+  width: 100%;
+}
+.top_left{
+	left:0;
+	top:30px;
+}
+.top_right{
+	right:0;
+	top:30px;
+}
+.bottom_left{
+	   bottom: 39px;
+	   left:0;
+}
+.bottom_right{
+	   bottom: 39px;
+	   right:0;
+}
+.recent_salesnotificationimg{
+	float:left;
+}
+.recent_salesnotificationtext {
+  float: left;
+  line-height: 25px;
+  padding-left: 10px;
+  width: calc(80% - 10px);
+}
+.closenotification {
+    cursor: pointer;
+    float: right;
+    position: absolute;
+    right: 6px;
+    top: 2;
+}
+@media only screen and (max-width: 768px) {
+.recent_sales_notificationtext {
+  width: 320px;
+}
+}

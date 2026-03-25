@@ -1,0 +1,25 @@
+{
+    "name": "webkul/store-pickup",
+    "description": "Webkul Store Pickup",
+    "type": "magento2-module",
+    "version": "3.0.0",
+    "require": {
+        "magento/module-checkout": "100.3.*",
+        "magento/module-quote": "101.1.*",
+        "magento/module-catalog": "103.0.*",
+        "magento/module-ui": "101.1.*",
+        "magento/module-inventory-distance-based-source-selection": "1.0.*",
+        "magento/module-inventory-distance-based-source-selection-api": "1.0.*"
+    },
+    "license": [
+        "proprietary"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Webkul\\StorePickup\\": ""
+        }
+    }
+}

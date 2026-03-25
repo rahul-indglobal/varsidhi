@@ -1,0 +1,100 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+		<argument name="data" xsi:type="array">
+				<item name="js_config" xsi:type="array">
+						<item name="provider" xsi:type="string">storepickup_stores_assign_listing.storepickup_stores_assign_listing_data_source</item>
+				</item>
+		</argument>
+
+		<settings>
+				<spinner>stores_columns</spinner>
+				<deps>
+						<dep>storepickup_stores_assign_listing.storepickup_stores_assign_listing_data_source</dep>
+				</deps>
+		</settings>
+
+		<dataSource component="Magento_Ui/js/grid/provider" name="storepickup_stores_assign_listing_data_source">
+				<settings>
+						<updateUrl path="mui/index/render"/>
+				</settings>
+				<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="storepickup_stores_assign_listing_data_source">
+						<settings>
+								<requestFieldName>id</requestFieldName>
+								<primaryFieldName>entity_id</primaryFieldName>
+						</settings>
+				</dataProvider>
+		</dataSource>
+
+		<listingToolbar name="listing_top">
+				<bookmark name="bookmarks"/>
+				<columnsControls name="columns_controls"/>
+				<filters name="listing_filters"/>
+				<paging name="listing_paging"/>
+		</listingToolbar>
+
+		<columns name="stores_columns">
+				<selectionsColumn name="ids">
+						<settings>
+								<indexField>entity_id</indexField>
+						</settings>
+				</selectionsColumn>
+
+				<column name="entity_id">
+						<settings>
+								<filter>textRange</filter>
+								<sorting>desc</sorting>
+								<label translate="true">ID</label>
+						</settings>
+				</column>
+
+				<column name="name">
+						<settings>
+								<filter>text</filter>
+								<label translate="true">Name</label>
+						</settings>
+				</column>
+
+				<column name="is_enabled" class="Webkul\StorePickup\Ui\Component\Listing\Columns\YesNo">
+						<settings>
+								<options class="Webkul\StorePickup\Ui\Component\Listing\Options\YesNo"/>
+								<filter>select</filter>
+								<dataType>select</dataType>
+								<label translate="true">Enabled</label>
+						</settings>
+				</column>
+
+				<column name="latitude">
+						<settings>
+								<filter>text</filter>
+								<label translate="true">Latitude</label>
+						</settings>
+				</column>
+
+				<column name="longitude">
+						<settings>
+								<filter>text</filter>
+								<label translate="true">Longitude</label>
+						</settings>
+				</column>
+
+				<column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+      			<settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+    				    <label translate="true">Created At</label>
+      			</settings>
+    		</column>
+		</columns>
+</listing>

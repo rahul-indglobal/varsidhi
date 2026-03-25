@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<head>
+		<css src="Magecomp_Recentsalesnotification::css/styles.css"/>
+		<css src="Magecomp_Recentsalesnotification::css/font-awesome-4.7.0/css/font-awesome.css"/>
+		<css src="Magecomp_Recentsalesnotification::css/font-awesome-4.7.0/css/font-awesome.min.css"/>
+	</head>
+    <body>
+		  <referenceContainer name="before.body.end">
+				<block class="Magecomp\Recentsalesnotification\Block\Recentsalesnotification" name="recentsalesnotification" template="Magecomp_Recentsalesnotification::recentsalesnotification.phtml" ifconfig="recentsalesnotification/general/enable"/>
+			</referenceContainer>
+    </body>
+</page>

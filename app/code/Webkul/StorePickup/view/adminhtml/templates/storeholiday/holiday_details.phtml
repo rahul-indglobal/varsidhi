@@ -1,0 +1,191 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<?php
+$fromDate = "";
+$toDate = "";
+$date = "";
+$dateOption = "0";
+
+if ($block->getFormData()) {
+    $data = $block->getFormData();
+
+    $dateOption = $data['is_single_date'] == true ? 0 : 1;
+    $decodedDate = $block->unserialize($data['date']);
+    $fromDate = $decodedDate['from'] ?? '';
+    $toDate = $decodedDate['to'] ?? '';
+    $date = $decodedDate['date'] ?? '';
+}
+?>
+
+<div class="admin__field">
+    <div class="admin__field-label">
+        <label><?= /** @NoEscape */ __('Date Type')?></label>
+    </div>
+
+    <div class="admin__field-control">
+        <select
+            class="admin__control-select"
+            id="holidaySelector"
+            name="holidaySelector"
+            data-form-part="storepickup_storesholidays_form">
+
+            <option value="0"><?= $block->escapeHtml(__('Single Day'))?></option>
+            <option value="1"><?= $block->escapeHtml(__('Date Range'))?></option>
+        </select>
+
+        <div class="padding-6"></div>
+
+        <div id="rendering-single-day" class="hide">
+           <div class="admin__field">
+               <input
+                  type="text"
+                  placeholder="<?= $block->escapeHtml(__('Date'))?>"
+                  readOnly
+                  class="admin__control-text required-entry"
+                  id="time"
+                  name="store_holiday"
+                  data-form-part="storepickup_storesholidays_form"/>
+
+               <input
+                  type="hidden"
+                  name="date-validator"
+                  id="date-validator"
+                  class="admin__control-text required-entry"
+                  data-form-part="storepickup_storesholidays_form" />
+           </div>
+        </div>
+
+        <div id="rendering-date-range" class="hide">
+            <div id="date-range" class="field overview required">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="admin__field text-align-center">
+                                    <input
+                                        type="text"
+                                        placeholder="<?= $block->escapeHtml(__('From Date'))?>"
+                                        readOnly
+                                        class="admin__control-text required-entry"
+                                        id="time-start"
+                                        name="store_holiday_start"
+                                        data-form-part="storepickup_storesholidays_form" />
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="admin__field text-align-center">
+                                    <div class="padding-left-8 padding-right-8 dash-seperator">-</div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="admin__field text-align-center">
+                                    <input
+                                        type="text"
+                                        placeholder="<?= $block->escapeHtml(__('To Date'))?>"
+                                        readOnly
+                                        class="admin__control-text required-entry"
+                                        id="time-end"
+                                        name="store_holiday_end"
+                                        data-form-part="storepickup_storesholidays_form" />
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/template',
+        'jquery/validate',
+        'mage/calendar'
+    ], function ($, mageTemplate) {
+        'use strict';
+
+        $(document).ready(function () {
+            var singleDate = "<?= $block->escapeHtml($date)?>";
+            var fromDate = "<?= $block->escapeHtml($fromDate)?>";
+            var toDate = "<?= $block->escapeHtml($toDate)?>";
+            var dateOption = "<?= $block->escapeHtml($dateOption)?>";
+
+            $('#date-range').dateRange({
+                buttonText: 'Select Date',
+                minDate: 'today',
+                changeMonth: true,
+                changeYear: true,
+                from: {
+                    id: 'time-start',
+                },
+                to: {
+                    id: 'time-end'
+                }
+            });
+
+            $("#time").datepicker({
+                buttonText: '',
+                minDate: 'today',
+                showOn: "button",
+                buttonImageOnly: true,
+                dateFormat: 'D, dd M yy',
+                changeMonth: true,
+                changeYear: true,
+            }).on('change', function () {
+                if ($(this).val().length > 0) {
+                    $("#date-validator").val("1");
+                } else {
+                    $("#date-validator").val('');
+                }
+            });
+
+            $("#holidaySelector").change(function () {
+                if ($(this).val() == 1) {
+                    $("#date-validator").val("1");
+                    $("#rendering-date-range").removeClass('hide');
+                    $("#rendering-single-day").addClass('hide');
+                    $("#time-start, #time-end").addClass('required-entry');
+                    $("#time").removeClass('required-entry');
+                } else {
+                    if ($("#time").val().length > 0) {
+                        $("#date-validator").val("1");
+                    } else {
+                        $("#date-validator").val("");
+                    }
+                    $("#rendering-date-range").addClass('hide');
+                    $("#rendering-single-day").removeClass('hide');
+                    $("#time-start, #time-end").removeClass('required-entry');
+                    $("#time").addClass('required-entry');
+                }
+            });
+
+            $("#holidaySelector").val(dateOption).trigger('change');
+
+            if (singleDate) {
+                $("#time").val(singleDate);
+                if ($("#time").val().length > 0) {
+                    $("#date-validator").val("1");
+                }
+            }
+
+            if (fromDate && toDate) {
+                $("#time-start").val(fromDate);
+                $("#time-end").val(toDate);
+            }
+        });
+    });
+</script>

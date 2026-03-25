@@ -1,0 +1,29 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+.text-darkcyan {
+    color: darkcyan;
+}
+
+.text-green {
+    color: darkgreen;
+}
+
+.text-darkorange {
+    color: #d29100;
+}
+
+h3 {
+  font-weight: normal;
+}
+
+h2 {
+    font-weight: 400;
+}

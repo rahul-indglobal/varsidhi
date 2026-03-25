@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Webkul_StorePickup::css/admintab.css" />
+    </head>
+    <body>
+        <referenceContainer name="left">
+            <referenceBlock name="sales_order_tabs">
+                <block class="Webkul\StorePickup\Block\Adminhtml\Order\View\Tab\PickupStoreInfoAndStatus" name="sales_order_pickup_store_page" />
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">Pickup Store Info and Status</argument>
+                    <argument name="block" xsi:type="string">sales_order_pickup_store_page</argument>
+                </action>
+            </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,136 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magecomp" translate="label" sortOrder="100" class="magecomp-logo">
+            <label><![CDATA[]]></label>
+        </tab>
+        <section id="recentsalesnotification" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10"
+                 translate="label">
+            <label>Recent Sales Notification</label>
+            <tab>magecomp</tab>
+            <resource>Magecomp_Recentsalesnotification::config_magecomp_recentsalesnotification</resource>
+            <group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+                <label>Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Recent Sales Notification</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="message" translate="label comment" type="textarea" sortOrder="20" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Notification Popup Text</label>
+                    <comment><![CDATA[{{product_name}},{{customer_name}},{{country_name}},{{city}}]]></comment>
+                </field>
+                <field id="position" translate="label comment" type="select" sortOrder="30" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Notification Popup Position</label>
+                    <source_model>Magecomp\Recentsalesnotification\Model\Config\Source\Position</source_model>
+                </field>
+                <field id="nooforder" translate="label comment" type="text" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Number Of Recent Orders to Fetch</label>
+
+                </field>
+                <field id="ajaxcalltime" translate="label comment" type="select" sortOrder="50" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Popup Display Frequency</label>
+                    <source_model>Magecomp\Recentsalesnotification\Model\Config\Source\Frequancy</source_model>
+                </field>
+                <field id="textcolor" translate="label" sortOrder="60" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Notification Text Color</label>
+                    <frontend_model>Magecomp\Recentsalesnotification\Block\Color</frontend_model>
+                </field>
+                <field id="iconcolor" translate="label" sortOrder="70" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Notification Icon Color</label>
+                    <frontend_model>Magecomp\Recentsalesnotification\Block\Color</frontend_model>
+                </field>
+            </group>
+            <group id="ordersetting" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20"
+                   translate="label">
+                <label>Order Settings</label>
+                <field id="orderenable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Use Fake Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="customername" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Fake Customers Name</label>
+                    <comment><![CDATA[For ex. Anika Walker, Jose Sexton, Maurice Randall]]></comment>
+                    <depends>
+                        <field id="orderenable">1</field>
+                    </depends>
+                </field>
+                <field id="productid" translate="label" sortOrder="30" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Fake Orders Product Id</label>
+                    <comment><![CDATA[For ex. 2, 6, 8]]></comment>
+                    <depends>
+                        <field id="orderenable">1</field>
+                    </depends>
+                </field>
+                <field id="shippingaddress" translate="label comment" type="textarea" sortOrder="40" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Fake Order Countries</label>
+                    <comment><![CDATA[For ex. Sydney, United States]]></comment>
+                    <depends>
+                        <field id="orderenable">1</field>
+                    </depends>
+                </field>
+                <field id="ordertime" translate="label" sortOrder="50" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Fake Order Time</label>
+                    <comment><![CDATA[For ex. a few seconds ago, a few minutes ago]]></comment>
+                    <depends>
+                        <field id="orderenable">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="layoutsetting" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30"
+                   translate="label">
+                <label>Layout Settings</label>
+                <field id="layout" translate="label comment" type="select" sortOrder="80" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Notification Layout</label>
+                    <source_model>Magecomp\Recentsalesnotification\Model\Config\Source\Layout</source_model>
+                </field>
+                <field id="bgcolor" translate="label" sortOrder="90" type="text" showInDefault="1" showInWebsite="1"
+                       showInStore="1">
+                    <label>Select Background Color</label>
+                    <frontend_model>Magecomp\Recentsalesnotification\Block\Color</frontend_model>
+                    <depends>
+                        <field id="layout">solidcolor</field>
+                    </depends>
+                </field>
+                <field id="bgimage" translate="label" type="image" sortOrder="100" showInDefault="1" showInWebsite="1">
+                    <label>Upload Background Image</label>
+                    <comment>Allowed file types:PNG, GIF, JPG, JPEG.</comment>
+                    <backend_model>Magecomp\Recentsalesnotification\Model\Config\Backgroundimage</backend_model>
+                    <base_url type="media" scope_info="1">recentsalesnotification/backgroundimage</base_url>
+                    <depends>
+                        <field id="layout">image</field>
+                    </depends>
+                </field>
+                <field id="template" translate="label comment" type="select" sortOrder="110" showInDefault="1"
+                       showInWebsite="1" showInStore="1">
+                    <label>Select Notification Template</label>
+                    <source_model>Magecomp\Recentsalesnotification\Model\Config\Source\Template</source_model>
+                    <depends>
+                        <field id="layout">template</field>
+                    </depends>
+                </field>
+                <field id="templates" translate="label comment" type="button" sortOrder="120" showInDefault="1"
+                       showInWebsite="1" showInStore="0">
+                    <frontend_model>Magecomp\Recentsalesnotification\Block\Collect</frontend_model>
+                    <label>Demo Templates</label>
+                    <depends>
+                        <field id="layout">template</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

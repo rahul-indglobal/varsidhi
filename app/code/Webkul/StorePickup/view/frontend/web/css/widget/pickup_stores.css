@@ -1,0 +1,140 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+.main {
+    width: 100%;
+    position: relative;
+}
+
+.col {
+    float: left;
+}
+
+.main-section {
+    width: 70%;
+    padding: 8px;
+}
+
+.side-section {
+    width: 30%;
+    padding: 8px;
+}
+
+.map-box {
+    position: relative;
+    border:1px solid lightgray;
+    padding: 8px;
+}
+
+#googleMap {
+    width: 100%;
+    height: 500px;
+}
+
+.map-selector {
+    text-align: center;
+    padding-top: 18px;
+}
+
+.position-relative {
+    position: relative;
+}
+
+.float-50 {
+    float: left;
+    width: 50%;
+}
+
+.top-minus-2 {
+    position: relative;
+    top: -2px;
+}
+
+.clear-float {
+    clear: both;
+}
+
+.set-lat-lng-btn  {
+    height: 32px;
+    width: 476px;
+}
+
+.padding-8 {
+    padding: 8px;
+}
+
+#manual_location_content, #address_location_content {
+    padding: 8px 23px;
+}
+
+.width-px-100 {
+    width: 156px!important;
+}
+
+.inline-px-30 {
+    display: inline-block;
+    width: 30px;
+}
+
+.hide {
+    display: none;
+}
+
+.padding-left-10 {
+    padding-left: 10px;
+}
+
+.pickup-stores-box {
+    overflow-y: auto;
+    max-height: 418px;
+    border: 1px solid lightgray;
+}
+
+.list-box {
+    padding: 16px;
+    border:1px solid lightgray;
+    margin: 8px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    transition: .5s;
+}
+
+.list-box:hover {
+    background-color: #eaeaea;
+    cursor: pointer;
+}
+
+.active-list-box {
+    background-color: #e0e0e0!important;
+}
+
+.active-list-box:hover {
+    background-color: #d0d0d0!important;
+}
+
+.page-products .columns {
+    position: static!important;
+}
+
+@media (min-width: 768px), print {
+    .page-products .columns {
+        position: static!important;
+    }
+}
+
+@media (min-width: 768px), print {
+    .page-layout-1column.page-with-filter .column.main {
+        position: static!important;
+    }
+}

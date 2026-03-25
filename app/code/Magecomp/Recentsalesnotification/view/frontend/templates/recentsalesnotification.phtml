@@ -1,0 +1,53 @@
+<?php 
+echo $block->getOrderNotification();
+?>
+
+<script type="text/javascript">
+require(['jquery'],function($){
+	jQuery(document).ready(function(e) {
+		var i = 1;
+		var flag = 1;
+		//doStuff();
+		jQuery(".closenotification").click(function(e) {
+            flag=0;
+			jQuery(".recent_sales_notificationtext").css('display','none');
+        });
+		function doStuff() {
+		   jQuery(".recent_sales_notificationtext").css('display','none');			
+			var orderId = jQuery(".recent_sales_notificationtext").attr('id');
+			var NoOfOrder = <?php echo $block->getNoOfOrder(); ?>;
+			
+			if(i == NoOfOrder || orderId == 0 )
+			{
+				i=0;	
+				orderId = orderId;
+			}else{
+				orderId = orderId-i;
+			}
+			
+			if(flag == 1)
+			{
+			   jQuery.ajax({
+				   url: "<?php echo $block->getUrl("recentsalesnotification/index/getorderdetail"); ?>",
+				   type: 'GET',
+				   data:{orderId:orderId},
+				   success: function(data) {
+					  
+					   jQuery(".recent_salesnotificationtext span").text(data['message']);
+					   jQuery(".recent_salesnotificationimg img").attr('src',data['img']);
+					   jQuery(".producturl").attr('href',data['producturl']);					   
+					   
+					   jQuery(".recent_sales_notificationtext").css('display','block');
+				   },
+					error: function() {
+						jQuery("#reg-otp-verify-please-wait").css('display','none');					   					
+						jQuery(".verifyotp").css('display','block');				
+				   }
+				});
+			}
+			i++;
+		}
+	setInterval(doStuff, <?php echo $block->getAjaxcalltime(); ?>);
+	});
+});	
+</script>

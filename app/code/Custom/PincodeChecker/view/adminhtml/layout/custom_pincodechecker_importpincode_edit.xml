@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd">
+    <body>
+
+        <referenceContainer name="content">
+            <block class="Custom\PincodeChecker\Block\Adminhtml\Importpincode\Edit" name="Custom_pincodechecker_pincode_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Custom\PincodeChecker\Block\Adminhtml\Importpincode\Edit\Tabs" name="Custom_pincodechecker_pincode_tabs">
+                <block class="Custom\PincodeChecker\Block\Adminhtml\Importpincode\Edit\Tab\Importpincode" name="Custom_pincodechecker_pincodechecker_edit_tab"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">importpincode</argument>
+                    <argument name="block" xsi:type="string">Custom_pincodechecker_pincodechecker_edit_tab</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

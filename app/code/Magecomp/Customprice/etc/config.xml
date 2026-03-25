@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customprice>
+            <module_options>
+                <frontend_label>Enter Your Custom Price</frontend_label>
+                <errormsg>You are not allowed to enter price lower than {{price}}.</errormsg>
+            </module_options>
+        </customprice>
+    </default>
+</config>

@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © Magefan (support@magefan.com). All rights reserved.
+ * Please visit Magefan.com for license details (https://magefan.com/end-user-license-agreement).
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\App\Response\HttpInterface">
+        <plugin disabled="false" name="Magefan_WebP_Plugin_Magento_Framework_App_Response_HttpInterface" sortOrder="10" type="Magefan\WebP\Plugin\Magento\Framework\App\Response\WebapiHttpInterface"/>
+    </type>
+    <type name="Magento\Framework\App\Http\Context">
+        <plugin
+                name="Magefan_WebP_Plugin_Magento_Framework_App_Http_Context_Rest_Api"
+                type="Magefan\WebP\Plugin\Magento\Framework\App\Http\WebapiContextPlugin"
+                sortOrder="20"
+                disabled="false"
+        />
+    </type>
+</config>

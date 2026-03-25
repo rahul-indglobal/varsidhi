@@ -1,0 +1,140 @@
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+
+* {
+    box-sizing: border-box;
+}
+
+.margin-left-to-form {
+    margin-left: 25.5%;
+}
+
+.action-btn {
+    height: 32px;
+}
+
+.dashed {
+    border-top: 1px dashed lightgray;
+    margin-bottom:24px;
+}
+
+.disabled-btn {
+    background-color: #f0f0f0;
+    border: 1px solid lightgray;
+}
+
+.admin__field > .admin__field-label {
+    width: calc( (100%) * 0.25 - 30px );
+    float: left;
+    margin-left: 7px;
+}
+
+.admin__field > .admin__field-control {
+    width: calc( (100%) * 0.5 - 15px );
+    float: left;
+    margin-left: 30px;
+}
+
+.admin__field-label label {
+    cursor: pointer;
+}
+
+.width-100 {
+    width: 100%;
+}
+
+.dash-seperator {
+    line-height: 2.3em;
+}
+
+.unset-font-weight {
+    font-weight: unset!important;
+}
+
+.padding-6 {
+    padding: 6px;
+}
+
+.left-border-remove {
+    border-left: none!important;
+}
+
+.right-border-remove {
+    border-right: none!important;
+}
+
+.text-align-center {
+    text-align: center;
+}
+
+.text-align-left {
+    text-align: left;
+}
+
+.text-align-right {
+    text-align: right;
+}
+
+.padding-left-0 {
+    padding-left: 0px!important;
+}
+
+#custom-days-custom-time-section .data-grid-th, #custom-days-same-time-section .data-grid-th {
+    text-align: center!important;
+}
+
+.width-20 {
+    width: 20px!important;
+}
+
+.padding-bottom-8 {
+    padding-bottom: 8px;
+}
+
+.box {
+    position: relative;
+}
+
+.dasher {
+    position: absolute;
+    top: 5px;
+}
+
+#holidaySelector {
+    width: 170px;
+}
+
+#time, #time-start, #time-end {
+    width: 170px;
+}
+
+.padding-right-8 {
+    padding-right: 8px;
+}
+
+.padding-left-8 {
+    padding-left: 8px;
+}
+
+.hide {
+    display: none!important;
+}
+
+#time-error, #rendering-date-range #time-start-error, #rendering-date-range #time-end-error, #date-validator-error {
+    width: 170px;
+}
+
+#rendering-date-range #time-end-error, #rendering-date-range #time-start-error {
+    position:absolute;
+}
+
+select[name='stores_holidays[holidays]'] {
+    width: 100%;
+}

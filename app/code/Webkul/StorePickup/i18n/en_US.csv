@@ -1,0 +1,238 @@
+"Pickup Store Info and Status","Pickup Store Info and Status"
+Back,Back
+"Delete Holiday","Delete Holiday"
+"Are you sure you want to do this?","Are you sure you want to do this?"
+"Save and Continue Edit","Save and Continue Edit"
+"Save Holiday","Save Holiday"
+"Delete Stores","Delete Stores"
+"Save Stores","Save Stores"
+"is scheduled for pickup","is scheduled for pickup"
+"Pickup Order Scheduled","Pickup Order Scheduled"
+"is re-scheduled for pickup","is re-scheduled for pickup"
+"Pickup Order Re-scheduled","Pickup Order Re-scheduled"
+"Order %1","Order %1"
+"Unable to scheduled.","Unable to scheduled."
+"Pickup Stores Orders","Pickup Stores Orders"
+Webkul,Webkul
+Stores,Stores
+"You deleted the Stores.","You deleted the Stores."
+"We can't find a Stores to delete.","We can't find a Stores to delete."
+"This Stores no longer exists.","This Stores no longer exists."
+"Edit Stores","Edit Stores"
+"New Stores","New Stores"
+"Edit Store (%1)","Edit Store (%1)"
+"New Store","New Store"
+"Please correct the data sent.","Please correct the data sent."
+"A total of %1 store(s) have been deleted.","A total of %1 store(s) have been deleted."
+"Selected store(s) are already disabled.","Selected store(s) are already disabled."
+"No store(s) are found enabled.","No store(s) are found enabled."
+"A total of %1 store(s) have been disabled.","A total of %1 store(s) have been disabled."
+"You are trying to disable, %1 already disabled store(s) which can't be disable again.","You are trying to disable, %1 already disabled store(s) which can't be disable again."
+"Selected store(s) are already enabled.","Selected store(s) are already enabled."
+"No store(s) are found disabled.","No store(s) are found disabled."
+"A total of %1 store(s) have been enabled.","A total of %1 store(s) have been enabled."
+"You are trying to enable, %1 already enabled store(s) which can't be enable again.","You are trying to enable, %1 already enabled store(s) which can't be enable again."
+"You saved the Stores.","You saved the Stores."
+"Something went wrong while saving the Stores.","Something went wrong while saving the Stores."
+Holiday,Holiday
+"You deleted the Holiday.","You deleted the Holiday."
+"We can't find a Holiday to delete.","We can't find a Holiday to delete."
+"This Holiday no longer exists.","This Holiday no longer exists."
+"Edit Holiday","Edit Holiday"
+"New Holiday","New Holiday"
+Holidays,Holidays
+"You saved the Holiday.","You saved the Holiday."
+"Something went wrong while saving the Holiday.","Something went wrong while saving the Holiday."
+m,m
+Km,Km
+"Open Now","Open Now"
+"Closed Now","Closed Now"
+"Could not save the storesHolidays: %1","Could not save the storesHolidays: %1"
+"StoresHolidays with id ""%1"" does not exist.","StoresHolidays with id ""%1"" does not exist."
+"Could not delete the StoresHolidays: %1","Could not delete the StoresHolidays: %1"
+"Could not save the storesProductsRelation: %1","Could not save the storesProductsRelation: %1"
+"StoresProductsRelation with id ""%1"" does not exist.","StoresProductsRelation with id ""%1"" does not exist."
+"Could not delete the StoresProductsRelation: %1","Could not delete the StoresProductsRelation: %1"
+"Could not save the stores: %1","Could not save the stores: %1"
+"Stores with id ""%1"" does not exist.","Stores with id ""%1"" does not exist."
+"Could not delete the Stores: %1","Could not delete the Stores: %1"
+Enabled,Enabled
+Disabled,Disabled
+Edit,Edit
+Delete,Delete
+"Delete ""${ $.$data.title }""","Delete ""${ $.$data.title }"""
+"Are you sure you wan't to delete a ""${ $.$data.title }"" record?","Are you sure you wan't to delete a ""${ $.$data.title }"" record?"
+Yes,Yes
+No,No
+.,.
+"Assign multiple pickup stores to product. Customer can go to these pickup stores to pickup his/her order.","Assign multiple pickup stores to product. Customer can go to these pickup stores to pickup his/her order."
+"Assign Pickup Stores","Assign Pickup Stores"
+Cancel,Cancel
+"Add Selected Stores","Add Selected Stores"
+Remove,Remove
+ID,ID
+Name,Name
+Latitude,Latitude
+Longitude,Longitude
+Actions,Actions
+"Get Current Location's Lat Long","Get Current Location's Lat Long"
+"Note: Use if you want to get current location's latitude longitude.","Note: Use if you want to get current location's latitude longitude."
+"Note: This option is disabled because website is not running on ssl server.","Note: This option is disabled because website is not running on ssl server."
+"Pickup Store Details","Pickup Store Details"
+"Pickup Scheduled At","Pickup Scheduled At"
+Pending,Pending
+"Pickup Store Address","Pickup Store Address"
+Contact,Contact
+"Name: ","Name: "
+name,name
+"Email: ","Email: "
+email,email
+"Mobile: ","Mobile: "
+mobile,mobile
+"Fax: ","Fax: "
+fax,fax
+"Pickup Created On","Pickup Created On"
+"Order Pickup Scheduling","Order Pickup Scheduling"
+"Schedule Date","Schedule Date"
+"Schedule Time","Schedule Time"
+" "," "
+"This pickup store is temporarily closed. You can't schedule this order for pickup.","This pickup store is temporarily closed. You can't schedule this order for pickup."
+"Date Type","Date Type"
+"Single Day","Single Day"
+"Date Range","Date Range"
+Date,Date
+"From Date","From Date"
+"To Date","To Date"
+Days,Days
+Timing,Timing
+"Store Opens","Store Opens"
+24x7,24x7
+"Custom Days With Same Timing","Custom Days With Same Timing"
+"Custom Days With Custom Timing","Custom Days With Custom Timing"
+"Your Location","Your Location"
+"Your location is: ","Your location is: "
+N/A,N/A
+"Get your current Location","Get your current Location"
+"To find the nearest pickup stores you need to provide your location (latitude & longitude).","To find the nearest pickup stores you need to provide your location (latitude & longitude)."
+" There are two ways to provide your location."," There are two ways to provide your location."
+" You can give your location manually or by searching address."," You can give your location manually or by searching address."
+"Manual Location","Manual Location"
+"Set Lat-Long as your current location","Set Lat-Long as your current location"
+"Address Search","Address Search"
+"Search Address","Search Address"
+"Feature is disabled by administrator","Feature is disabled by administrator"
+"Store Details","Store Details"
+"Store Open","Store Open"
+"Store Closed","Store Closed"
+"Call Us: ","Call Us: "
+Hello,Hello
+"Order Id: ","Order Id: "
+"Your order","Your order"
+"Pickup Store - ","Pickup Store - "
+"Scheduled Date","Scheduled Date"
+"Thank you","Thank you"
+"Choose Nearest Pickup Store","Choose Nearest Pickup Store"
+Details,Details
+"Pickup store is missing. Select the pickup store and try again.","Pickup store is missing. Select the pickup store and try again."
+"Distance from your location: ","Distance from your location: "
+"Expected time from your location: ","Expected time from your location: "
+"Contact Info","Contact Info"
+"Store Address","Store Address"
+"Pickup Stores are not available.","Pickup Stores are not available."
+"Show All Pickup Stores","Show All Pickup Stores"
+"Show Pickup Store Direction","Show Pickup Store Direction"
+"Store Pickup","Store Pickup"
+"Some issue occurring in getting latitude longitude.","Some issue occurring in getting latitude longitude."
+"Geo Location is supported by your browser.","Geo Location is supported by your browser."
+"Weekly Off","Weekly Off"
+"Please select a day!","Please select a day!"
+Monday,Monday
+Tuesday,Tuesday
+Wednesday,Wednesday
+Thusday,Thusday
+Friday,Friday
+Saturday,Saturday
+Sunday,Sunday
+"Field ","Field "
+" is required."," is required."
+Close,Close
+"Person Name","Person Name"
+Email,Email
+Phone,Phone
+Fax,Fax
+Country,Country
+State,State
+City,City
+Street,Street
+Postcode,Postcode
+"Latitude - ","Latitude - "
+", Longitude - ",", Longitude - "
+"Please provide latitude or longitude in proper format.","Please provide latitude or longitude in proper format."
+"Pickup stores not found at this location.","Pickup stores not found at this location."
+"Manage Stores","Manage Stores"
+"Manage Holidays","Manage Holidays"
+Title,Title
+"Method Name","Method Name"
+"Calculate Handling Fee","Calculate Handling Fee"
+"Handling Fee","Handling Fee"
+"Within Range (Kilometers)","Within Range (Kilometers)"
+"By default is 15. Minimum 1 and Maximum 50.","By default is 15. Minimum 1 and Maximum 50."
+"Show Pickup Stores Page","Show Pickup Stores Page"
+"Distance Provider must be set to Google Map [Catalog > Inventory > Google Distance Provider]. Google Direction Api and Google Maps Api must be enabled.","Distance Provider must be set to Google Map [Catalog > Inventory > Google Distance Provider]. Google Direction Api and Google Maps Api must be enabled."
+"Enable Address Search","Enable Address Search"
+"Google places api must be enabled. Work only on non-ssl server.","Google places api must be enabled. Work only on non-ssl server."
+"Enabled Scheduling Emails","Enabled Scheduling Emails"
+"Order Scheduling Template","Order Scheduling Template"
+"Displayed Error Message","Displayed Error Message"
+"Ship to Applicable Countries","Ship to Applicable Countries"
+"Ship to Specific Countries","Ship to Specific Countries"
+"Show Method if Not Applicable","Show Method if Not Applicable"
+"Sort Order","Sort Order"
+"Purchase Point","Purchase Point"
+"Purchase Date","Purchase Date"
+"Grand Total (Base)","Grand Total (Base)"
+"Grand Total (Purchased)","Grand Total (Purchased)"
+Status,Status
+"Shipping Information","Shipping Information"
+"Customer Email","Customer Email"
+"Customer Group","Customer Group"
+Subtotal,Subtotal
+"Customer Name","Customer Name"
+"Payment Method","Payment Method"
+"Total Refunded","Total Refunded"
+"All Store Views","All Store Views"
+"Store View","Store View"
+Thumbnail,Thumbnail
+Type,Type
+"Attribute Set","Attribute Set"
+SKU,SKU
+Price,Price
+Visibility,Visibility
+"Created At","Created At"
+"General Information","General Information"
+"Store Info","Store Info"
+"Store Name","Store Name"
+Description,Description
+"Description will not show on frontend.","Description will not show on frontend."
+"Store Timing","Store Timing"
+"Urgent Closed","Urgent Closed"
+"This option will show store as ""Closed"" to customers. Use this option, if you are closing your store at un-scheduled timing. This option will keep your store closed until you turn off this option.","This option will show store as ""Closed"" to customers. Use this option, if you are closing your store at un-scheduled timing. This option will keep your store closed until you turn off this option."
+"Store Holidays","Store Holidays"
+"Holidays List","Holidays List"
+Mobile,Mobile
+"Address Data","Address Data"
+State/Province,State/Province
+"Product Assignment","Product Assignment"
+"Assign Products","Assign Products"
+Id,Id
+"Add Products","Add Products"
+"Add Store","Add Store"
+Enable,Enable
+"Are you sure want to enable Store(s) ?","Are you sure want to enable Store(s) ?"
+Disable,Disable
+"Are you sure want to disable Store(s) ?","Are you sure want to disable Store(s) ?"
+"Are you sure want to delete Store(s) ?","Are you sure want to delete Store(s) ?"
+General,General
+"Holiday Name","Holiday Name"
+"Add New Holiday","Add New Holiday"
+"Pickup Order","Pickup Order"

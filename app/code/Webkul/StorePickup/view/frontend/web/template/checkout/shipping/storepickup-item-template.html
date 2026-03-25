@@ -1,0 +1,191 @@
+<!-- ko ifnot: (method.carrier_code == 'storepickup') -->
+<tr class="row"
+    click="element.selectShippingMethod">
+    <td class="col col-method">
+        <input type="radio"
+               class="radio"
+               ifnot="method.error_message"
+               ko-checked="element.isSelected"
+               ko-value="method.carrier_code + '_' + method.method_code"
+               attr="'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                    'checked': element.rates().length == 1 || element.isSelected" />
+    </td>
+    <td class="col col-price">
+        <each args="element.getRegion('price')" render="" />
+    </td>
+    <td class="col col-method"
+        attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+        text="method.method_title" />
+    <td class="col col-carrier"
+        attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+        text="method.carrier_title" />
+</tr>
+<!-- /ko -->
+
+<!-- ko if: (method.carrier_code == 'storepickup') -->
+
+    <!-- ko if: $parent.pickupStores().length > 0 -->
+        <tr class="row"
+            click="element.selectShippingMethod">
+            <td class="col col-method">
+                <input type="radio"
+                       class="radio"
+                       ifnot="method.error_message"
+                       ko-checked="element.isSelected"
+                       ko-value="method.carrier_code + '_' + method.method_code"
+                       attr="'aria-labelledby': 'label_method_' + method.method_code + '_' + method.carrier_code + ' ' + 'label_carrier_' + method.method_code + '_' + method.carrier_code,
+                            'checked': element.rates().length == 1 || element.isSelected" />
+            </td>
+            <td class="col col-price">
+                <each args="element.getRegion('price')" render="" />
+            </td>
+            <td class="col col-method"
+                attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+                text="method.method_title" />
+            <td class="col col-carrier"
+                attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+                text="method.carrier_title" />
+        </tr>
+
+        <tr class="storepickup-section">
+            <td></td>
+            <td colspan="3">
+                <div>
+                    <div data-bind="i18n: 'Choose Nearest Pickup Store'"></div>
+                    <hr class="dashed-line">
+
+                    <div>
+                        <table id="storepickup-table">
+                            <tbody>
+                                <!-- ko foreach: $parent.pickupStores -->
+                                <tr>
+                                    <td>
+                                        <input type="radio"
+                                               class="pickupstores_radio"
+                                               name="pickupstores_radio"
+                                               data-bind="click: $parentContext.$parent.selectPickupStore.bind(this, 'pickupstore_radio_'+$data.store.entity_id), attr: {'id': 'pickupstore_radio_'+$data.store.entity_id, 'checked': $parentContext.$parent.isChecked('pickupstore_radio_'+$data.store.entity_id)}"
+                                               />
+
+                                    </td>
+                                    <td data-bind="click: $parentContext.$parent.selectPickupStore.bind(this, 'pickupstore_radio_'+$data.store.entity_id)"><div data-bind="text: $data.store.name"></div></td>
+                                    <td data-bind="click: $parentContext.$parent.selectPickupStore.bind(this, 'pickupstore_radio_'+$data.store.entity_id)" class="text-align-right"><div data-bind="text: $data.distance+' '+$data.distance_unit"></div></td>
+
+                                    <!-- ko if: ($parentContext.$parent.isGoogleMapEnabled == true) -->
+                                        <td>
+                                            <div class="text-align-right" data-bind="click: $parentContext.$parent.openDetails.bind(this, $data)">
+                                                <span class="pickupStoreDetails" data-bind="i18n: 'Details'"></span>
+                                            </div>
+                                        </td>
+                                    <!-- /ko -->
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                        <div role="alert" id="pickup-store-error-section" class="message notice" data-bind="visible: $parent.pickupStoreError()">
+                            <span data-bind="i18n: 'Pickup store is missing. Select the pickup store and try again.'">
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr class="collapse">
+            <td>
+                <div id="popup-modal" class="content">
+                    <div>
+                        <div>
+                            <span data-bind="i18n: 'Distance from your location: '"></span>
+                            <span class="bold" data-bind="text: $parent.distance"></span>
+                        </div>
+                        <div>
+                            <span data-bind="i18n: 'Expected time from your location: '"></span>
+                            <span class="bold" data-bind="text: $parent.time"></span>
+                        </div>
+                        <br>
+                        <div id="googleMap"></div>
+                    </div>
+
+                    <hr class="dashed-line">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th width="50%" class="right-border bottom-border" data-bind="i18n: 'Contact Info'"></th>
+                                <th class="bottom-border" data-bind="i18n: 'Store Address'"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="right-border">
+                                    <table>
+                                        <tbody>
+                                            <!-- ko foreach: $parent.storeContactInfo -->
+                                            <tr>
+                                                <td class="right-border" data-bind="text: $data.name"></td>
+                                                <td data-bind="text: $data.value"></td>
+                                            </tr>
+                                            <!-- /ko -->
+                                        </tbody>
+                                    </table>
+                                </td>
+
+                                <td>
+                                    <table>
+                                        <tbody>
+                                            <!-- ko foreach: $parent.storeAddressInfo -->
+                                            <tr>
+                                                <td class="right-border" data-bind="text: $data.name"></td>
+                                                <td data-bind="text: $data.value"></td>
+                                            </tr>
+                                            <!-- /ko -->
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div data-bind="afterRender: $parent.initModal"></div>
+            </td>
+        </tr>
+    <!-- /ko -->
+
+    <!-- ko ifnot: $parent.pickupStores().length > 0 -->
+
+        <tr class="row"
+            click="element.selectShippingMethod">
+            <td class="col col-method">
+                <input type="radio" disabled>
+            </td>
+            <td class="col col-price">
+                <each args="element.getRegion('price')" render="" />
+            </td>
+            <td class="col col-method"
+                attr="'id': 'label_method_' + method.method_code + '_' + method.carrier_code"
+                text="method.method_title" />
+            <td class="col col-carrier"
+                attr="'id': 'label_carrier_' + method.method_code + '_' + method.carrier_code"
+                text="method.carrier_title" />
+        </tr>
+
+        <tr class="storepickup-section">
+            <td></td>
+            <td colspan="3">
+                <div data-bind="i18n: 'Pickup Stores are not available.'"></div>
+            </td>
+        </tr>
+
+    <!-- /ko -->
+<!-- /ko -->
+
+<tr class="row row-error"
+    if="method.error_message">
+    <td class="col col-error" colspan="4">
+        <div role="alert" class="message error">
+            <div text="method.error_message"></div>
+        </div>
+        <span class="no-display">
+            <input type="radio"
+                   attr="'value' : method.method_code, 'id': 's_method_' + method.method_code" />
+        </span>
+    </td>
+</tr>

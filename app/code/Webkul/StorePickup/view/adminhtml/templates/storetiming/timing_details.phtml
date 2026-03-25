@@ -1,0 +1,549 @@
+<?php
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+?>
+
+<?php
+    $timings = $block->encode($block->getTimings());
+    $timingType = $block->getTimingType();
+    $isDaySelected = $block->isDaySelected();
+
+?>
+
+<script id="custom-days-custom-time-template" type="text/x-magento-template">
+    <table class="width-100 data-grid" border="1">
+        <thead>
+            <tr>
+                <th class="data-grid-th"></th>
+                <th class="data-grid-th"><?= /** @NoEscape */ __('Days')?></th>
+                <th class="data-grid-th" colspan="3"><?= /** @NoEscape */ __('Timing') ?></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% _.each(data.days, function(item, index) { %>
+
+                <tr>
+                    <td>
+                        <div class="admin__field admin__field-option">
+                            <input
+                                type="checkbox"
+                                class="admin__control-checkbox" <%- (item.checked == 1) ? 'checked' : '' %>
+                                data-index="<%- index %>" id="checkbox-day-<%- index %>"
+                                name="stores_timings[timings][checkbox-day-<%- index %>]"
+                                data-form-part="storepickup_stores_form" />
+
+                            <label class="admin__field-label" for="checkbox-day-<%- index %>"></label>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="admin__field">
+                            <div class="admin__field-label unset-font-weight"><%- item.label %></div>
+                        </div>
+                    </td>
+
+                    <td class="right-border-remove">
+                        <div class="admin__field text-align-center">
+                            <input
+                                type="text"
+                                readOnly
+                                class="admin__control-text timepicker-start"
+                                value="<%- item.startTime%>"
+                                id="time-start-<%- index %>"
+                                name="stores_timings[timings][time-start-<%- index %>]"
+                                data-form-part="storepickup_stores_form" />
+                        </div>
+                    </td>
+
+                    <td class="right-border-remove left-border-remove">
+                        <div class="admin__field text-align-center">
+                            <div class="dash-seperator">-</div>
+                        </div>
+                    </td>
+
+                    <td class="left-border-remove">
+                        <div class="admin__field text-align-center">
+                            <input
+                                type="text"
+                                readOnly
+                                class="admin__control-text timepicker-end"
+                                value="<%- item.endTime%>"
+                                id="time-end-<%- index %>"
+                                name="stores_timings[timings][time-end-<%- index %>]"
+                                data-form-part="storepickup_stores_form" />
+                        </div>
+                    </td>
+
+                </tr>
+
+             <% }); %>
+        </tbody>
+
+    </table>
+</script>
+
+<script id="custom-days-same-time-template" type="text/x-magento-template">
+
+    <div class="padding-bottom-8 text-align-center"><b>Timing</b></div>
+    <div class="box">
+        <table class="width-100">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="admin__field text-align-center">
+                            <input
+                                type="text"
+                                readOnly
+                                class="admin__control-text timepicker-start required-entry"
+                                value="<%- data.startTime%>"
+                                id="time-start"
+                                name="stores_timings[timings][time-start]"
+                                data-form-part="storepickup_stores_form" />
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="admin__field text-align-center">
+                            <div class="dasher">-</div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="admin__field text-align-center">
+                            <input
+                                type="text"
+                                readOnly
+                                class="admin__control-text timepicker-end required-entry"
+                                value="<%- data.endTime%>"
+                                id="time-end"
+                                name="stores_timings[timings][time-end]"
+                                data-form-part="storepickup_stores_form" />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <br>
+
+    <table class="width-100 data-grid" border="1">
+        <thead>
+            <tr>
+                <th class="data-grid-th width-20"></th>
+                <th class="data-grid-th padding-left-0"><?= /** @NoEscape */ __('Days') ?></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <% _.each(data.days, function(item, index) { %>
+
+                <tr>
+                    <td>
+                        <div class="admin__field admin__field-option">
+                            <input
+                                type="checkbox"
+                                class="admin__control-checkbox" <%- (item.checked == 1) ? 'checked' : '' %>
+                                data-index="<%- index %>"
+                                id="same-checkbox-day-<%- index %>"
+                                name="stores_timings[timings][same-checkbox-day-<%- index %>]"
+                                data-form-part="storepickup_stores_form" />
+
+                            <label class="admin__field-label" for="same-checkbox-day-<%- index %>"></label>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="admin__field">
+                            <div class="admin__field-label unset-font-weight text-align-left"><%- item.label %></div>
+                        </div>
+                    </td>
+                </tr>
+
+            <% }); %>
+
+        </tbody>
+
+    </table>
+</script>
+
+<div class="admin__field">
+    <div class="admin__field-label">
+        <label><?= /** @NoEscape */ __('Store Opens')?></label>
+    </div>
+
+    <div class="admin__field-control">
+
+        <select
+            class="admin__control-select"
+            id="timingSelector"
+            name="stores_timings[timing_type]"
+            data-form-part="storepickup_stores_form">
+
+            <option value="0"><?= /** @NoEscape */ __('24x7')?></option>
+            <option value="1"><?= /** @NoEscape */ __('Custom Days With Same Timing')?></option>
+            <option value="2"><?= /** @NoEscape */ __('Custom Days With Custom Timing')?></option>
+        </select>
+
+        <div class="padding-6"></div>
+
+        <div class="admin__field text-align-center">
+            <input
+                type="hidden"
+                class="admin__control-text minimum-one-selection"
+                value="<?= /** @NoEscape */ ($isDaySelected == 1) ? 1 : 0?>"
+                id="minimum-one-selection-for-custom"
+                name="minimum-one-selection-for-custom"
+                data-form-part="storepickup_stores_form" />
+        </div>
+
+        <div class="padding-6"></div>
+
+        <div id="rendering-same-area">
+            <div id="custom-days-same-time-section"></div>
+        </div>
+
+        <div id="rendering-custom-area">
+            <div id="custom-days-custom-time-section"></div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'mage/template',
+        'jquery/validate',
+        'mage/calendar'
+    ], function ($, mageTemplate) {
+        'use strict';
+
+        var htmlSection1;
+        var htmlSection2;
+        $(document).ready(function () {
+            $.validator.addMethod(
+                'minimum-one-selection', function (value) {
+                    if ($("#timingSelector").val() == 0) {
+                        return true;
+                    }
+
+                    if (value == 1) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }, $.mage.__('Please select a day!')
+            );
+
+            $("#timingSelector").change(function () {
+                if ($(this).val() == 0) {
+                    $("#minimum-one-selection-for-custom-error").css("display", "none");
+                    if ($('#custom-days-same-time-section').html()) {
+                        htmlSection1 = $("#custom-days-same-time-section").detach();
+                    }
+
+                    if ($('#custom-days-custom-time-section').html()) {
+                        htmlSection2 = $("#custom-days-custom-time-section").detach();
+                    }
+                } else if ($(this).val() == 1) {
+                    if ($('#custom-days-custom-time-section').html()) {
+                        htmlSection2 = $("#custom-days-custom-time-section").detach();
+                    }
+
+                    if (htmlSection1) {
+                        $("#rendering-same-area").html(htmlSection1);
+                    }
+
+                    if (!$('#custom-days-same-time-section').html()) {
+                        var timings = JSON.parse('<?= /** @NoEscape */ $timings ?>');
+                        var data = {
+                            days: [
+                                {label: $.mage.__('Monday'), checked: timings['same-checkbox-day-0']},
+                                {label: $.mage.__('Tuesday'), checked: timings['same-checkbox-day-1']},
+                                {label: $.mage.__('Wednesday'), checked: timings['same-checkbox-day-2']},
+                                {label: $.mage.__('Thusday'), checked: timings['same-checkbox-day-3']},
+                                {label: $.mage.__('Friday'), checked: timings['same-checkbox-day-4']},
+                                {label: $.mage.__('Saturday'), checked: timings['same-checkbox-day-5']},
+                                {label: $.mage.__('Sunday'), checked: timings['same-checkbox-day-6']}
+                            ],
+                            startTime: timings['time-start'],
+                            endTime: timings['time-end']
+                        };
+
+                        var progressTmpl = mageTemplate('#custom-days-same-time-template'),
+                            tmpl;
+                        tmpl = progressTmpl({data});
+                        $('#custom-days-same-time-section').html(tmpl);
+
+                        $('#custom-days-same-time-section .timepicker-start').timepicker({
+                            'timeFormat': 'HH:mm',
+                            'showButtonPanel': true,
+                            'showOn': "button",
+                            'buttonImage': null,
+                            'buttonImageOnly': null,
+                            'buttonText': '',
+                            onSelect: function (date, meta) {
+                                var endId = "#time-end";
+
+                                var endTime = $(endId).val();
+                                if (endTime) {
+                                    var pieces = $(endId).val().split(':');
+                                    var hour = Number(pieces[0]);
+                                    var min = Number(pieces[1]);
+
+                                    var totalMinutesEnd = hour * 60 + min;
+                                    var totalMinutesStart = Number(meta.hour) * 60 + Number(meta.minute);
+
+                                    if (totalMinutesStart >= totalMinutesEnd) {
+                                        $(endId).val('');
+                                    }
+                                }
+
+                                $(endId).timepicker('destroy');
+                                $(endId).timepicker({
+                                    'timeFormat': 'HH:mm',
+                                    'showButtonPanel': true,
+                                    'showOn': "button",
+                                    'buttonImage': null,
+                                    'buttonImageOnly': null,
+                                    'buttonText': '',
+                                    'minDateTime': new Date(2018, 11, 11, meta.hour, meta.minute)
+                                });
+                            }
+                        });
+
+                        if (timings['time-start']) {
+                            let time = timings['time-start'].split(':');
+                            $('#custom-days-same-time-section .timepicker-end').timepicker({
+                                'timeFormat': 'HH:mm',
+                                'showButtonPanel': true,
+                                'showOn': "button",
+                                'buttonImage': null,
+                                'buttonImageOnly': null,
+                                'buttonText': '',
+                                'minDateTime': new Date(2018, 11, 11, time[0], time[1])
+                            });
+                        } else {
+                            $('#custom-days-same-time-section .timepicker-end').timepicker({
+                                'timeFormat': 'HH:mm',
+                                'showButtonPanel': true,
+                                'showOn': "button",
+                                'buttonImage': null,
+                                'buttonImageOnly': null,
+                                'buttonText': ''
+                            });
+                        }
+
+                        $("#custom-days-same-time-section input[id^='same-checkbox-day-']").change(function () {
+                            var index = $(this).attr('data-index');
+                            var timeStartId = "#custom-days-same-time-section #time-start-"+index;
+                            var timeEndId = "#custom-days-same-time-section #time-end-"+index;
+
+                            if ($(this).prop('checked')) {
+                                $(timeStartId+", "+timeEndId).addClass('required-entry');
+                            } else {
+                                $(timeStartId+", "+timeEndId).removeClass('required-entry');
+                            }
+
+                            if ($("#custom-days-same-time-section input[type='checkbox']:checked").length) {
+                                $("#minimum-one-selection-for-custom").val(1);
+                            } else {
+                                $("#minimum-one-selection-for-custom").val(0);
+                            }
+
+                            if ($("#minimum-one-selection-for-custom").val()) {
+                                $("#minimum-one-selection-for-custom-error").hide();
+                            }
+                        });
+                    }
+
+                    if ($("#custom-days-same-time-section input[type='checkbox']:checked").length) {
+                        $("#minimum-one-selection-for-custom").val(1);
+                    } else {
+                        $("#minimum-one-selection-for-custom").val(0);
+                    }
+
+                    if ($("#minimum-one-selection-for-custom").val()) {
+                        $("#minimum-one-selection-for-custom-error").hide();
+                    }
+                } else {
+                    if ($('#custom-days-same-time-section').html()) {
+                        htmlSection1 = $("#custom-days-same-time-section").detach();
+                    }
+
+                    if (htmlSection2) {
+                        $("#rendering-custom-area").html(htmlSection2);
+                    }
+
+                    if (!$('#custom-days-custom-time-section').html()) {
+                        var timings = JSON.parse('<?= /** @NoEscape */ $timings ?>');
+                        var data = {
+                            days: [
+                                {
+                                    label: $.mage.__('Monday'),
+                                    startTime: timings['time-start-0'],
+                                    endTime: timings['time-end-0'],
+                                    checked: timings['checkbox-day-0']
+                                },
+                                {
+                                    label: $.mage.__('Tuesday'),
+                                    startTime: timings['time-start-1'],
+                                    endTime: timings['time-end-1'],
+                                    checked: timings['checkbox-day-1']
+                                },
+                                {
+                                    label: $.mage.__('Wednesday'),
+                                    startTime: timings['time-start-2'],
+                                    endTime: timings['time-end-2'],
+                                    checked: timings['checkbox-day-2']
+                                },
+                                {
+                                    label: $.mage.__('Thusday'),
+                                    startTime: timings['time-start-3'],
+                                    endTime: timings['time-end-3'],
+                                    checked: timings['checkbox-day-3']
+                                },
+                                {
+                                    label: $.mage.__('Friday'),
+                                    startTime: timings['time-start-4'],
+                                    endTime: timings['time-end-4'],
+                                    checked: timings['checkbox-day-4']
+                                },
+                                {
+                                    label: $.mage.__('Saturday'),
+                                    startTime: timings['time-start-5'],
+                                    endTime: timings['time-end-5'],
+                                    checked: timings['checkbox-day-5']
+                                },
+                                {
+                                    label: $.mage.__('Sunday'),
+                                    startTime: timings['time-start-6'],
+                                    endTime: timings['time-end-6'],
+                                    checked: timings['checkbox-day-6']
+                                }
+                            ]
+                        };
+
+                        var progressTmpl = mageTemplate('#custom-days-custom-time-template'),
+                            tmpl;
+                        tmpl = progressTmpl({data});
+                        $('#custom-days-custom-time-section').html(tmpl);
+
+                        $('#custom-days-custom-time-section .timepicker-start').timepicker({
+                            'timeFormat': 'HH:mm',
+                            'showButtonPanel': true,
+                            'showOn': "button",
+                            'buttonImage': null,
+                            'buttonImageOnly': null,
+                            'buttonText': '',
+                            onSelect: function (date, meta) {
+                                var pieces = meta.inst.id.split('-');
+                                var endId = "#"+pieces[0]+'-end-'+pieces[2];
+
+                                var endTime = $(endId).val();
+                                if (endTime) {
+                                    pieces = $(endId).val().split(':');
+                                    var hour = Number(pieces[0]);
+                                    var min = Number(pieces[1]);
+
+                                    var totalMinutesEnd = hour * 60 + min;
+                                    var totalMinutesStart = Number(meta.hour) * 60 + Number(meta.minute);
+
+                                    if (totalMinutesStart >= totalMinutesEnd) {
+                                        $(endId).val('');
+                                    }
+                                }
+
+                                $(endId).timepicker('destroy');
+                                $(endId).timepicker({
+                                    'timeFormat': 'HH:mm',
+                                    'showButtonPanel': true,
+                                    'showOn': "button",
+                                    'buttonImage': null,
+                                    'buttonImageOnly': null,
+                                    'buttonText': '',
+                                    'minDateTime': new Date(2018, 11, 11, meta.hour, meta.minute)
+                                });
+                            }
+                        });
+
+                        for (var day = 0; day < 7; day++) {
+                            if (timings['time-start-'+day]) {
+                                let time = timings['time-start-'+day].split(':');
+                                $('#time-end-'+day).timepicker({
+                                    'timeFormat': 'HH:mm',
+                                    'showButtonPanel': true,
+                                    'showOn': "button",
+                                    'buttonImage': null,
+                                    'buttonImageOnly': null,
+                                    'buttonText': '',
+                                    'minDateTime': new Date(2018, 11, 11, time[0], time[1])
+                                });
+                            } else {
+                                $('#time-end-'+day).timepicker({
+                                    'timeFormat': 'HH:mm',
+                                    'showButtonPanel': true,
+                                    'showOn': "button",
+                                    'buttonImage': null,
+                                    'buttonImageOnly': null,
+                                    'buttonText': ''
+                                });
+                            }
+                        }
+
+                        $('#custom-days-custom-time-section .timepicker-end').timepicker({
+                            'timeFormat': 'HH:mm',
+                            'showButtonPanel': true,
+                            'showOn': "button",
+                            'buttonImage': null,
+                            'buttonImageOnly': null,
+                            'buttonText': ''
+                        });
+
+                        $("#custom-days-custom-time-section input[id^='checkbox-day-']").change(function () {
+                            var index = $(this).attr('data-index');
+                            var timeStartId = "#custom-days-custom-time-section #time-start-"+index;
+                            var timeEndId = "#custom-days-custom-time-section #time-end-"+index;
+
+                            if ($(this).prop('checked')) {
+                                $(timeStartId+", "+timeEndId).addClass('required-entry');
+                            } else {
+                                $(timeStartId+", "+timeEndId).removeClass('required-entry');
+                            }
+
+                            if ($("#custom-days-custom-time-section input[type='checkbox']:checked").length) {
+                                $("#minimum-one-selection-for-custom").val(1);
+                            } else {
+                                $("#minimum-one-selection-for-custom").val(0);
+                            }
+
+                            if ($("#minimum-one-selection-for-custom").val()) {
+                                $("#minimum-one-selection-for-custom-error").hide();
+                            }
+                        });
+                    }
+
+                    if ($("#custom-days-custom-time-section input[type='checkbox']:checked").length) {
+                        $("#minimum-one-selection-for-custom").val(1);
+                    } else {
+                        $("#minimum-one-selection-for-custom").val(0);
+                    }
+
+                    if ($("#minimum-one-selection-for-custom").val()) {
+                        $("#minimum-one-selection-for-custom-error").hide();
+                    }
+                }
+            });
+
+            $("#timingSelector").val(<?= /** @NoEscape */ $timingType?>).trigger('change');
+        });
+    });
+</script>

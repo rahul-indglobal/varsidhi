@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<!--
+  ~ Copyright © 2018 Ideo. All rights reserved.
+  ~ @license GPLv3
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Ideo_StoreLocator::css/store-locator.css" />
+        <link src="Ideo_StoreLocator::angular/angular.min.js" />
+        <link src="Ideo_StoreLocator::js/markerclusterer.js" />
+    </head>
+    <body>
+        <referenceBlock name="ideo-storelocator-link">
+            <arguments>
+                <argument name="current" xsi:type="boolean">true</argument>
+            </arguments>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Ideo\StoreLocator\Block\StoresList" name="storelocator.stores.list" template="Ideo_StoreLocator::list.phtml" />
+        </referenceContainer>
+    </body>
+</page>

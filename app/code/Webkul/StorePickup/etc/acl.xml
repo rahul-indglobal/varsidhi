@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+		<acl>
+				<resources>
+						<resource id="Magento_Backend::admin">
+
+								<resource id="Webkul_StorePickup::top_level" title="Store Pickup" sortOrder="10">
+										<resource id="Webkul_StorePickup::pickupstores" title="Manage Stores" sortOrder="10" />
+										<resource id="Webkul_StorePickup::pickuporders" title="Pickup Stores Orders" sortOrder="11" />
+										<resource id="Webkul_StorePickup::pickupholidays" title="Manage Holidays" sortOrder="12" />
+								</resource>
+								
+            </resource>
+				</resources>
+		</acl>
+</config>

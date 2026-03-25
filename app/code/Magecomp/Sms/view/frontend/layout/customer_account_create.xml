@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance dc" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+   	<head>
+		<css src="Magecomp_Sms::css/sms.css"/>
+		<css src="Magecomp_Sms::countryflag/css/intlTelInput.css"/>
+		<link src="Magecomp_Sms::countryflag/js/intlTelInput.js"/>
+		<css src="Magecomp_Countryflag/css/intlTelInput.css"/>
+		<css src="Magecomp_Countryflag/css/main.css"/>
+		<css src="Magecomp_Countryflag/css/validation.css"/>
+	</head>
+	<body>
+		<referenceContainer name="form.additional.info">
+            <block class="Magecomp\Sms\Block\Customer\Register" name="customer_register_sms" template="Magecomp_Sms::customer/register.phtml" ifconfig="sms/general/enable" />
+			<block name="magecomp_countryflag_reg_intphoneinput" class="Magecomp\Countryflag\Block\IntPhoneInput" before="-" template="Magecomp_Countryflag::regphoneInput.phtml" ifconfig="sms/general/enable"/>
+        </referenceContainer>
+	</body>		
+</page>

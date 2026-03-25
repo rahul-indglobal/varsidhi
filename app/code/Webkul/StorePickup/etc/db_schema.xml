@@ -1,0 +1,114 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="webkul_storepickup_stores" resource="default" engine="innodb" comment="Webkul Storepickup Stores">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+        <column xsi:type="boolean" name="is_enabled" default="0" comment="Is Enabled"/>
+        <column xsi:type="varchar" name="name" nullable="true" length="255" comment="Store Name"/>
+        <column xsi:type="varchar" name="description" nullable="true" length="255" comment="Store Description"/>
+        <column xsi:type="varchar" name="latitude" nullable="true" length="50" comment="Latitude"/>
+				<column xsi:type="varchar" name="longitude" nullable="true" length="50" comment="Longitude"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP" comment="Created At"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+		<table name="webkul_storepickup_details" resource="default" engine="innodb" comment="Webkul Storepickup Details">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+				<column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" comment="Store Id"/>
+
+        <column xsi:type="varchar" name="person_name" length="255" nullable="true" comment="Contact Person Name"/>
+    		<column xsi:type="varchar" name="email" length="255" nullable="true" comment="Store Email Id"/>
+    		<column xsi:type="varchar" name="mobile" length="15" nullable="true" comment="Store Contact Number"/>
+    		<column xsi:type="varchar" name="fax" length="15" nullable="true" comment="Store Fax Number"/>
+    		<column xsi:type="varchar" name="country_id" length="60" nullable="true" comment="Country Id"/>
+    		<column xsi:type="varchar" name="region" length="60"  nullable="true" comment="Region"/>
+        <column xsi:type="varchar" name="region_id" length="5" nullable="true" comment="Region Id"/>
+    		<column xsi:type="varchar" name="city" length="255" nullable="true" comment="City"/>
+    		<column xsi:type="varchar" name="street" length="255" nullable="true" comment="Street"/>
+    		<column xsi:type="varchar" name="postcode" length="15" nullable="true" comment="Postcode"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+				<constraint xsi:type="foreign" referenceId="webkul_storepickup_stores_entity_id" table="webkul_storepickup_details" column="store_id" referenceTable="webkul_storepickup_stores" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="webkul_storepickup_timings" resource="default" engine="innodb" comment="Webkul Storepickup Timings">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+				<column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" comment="Store Id"/>
+
+        <column xsi:type="boolean" name="is_urgent_close" default="0" comment="Is Urgent Closed"/>
+        <column xsi:type="varchar" name="timing_type" length="1" default="0" nullable="false" comment="Timing Type"/>
+        <column xsi:type="text" name="timings" nullable="true" comment="Timings"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+				<constraint xsi:type="foreign" referenceId="webkul_storepickup_stores_entity_id" table="webkul_storepickup_details" column="store_id" referenceTable="webkul_storepickup_stores" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="webkul_storepickup_holidays" resource="default" engine="innodb" comment="Webkul Storepickup Holidays">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+				<column xsi:type="boolean" name="status" default="0" comment="Status"/>
+        <column xsi:type="boolean" name="is_single_date" default="0" comment="Is Single Date"/>
+        <column xsi:type="varchar" name="name" length="255" nullable="false" comment="Holiday Name"/>
+        <column xsi:type="varchar" name="date" length="255" nullable="false" comment="Date"/>
+        <column xsi:type="date" name="from_date" comment="From Date"/>
+        <column xsi:type="date" name="to_date" comment="To Date"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="webkul_storepickup_stores_products_relation" resource="default" engine="innodb" comment="Webkul Storepickup Products Assigned">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+				<column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" comment="Store Id"/>
+        <column xsi:type="int" name="product_id" padding="11" unsigned="false" nullable="false" comment="Product Id"/>
+        <column xsi:type="int" name="qty" padding="11" unsigned="false" nullable="false" default="0" comment="Product quantity"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+				<constraint xsi:type="foreign" referenceId="webkul_storepickup_stores_entity_id" table="webkul_storepickup_details" column="store_id" referenceTable="webkul_storepickup_stores" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="webkul_storepickup_stores_holidays_relation" resource="default" engine="innodb" comment="Webkul Storepickup Holidays Assigned">
+        <column xsi:type="int" name="entity_id" padding="11" unsigned="false" nullable="false" identity="true" comment="Entity Id"/>
+				<column xsi:type="int" name="store_id" padding="11" unsigned="false" nullable="false" comment="Store Id"/>
+        <column xsi:type="int" name="holiday_id" padding="11" unsigned="false" nullable="false" comment="Holiday Id"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+				<constraint xsi:type="foreign" referenceId="webkul_storepickup_stores_entity_id" table="webkul_storepickup_details" column="store_id" referenceTable="webkul_storepickup_stores" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+
+    <table name="quote" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="pickup_store" length="255" nullable="true" comment="Pickup Store"/>
+    </table>
+
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="varchar" name="pickup_store" length="255" nullable="true" comment="Pickup Store"/>
+        <column xsi:type="timestamp" name="pickup_scheduled_datetime" nullable="true" comment="Pickup Scheduled DateTime"/>
+        <column xsi:type="timestamp" name="pickup_scheduled_at" nullable="true" comment="Pickup Scheduling At"/>
+    </table>
+</schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Webkul Software.
+ *
+ * @category  Webkul
+ * @package   Webkul_StorePickup
+ * @author    Webkul
+ * @copyright Copyright (c) Webkul Software Private Limited (https://webkul.com)
+ * @license   https://store.webkul.com/license.html
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+		<menu>
+				<add id="Webkul_StorePickup::top_level" module="Webkul_StorePickup" resource="Webkul_StorePickup::top_level" sortOrder="10" title="Store Pickup"/>
+				<add action="storepickup/stores/index" id="Webkul_StorePickup::webkul_storepickup_stores" module="Webkul_StorePickup" parent="Webkul_StorePickup::top_level" resource="Webkul_StorePickup::pickupstores" sortOrder="10" translate="title" title="Manage Stores"/>
+				<add action="storepickup/orders/index" id="Webkul_StorePickup::webkul_storepickup_orders" module="Webkul_StorePickup" parent="Webkul_StorePickup::top_level" resource="Webkul_StorePickup::pickuporders" sortOrder="20" translate="title" title="Pickup Stores Orders"/>
+				<add action="storepickup/storesholidays/index" id="Webkul_StorePickup::webkul_storepickup_holidays" module="Webkul_StorePickup" parent="Webkul_StorePickup::top_level" resource="Webkul_StorePickup::pickupholidays" sortOrder="30" translate="title" title="Manage Holidays"/>
+		</menu>
+</config>

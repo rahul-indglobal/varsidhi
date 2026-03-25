@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+    <add id="Custom_PincodeChecker::top" module="Custom_PincodeChecker" resource="Magento_Backend::content" sortOrder="20" title="Pincode Verifier"/>
+
+		<add action="Custom_pincodechecker/pincodechecker/index" id="Custom_pincodechecker::pincodechecker" module="Custom_PincodeChecker" parent="Custom_PincodeChecker::top" resource="Magento_Backend::content" sortOrder="10" title="Manage Pincode"/>
+
+	     <add id="Custom_PincodeChecker::importpincode" title="Import Pincodes" module="Custom_PincodeChecker" sortOrder="20" action="Custom_pincodechecker/importpincode/new" resource="Magento_Backend::content" parent="Custom_PincodeChecker::top"/>
+
+        <add action="adminhtml/system_config/edit/section/pincode" id="Custom_pincodechecker::pincodechecker_settings" module="Custom_PincodeChecker" parent="Custom_PincodeChecker::top" resource="Magento_Backend::content" sortOrder="30" title="Settings"/>
+	</menu>
+</config>
