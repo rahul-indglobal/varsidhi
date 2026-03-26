@@ -1,0 +1,80 @@
+<?php
+/**
+ * Copyright © 2015 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php $_product = $block->getProduct();
+ $_helper = $this->helper('Magento\Catalog\Helper\Output');
+ $imageUrl = $this->helper('Magento\Catalog\Helper\Image')
+                    ->init($_product, 'product_base_image')
+                    ->constrainOnly(TRUE)
+                    ->keepAspectRatio(TRUE)
+                    ->keepTransparency(TRUE)
+                    ->keepFrame(FALSE)
+                    ->resize(800, 800)->getUrl();
+?>
+<div id="social-links" class="">
+  <div class="social-addthis" data-media="<?php echo $imageUrl ?>">
+      <a href="https://api.addthis.com/oexchange/0.8/forward/facebook/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
+        <span class="icon-facebook fa fa-facebook"></span>
+      </a> 
+      <a href="https://api.addthis.com/oexchange/0.8/forward/twitter/offer?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&amp;title=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
+        <span class="icon-twitter fa fa-twitter"></span>
+      </a>
+      <a href="https://www.pinterest.com/pin/create/button/?url=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&media=<?php echo $imageUrl ?>&description=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" target="_blank">
+        <span class="icon-pinterest fa fa-pinterest-square"></span>
+      </a>
+        <?php $urlInterface = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Framework\UrlInterface');
+              $_currentUrl = $urlInterface->getCurrentUrl();
+        ?>    
+      <!-- <a href="whatsapp://send?text=<?php echo $_helper->productAttribute($_product, $_product->getProductUrl(), 'product_url'); ?>&media=<?php //echo $imageUrl ?>&description=<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?>" data-action="share/whatsapp/share"> -->
+      <a href="https://api.whatsapp.com/send?text=<?php echo $_currentUrl; ?>" data-action="share/whatsapp/share" target="_blank">
+        <span class="icon-whatsapp"><i class="fa fa-whatsapp" style="font-size: 18px;"></i></span>
+      </a> 
+  </div>  
+  <div class="text-center">
+    <a href="<?php echo $this->getUrl().'store-locator'?>"><i class="fa fa-map-marker" aria-hidden="true"></i> Store Locator</a>
+  </div>
+  <div class="size-chart">
+    <?php $attsetid = $_product->getAttributeSetId();
+    if($attsetid == 4){ 
+    ?>
+    <a href="<?php echo $this->getUrl().'measurementform'?>">Meaurement Info</a>
+    <?php } else if($attsetid == 101){ ?>
+    <a href="<?php echo $this->getUrl().'lehengameasurement'?>">Lehenga Meaurement Info</a>
+    <?php } else if($attsetid == 102){ ?> 
+      <a href="<?php echo $this->getUrl().'salwarmeasurement'?>">Salwar Meaurement Info</a>
+    <?php } else if($attsetid == 103){ ?> 
+      <a href="<?php echo $this->getUrl().'gownmeasurement'?>">Gown Meaurement Info</a>
+    <?php } else if($attsetid == 105){ ?> 
+      <a href="<?php echo $this->getUrl().'blousemeasurement'?>">Blouse Meaurement Info</a>
+    <?php } else { /*echo $attsetid; */ } ?>
+  
+  </div>
+
+</div>
+<style type="text/css">
+@media (min-width: 771px)
+{
+  .product-social-links #social-links
+  {
+    display: flex;
+    margin: auto;
+    justify-content: space-between;
+  }
+}
+@media (max-width: 770px)
+{
+  .product-social-links .mailto.friend {
+    left: 17%;
+    position: relative;
+  }
+  .product-social-links .social-addthis {
+    float: none;
+  }
+}
+</style>

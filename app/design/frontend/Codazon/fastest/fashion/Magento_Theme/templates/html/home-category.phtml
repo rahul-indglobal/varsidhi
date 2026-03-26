@@ -1,0 +1,63 @@
+
+
+<?php 
+	$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+	// $prdoduct = $objectManager->get('Magento\Catalog\Api\ProductRepositoryInterface')->getById($productid);
+	$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+	$mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+?>
+
+<div class="container">
+	<div id="category">
+		<div class="category-salwar-kameez">
+			<div class="top-block">
+				<div class="category-title">
+					<h3>Prolific Salwar Silhouette</h3>
+				</div>
+				<a href="/salwar-kameez"> <span class="banner hidden-xs"> <img src="<?php echo $mediaUrl.'/salwar1.jpg' ?>"></span> </a>
+			</div>
+			<div class="container row content-block">
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/anarkali-salwar.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/cotton-suit.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/crop-top-suit.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/designer-salwar.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/pallazo-suit.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/party-wear-salwar-kameez.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/pataila-suit.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>
+				<div class="sub-category block col-sm-6 col-xs-6">
+					<a href="/salwar-kameez/anarkali-salwars"> 
+						<span class="cat-image"> <img alt="" src="<?php echo $mediaUrl.'/straight-cut-salwar.jpg' ?>"></span> <span class="cat-title"><span class="title"> Anarkali Salwar </span></span> 
+					</a>
+				</div>	
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,207 @@
+<?php 
+
+use Magento\Framework\App\Action\Action;
+
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_optionHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
+$_mobileHelper = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
+$labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
+
+$showHover = $_optionHelper->getConfig('general_section/category_view/hover_product_effect');
+$showDescription = $_optionHelper->getConfig('general_section/category_view/show_short_description');
+$showCompareWishlist = $_optionHelper->getConfig('general_section/category_view/show_action');
+$showReviewRating = $_optionHelper->getConfig('general_section/category_view/review_rating_star');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $prdoduct = $objectManager->get('Magento\Catalog\Api\ProductRepositoryInterface')->getById($productid);
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+$mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+ 
+// $productImageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $prdoduct->getImage();
+// $productUrl  = $product->getProductUrl(); 
+?>
+<div id="trending-wrapper" class="section-block">
+    <div class="row justify-content-center d-flex">
+        <div class="col-md-24">
+            <div class="title">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="mb-5">BEST SELLERS</h1>
+                    </div>
+                    <div class="col-md-12 carousel-navigation text-right">
+                        <a href="javascript:" class="prev mr-4">
+                            <img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+                        </a>
+                        <a href="javascript:" class="next">
+                            <img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="owl-carousel">
+                <?php
+                    $blockObj= $block->getLayout()->createBlock('Mageplaza\Productslider\Block\MostViewedProducts');
+                    $collection = $blockObj->getProductCollection();
+                    // print_r($collection);
+                // $collection = $block->getProductCollection();
+                    //echo "Hi___________________";
+                foreach ($collection as $product) {
+                    // echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+                    
+                ?>
+                <div class="products-grid">
+                    <div class="product-item">
+                        <div class="product-item-info">
+                            <div class="cdz-hover-section">
+                                <div class="cdz-product-top product-item-info">
+                                    <div class="item">
+                                        <a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">                            
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="cdz-product-wishlist show-tooltip">
+                                    <?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+                                        <a href="#"
+                                           class="action towishlist"
+                                           title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+                                           aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+                                           data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+                                           data-action="add-to-wishlist"
+                                           role="button">
+                                            <span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+                                        </a>
+                                    <?php endif; ?> 
+                                </div>
+                            </div>
+                            <div class="product details product-item-details">
+                                <?php
+                                    // $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+                                ?>
+                                <strong class="product name product-item-name">
+                                    <a class="product-item-link"
+                                       href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+                                        <?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+                                    </a>
+                                </strong>
+                                
+                                <?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+                                <?php if($showReviewRating): ?>
+                                <?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?> 
+                                <?php endif ?>
+                                <?php echo $blockObj->getProductDetailsHtml($product); ?>
+                                
+                                <div class="product-item-inner">
+                                    
+                                    <?php if ($showDescription):?>
+                                        <div class="product description product-item-description">
+                                            <?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+                                            <a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+                                               class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+                                        </div>
+                                    <?php endif; ?>
+                                     
+                                </div>
+                                
+                                <!--quiclick-addtocart-->
+                                 <div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+                                    <div class="cdz-buttons-container">
+                                    <div class="cdz-buttons-inner">                             
+                                        <?php if ($product->isSaleable()): ?>
+                                            <?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+                                            <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+                                                <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+                                                <input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                                <?php echo $blockObj->getBlockHtml('formkey')?>
+                                                <button type="submit"
+                                                        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+                                                        class="action tocart primary show-tooltip">
+                                                    <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                </button>
+                                            </form>
+                                        <?php else: ?>
+                                            <?php if ($product->getIsSalable()): ?>
+                                                <div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+                                            <?php else: ?>
+                                                <div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+                                            <?php endif; ?>
+                                        <?php endif; ?>                             
+                                        <?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+                                        <?php
+                                            $compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+                                        ?>
+                                        <?php if($showCompareWishlist): ?>
+                                        <a href="#"
+                                           class="action tocompare show-tooltip"
+                                           title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+                                           aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+                                           data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+                                           role="button">
+                                            <span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+                                        </a>
+                                        <?php endif ?>
+                                    </div>
+                                    </div>
+                                </div>                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php } ?>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require(['jquery','owlSlider'], function(jQuery){
+        jQuery(document).ready(function(){
+            jQuery('#trending-wrapper .owl-carousel').owlCarousel({
+                items : 4,
+                lazyLoad: true,
+                loop : true,
+                smartSpeed:1000,
+                autoplay: true,
+                autoplayTimeout:5000,
+                margin: 25,
+                responsive:{
+                    0:{
+                        items: 1
+                    },
+                    768:{
+                        items: 2
+                    },
+                    1024:{
+                        items: 4
+                    }
+                }
+            });
+            
+
+            
+            jQuery(document).on('click', '#trending-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#trending-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#trending-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#trending-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            
+        }); 
+
+        // function getRandomSize(min, max) {
+        //     return Math.round(Math.random() * (max - min) + min);
+        // }
+
+        // var allImages = "";
+
+        // for (var i = 0; i < 25; i++) {
+        // var width = getRandomSize(200, 400);
+        // var height =  getRandomSize(200, 400);
+        //     allImages += '<img src="https://placekitten.com/'+width+'/'+height+'" alt="pretty kitty">';
+        // }
+
+        // $('#photos').append(allImages);
+    });
+</script>

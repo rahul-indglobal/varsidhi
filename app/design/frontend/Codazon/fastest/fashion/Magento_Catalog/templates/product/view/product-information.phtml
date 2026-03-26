@@ -1,0 +1,10 @@
+<?php
+$_product = $block->getProduct();
+  $_attributeValue = $_product->getResource()->getAttribute('product_info')->getFrontend()->getValue($_product);
+?>
+ 
+<?php if ($_attributeValue): ?>
+    <div class="product-custom-information">
+        <?php echo $_attributeValue; ?>
+    </div>
+<?php endif; ?>
