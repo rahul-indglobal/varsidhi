@@ -8,11 +8,22 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
         <css src="Codazon_Lookbookpro::css/lookbook.css" />
+		<css src="css/promotionbar.css"/>
     </head>
     <body>
 		 <referenceBlock name="head.additional">
             <block class="Magento\Framework\View\Element\Template" name="head_custom_options" template="Magento_Theme::html/head_options.phtml" />           
-        </referenceBlock> 
+        </referenceBlock>
+
+		<referenceContainer name="header.container">
+			<container name="header.announcment" label="Page Header Promotion Panel" htmlTag="div" htmlClass="panel promotion">
+				<block class="Magento\Cms\Block\Block" name="promo_announcement_bar" before="-">
+					<arguments>
+						<argument name="block_id" xsi:type="string">promo_announcement_bar</argument>
+					</arguments>
+				</block>
+			</container>
+		</referenceContainer>
         <referenceContainer name="header.panel">
 			<block class="Magento\Framework\View\Element\Html\Links" name="header.links">
                 <arguments>
@@ -123,7 +134,7 @@
 		        <block class="Magento\Framework\View\Element\Template" name="custom-footer" template="html/custom-footer.phtml" />
 		    </container>
 		</referenceContainer> -->
-		
+		<referenceContainer name="header.panel.wrapper" remove="true" />
     </body>
 </page>
 
