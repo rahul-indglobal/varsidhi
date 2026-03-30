@@ -43,8 +43,11 @@ class Image extends \Magento\Framework\App\Helper\AbstractHelper
 
     protected $_cachePath = 'codazon_cache/brand/';
     protected $_placeholderFile = 'codazon/brand/placeholder_thumbnail.jpg';
-    
-    public function __construct(
+	protected \Magento\Framework\Image\Factory $_imageFactory;
+	protected \Magento\Framework\Filesystem\Directory\WriteInterface $_mediaDirectory;
+	protected \Magento\Store\Model\StoreManagerInterface $_storeManager;
+
+	public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\Image\Factory $imageFactory,
         \Magento\Framework\Filesystem $filesystem,
