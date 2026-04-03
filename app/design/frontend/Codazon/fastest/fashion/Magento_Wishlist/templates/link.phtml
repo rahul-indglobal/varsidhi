@@ -8,8 +8,11 @@
 
 /* @var $block \Magento\Wishlist\Block\Link */
 ?>
+<a class="phone" href="https://api.whatsapp.com/send?phone=919962241000"><img src="<?php echo $block->getBaseUrl().'media/header/phone.svg'?>" title="+91-9962241000"></a>
 <li class="link wishlist" data-bind="scope: 'wishlist'">
-    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes() ?>><?php echo __('Wishlist') ?>
+    <a <?php /* @escapeNotVerified */ echo $block->getLinkAttributes() ?>>
+        <img src="<?php echo $block->getBaseUrl() ?>media/header/wishlist.svg" alt="Wishlist" class="wishlist-icon" />
+        <?php //echo __('Wishlist') ?>
         <!-- ko if: wishlist().counter -->
         <span data-bind="text: wishlist().counter" class="counter qty"></span>
         <!-- /ko -->

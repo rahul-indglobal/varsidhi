@@ -25,13 +25,14 @@
         </block>
         <move element="header" destination="header.links" before="-"/>
         <move element="register-link" destination="header.links" after="-"/>
-        <move element="my-account-link" destination="customer"/>
         <move element="authorization-link" destination="top.links" after="-"/>
         <referenceBlock name="authorization-link" display="false" />
         
+
         <referenceBlock name="my-account-link">
         	<arguments>
-                    <argument name="class" xsi:type="string" translate="false">my-account</argument>
+                <argument name="class" xsi:type="string" translate="false">my-account test</argument>
+                <argument name="template" xsi:type="string">Magento_Customer::account/link/my-account.phtml</argument>
             </arguments>
         </referenceBlock>
         <referenceBlock name="register-link">

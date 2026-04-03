@@ -9,7 +9,24 @@ use Magento\Framework\View\Asset\ContentProcessorException;
 use Magento\Framework\App\State;
 class Processor
 {
-    public function __construct(
+	protected State $state;
+	protected \Codazon\ThemeOptions\Helper\Data $helper;
+	protected \Magento\Framework\View\DesignInterface $design;
+	protected \Magento\Store\Model\StoreManagerInterface $storeManager;
+	protected State $appState;
+	protected \Codazon\ThemeOptions\Model\Config\Reader\Store $storeConfig;
+	protected \Magento\Theme\Model\ResourceModel\Theme\CollectionFactory $themeFactory;
+	protected \Magento\Framework\App\ResourceConnection $connection;
+	protected LoggerInterface $logger;
+	protected Temporary $temporaryFile;
+	protected Source $assetSource;
+	private array $config;
+	/**
+	 * @var array|mixed
+	 */
+	private mixed $data;
+
+	public function __construct(
         //\Codazon\ThemeOptions\Framework\App\Config\Initial $initialConfig,
         \Codazon\ThemeOptions\Model\Config\Reader\Store $storeConfig,
         \Magento\Store\Model\StoreManagerInterface $storeManager,

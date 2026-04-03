@@ -49,7 +49,9 @@
 		<move element="store_switcher" destination="header.panel.store" />
 		<!--MOVE COMPARE - WISHLIST-->
 		<move element="catalog.compare.link" destination="header.links" before="authorization-link-login" />
-		<move element="wish-list-link" destination="header.links" before="catalog.compare.link" />
+		<move element="wish-list-link" destination="header-wrapper-right-desktop" before="-" />
+		<move element="my-account-link" destination="header-wrapper-right-desktop" after="wish-list-link"/>
+		<move element="minicart" destination="header-wrapper-right-desktop" after="my-account-link"/>
 		<referenceContainer name="compare-link-wrapper" remove="true" />
 		
 		<!--END MOVE COMPARE - WISHLIST-->
@@ -58,7 +60,7 @@
 			<container name="header.wrapper.content" htmlTag="div" htmlClass="header-wrapper-content sticky-menu" after="-">
                 <container name="header.bottom.middle" htmlTag="div" htmlClass="header-wrapper-middle" before="header.wrapper.bottom" />
                 <container name="header.wrapper.bottom" htmlTag="div" htmlClass="header-wrapper-bottom" after="-">
-                    <container name="header.bottom.content" htmlTag="div" htmlClass="header content" before="-" label="Header Bottom Content" >
+                    <container name="header.bottom.content" htmlTag="div" htmlClass="header content menu-container" before="-" label="Header Bottom Content" >
                         <container name="main.menu" htmlTag="div" htmlClass="header-main-menu" after="-" />
                         <container name="menu.container" htmlTag="div" htmlClass="menu-container" label="Header Main Menu" />					
                     </container>
@@ -71,7 +73,9 @@
 		<move element="header-wrapper" destination="header.wrapper.content" before="-" />
 		<move element="navigation.sections" destination="main.menu" />
 		<move element="menu.container" destination="store.menu" />
-		<move element="top.search" destination="header-wrapper" />
+		<move element="top.search" destination="header-wrapper-left-desktop" before="-"/>
+		<move element="logo" destination="header-wrapper-middle-desktop"/>
+
 
 		<!--move element="minicart" destination="header.bottom.right" /-->
 		
@@ -127,7 +131,13 @@
 		</block>
         </referenceContainer>
         <referenceContainer name="header-wrapper">
-            <block class="Magento\Framework\View\Element\Template" name="customblock" before="top.search" template="Magento_Theme::html/custom-header.phtml" />
+			<container name="header-wrapper-left-desktop" htmlTag="div" htmlClass="header-wrapper-left-desktop">
+			</container>
+			<container name="header-wrapper-middle-desktop" htmlTag="div" htmlClass="header-wrapper-middle-desktop">
+			</container>
+			<container name="header-wrapper-right-desktop" htmlTag="div" htmlClass="header-wrapper-right-desktop" after="-">
+				<!--<block class="Magento\Framework\View\Element\Template" name="customblock" after="logo" template="Magento_Theme::html/custom-header.phtml" />-->
+			</container>
         </referenceContainer>
         <!-- <referenceContainer name="footer-container">
 		    <container name="my-new-footer" as="footer.new" label="Page new Footer" htmlTag="div" htmlClass="footer content">
@@ -137,4 +147,3 @@
 		<referenceContainer name="header.panel.wrapper" remove="true" />
     </body>
 </page>
-

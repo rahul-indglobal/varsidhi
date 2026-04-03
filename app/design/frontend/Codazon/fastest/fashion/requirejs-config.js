@@ -1,12 +1,12 @@
 var config = {
-  map: {
+    map: {
         "*": {
             "cdz_slider": "js/owlcarousel/owlslider",
             "modal" : "Magento_Ui/js/modal/modal",
-			"cdz_menu": "js/menu/cdz_menu",
-			"cdz_ajax_product":"Codazon_ProductFilter/js/ajaxload",
-			"cdzZoom": "Magento_Catalog/js/cdzZoom",
-            "owlSlider": "js/owlcarousel/owl.carousel.min",
+            "cdz_menu": "js/menu/cdz_menu",
+            "cdz_ajax_product":"Codazon_ProductFilter/js/ajaxload",
+            "cdzZoom": "Magento_Catalog/js/cdzZoom",
+            "owlCarousel": "js/owlcarousel/owl.carousel.min", // Added this exact alias
             "owlslider" : "js/owlcarousel/owl.carousel.min",
             "owl_slider": "js/owlcarousel/owl.carousel.min",
             "customjs": "js/custom",
@@ -14,18 +14,28 @@ var config = {
         }
     },
     paths:  {
+        "owlCarousel": "js/owlcarousel/owl.carousel.min",
         "owlslider" : "js/owlcarousel/owl.carousel.min",
         "customjs": "js/custom",
         "jgallery": "js/justifiedGallery.min",
         'jquery-ui-modules': 'jquery/ui-modules'
     },
     "shim": {
-		"js/owlcarousel/owl.carousel.min": ["jquery"],
-        "js/custom": ["jquery"],
-        "js/justifiedGallery.min": ["jquery"],
-	},
-	deps: [
-        "Magento_Theme/js/fastest",
+        // Use the ALIAS here, not the full path string
+        "owlCarousel": {
+            "deps": ["jquery"]
+        },
+        "owlslider": {
+            "deps": ["jquery"]
+        },
+        "customjs": {
+            "deps": ["jquery"]
+        },
+        "jgallery": {
+            "deps": ["jquery"]
+        }
+    },
+    deps: [
+        "Magento_Theme/js/fastest"
     ]
-
 };
