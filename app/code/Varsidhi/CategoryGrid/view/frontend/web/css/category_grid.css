@@ -1,0 +1,116 @@
+.cms-index-index .column.main {
+    margin-top: 40px;
+}
+.category-header {
+    margin-bottom: 35px;
+}
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px 0;
+}
+.category-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+.category-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 280px;
+    transition: transform 0.5s ease;
+}
+
+.category-image .category-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: white;
+    pointer-events: none;
+}
+.category-item:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+.category-grid-section .category-header .title, .category-grid-section .category-header .subtitle {
+    text-align: center;
+}
+.category-grid-section .category-header .title h2 {
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 33.8px;
+    line-height: 40px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #0A0A0A;
+}
+.category-grid-section .category-header .subtitle p {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.8px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+.category-grid-section .category-header .divider {
+    text-align: center;
+    margin-top: 10px;
+}
+.category-grid-section .category-header .divider img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+.category-image .image-wrapper {
+    height: 280px;
+    background: linear-gradient(135deg, #101011 0%, #c3cfe2 100%);
+}
+.category-image .no-image {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    content: '';
+    justify-content: center;
+    background: linear-gradient(135deg, #101011 0%, #c3cfe2 100%);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.category-info .category-title-wrapper h3.category-title {
+    color: #FFFFFF;
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.product-count-wrapper span.product-count {
+    font-family: Inter,serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12.8px;
+    line-height: 20px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #E5E7EB;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .category-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+    }
+}
