@@ -41,8 +41,10 @@ class TrackPluginInstrumentation
     protected $mode;
 
     protected $moduleList;
+	protected \Razorpay\Magento\Model\Config $config;
+	protected \Psr\Log\LoggerInterface $logger;
 
-    public function __construct(
+	public function __construct(
         \Razorpay\Magento\Model\Config $config,
         ModuleListInterface $moduleList,
         \Psr\Log\LoggerInterface $logger

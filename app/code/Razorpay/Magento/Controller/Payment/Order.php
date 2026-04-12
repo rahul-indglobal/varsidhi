@@ -15,7 +15,18 @@ class Order extends \Razorpay\Magento\Controller\BaseController
     protected $_currency = PaymentMethod::CURRENCY;
 
     protected $logger;
-    /**
+	protected \Magento\Catalog\Model\Session $catalogSession;
+	protected \Razorpay\Magento\Model\Config $config;
+	/**
+	 * @var null
+	 */
+	private $webhookId;
+	private array $active_events;
+	private \Magento\Store\Model\StoreManagerInterface $_storeManager;
+	private string $webhookUrl;
+	protected object $webhooks;
+
+	/**
      * @param \Magento\Framework\App\Action\Context $context
      * @param \Magento\Customer\Model\Session $customerSession
      * @param \Magento\Checkout\Model\Session $checkoutSession

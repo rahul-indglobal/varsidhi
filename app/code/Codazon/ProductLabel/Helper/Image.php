@@ -39,8 +39,11 @@ class Image extends AbstractHelper
     protected $_watermarkWidth;
     protected $_watermarkHeight;
     protected $_watermarkImageOpacity = 0;
+	protected \Magento\Framework\Image\Factory $_imageFactory;
+	protected \Magento\Framework\Filesystem\Directory\WriteInterface $_mediaDirectory;
+	protected \Magento\Store\Model\StoreManagerInterface $_storeManager;
 
-    public function __construct(
+	public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Framework\Image\Factory $imageFactory,
         \Magento\Framework\Filesystem $filesystem,

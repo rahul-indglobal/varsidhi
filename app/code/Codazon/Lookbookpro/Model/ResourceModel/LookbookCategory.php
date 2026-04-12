@@ -30,8 +30,10 @@ class LookbookCategory extends \Magento\Eav\Model\Entity\AbstractEntity
     protected $_categoryCollectionFactory;
     
     protected $_isActiveAttributeId = null;
+	protected string $_read;
+	protected string $_write;
 
-    public function __construct(
+	public function __construct(
         \Magento\Eav\Model\Entity\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
 		\Codazon\Lookbookpro\Model\LookbookCategoryFactory $modelFactory,
