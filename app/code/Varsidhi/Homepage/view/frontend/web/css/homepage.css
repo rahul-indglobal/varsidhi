@@ -39,7 +39,7 @@ section.slider-wrap {
 section.slider-wrap {
     width: 100%;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
     max-width: 1920px;
 }
 
@@ -116,7 +116,7 @@ div#hero-carousel {
 }
 
 .slide-overlay h2.inter-font {
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 54.8px;
@@ -127,7 +127,7 @@ div#hero-carousel {
 }
 
 .slide-overlay p {
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 22.1px;
@@ -139,7 +139,7 @@ div#hero-carousel {
 }
 
 .slide-overlay a.action.primary {
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 16.9px;
@@ -165,11 +165,11 @@ div#hero-carousel {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter' !important;
 }
 
 .cms-index-index #promo-sale p {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 15px;
@@ -182,7 +182,7 @@ div#hero-carousel {
 }
 
 .cms-index-index .title h2 {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 34px;
@@ -194,7 +194,7 @@ div#hero-carousel {
 }
 
 .cms-index-index .subtitle p {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 15px;
@@ -262,7 +262,7 @@ div#hero-carousel {
 }
 
 .category-grid-section .category-header .title h2 {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 33.8px;
@@ -275,7 +275,7 @@ div#hero-carousel {
 }
 
 .category-grid-section .category-header .subtitle p {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 14.8px;
@@ -315,7 +315,7 @@ div#hero-carousel {
 
 .category-info .category-title-wrapper h3.category-title {
     color: #FFFFFF;
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 22px;
@@ -326,7 +326,7 @@ div#hero-carousel {
 }
 
 .product-count-wrapper span.product-count {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 12.8px;
@@ -341,8 +341,8 @@ div#hero-carousel {
     margin-bottom: 35px;
 }
 
-.cms-index-index .new-arrival-header .title h2 {
-    font-family: Inter, serif;
+.cms-index-index .header .title h2 {
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 33.8px;
@@ -354,7 +354,7 @@ div#hero-carousel {
 }
 
 .cms-index-index .new-arrival-header .subtitle p {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 14.8px;
@@ -379,11 +379,11 @@ div#hero-carousel {
 .feature-container {
     display: flex;
     background: #FBF6F0;
-    /*padding: 27px 0;*/
+    padding: 27px 0 !important;
     max-width: 100%;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 10px 15px -3px #0000001a, 0 4px 6px -4px #0000001a;
 }
 
 .feature-image {
@@ -414,7 +414,7 @@ div#hero-carousel {
 }
 
 .description {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 17px;
@@ -433,7 +433,7 @@ div#hero-carousel {
     display: flex;
     margin-bottom: 15px;
     color: #364153;
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 15px;
@@ -459,7 +459,7 @@ div#hero-carousel {
     text-decoration: none;
     border-radius: 6px;
     transition: background 0.3s ease;
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 15px;
@@ -593,11 +593,16 @@ div#hero-carousel {
                 border: none;
                 background: transparent;
                 color: #fff;
-                padding: 12px;
-                font-size: 13px;
-                text-transform: uppercase;
-                font-weight: 600;
+                padding-block: 8px;
+                font-size: 14px;
+                text-transform: capitalize;
+                font-weight: 500;
                 cursor: pointer;
+                margin-bottom: 0;
+                line-height: 1.42857;
+                display: flex;
+                align-items: center;
+                justify-content: center;;
                 /*
                 &:hover {
                     background: #a00000;
@@ -634,7 +639,7 @@ div#hero-carousel {
             .product-item-link {
                 color: #0A0A0A;
                 text-decoration: none;
-                font-family: Inter, serif;
+                font-family: 'Inter' !important;
                 font-weight: 500;
                 font-style: normal;
                 font-size: 14px;
@@ -650,7 +655,7 @@ div#hero-carousel {
             /* This applies the 17px Red style to products NOT on sale */
 
             .price-container .price {
-                font-family: Inter, serif;
+                font-family: 'Inter' !important;
                 font-size: 17px;
                 font-weight: 400;
                 color: var(--primary-red) !important;
@@ -722,7 +727,7 @@ div#hero-carousel {
 }
 
 .promo-title {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 28px;
@@ -733,7 +738,7 @@ div#hero-carousel {
 }
 
 .promo-subtitle {
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 17px;
@@ -749,7 +754,7 @@ div#hero-carousel {
     display: flex;
     align-items: center;
     gap: 8px;
-    font-family: Inter, serif;
+    font-family: 'Inter' !important;
     font-weight: 600;
     font-style: normal;
     font-size: 15px;
@@ -790,14 +795,6 @@ section.category-collection:nth-child(odd) {
 
 section.category-collection:nth-child(even) {
     background-color: #fbf9fa;
-}
-
-.minicart-wrapper .action.showcart .counter.qty {
-    background-color: #c10007 !important;
-    width: 20px !important;
-    height: 20px !important;
-    position: absolute !important;
-    left: 16px !important;
 }
 
 .shop_by_occasion_grid {
@@ -849,7 +846,7 @@ section.category-collection:nth-child(even) {
 }
 
 .item-overlay .item-title {
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 24px;
@@ -861,7 +858,7 @@ section.category-collection:nth-child(even) {
 }
 
 .item-content .item-subtitle {
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
     font-size: 13px;
@@ -879,7 +876,7 @@ section.category-collection:nth-child(even) {
     width: fit-content;
     margin-top: 10px;
     border-radius: 4px;
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 600;
     font-style: normal;
     font-size: 14px;
@@ -912,7 +909,7 @@ section.category-collection:nth-child(even) {
     transition: all 0.3s ease;
     background-color: #ffffff;
     white-space: nowrap;
-    font-family: Inter;
+    font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
     font-size: 14.6px;
@@ -934,6 +931,11 @@ section.category-collection:nth-child(even) {
 }
 
 /* Tablet/Mobile Responsive */
+@media (max-width: 1320px) {
+    .slide-overlay {
+        padding-inline: 55px;
+    }
+}
 @media (max-width: 1024px) {
     #new-arrival-section .product-items .product-item {
         width: 33.33%;
@@ -967,15 +969,117 @@ section.category-collection:nth-child(even) {
 
     .promo-title {
         font-size: 1.5rem;
+        margin-bottom: 5px;
+        line-height: 22px;
+    }
+    .promo-subtitle {
+        font-size: 13px;
+        line-height: 20px;
+        margin-bottom: 5px;
+    }
+    .promo-section {
+        padding: 16px 0 !important;
     }
 
     .category-container {
         grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
     }
+    #hero-carousel .item img {
+        height: 50vh;
+        min-height: 300px;
+    }
+    section.slider-wrap {
+        min-height: 300px;
+    }
+    div#promo-sale {
+        padding-inline: 32px;
+    }
+
+    .slide-overlay h2.inter-font {
+        font-style: normal;
+        font-size: 28px;
+        line-height: 20px;
+        margin-bottom: 8px;
+    }
+
+    .slide-overlay p {
+        padding-bottom: 0;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 22px;
+        margin-bottom: 1px;
+    }
+
+    .slide-overlay a.action.primary {
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    #hero-carousel .owl-nav .owl-prev, #hero-carousel .owl-nav .owl-next {
+        height: 35px;
+        width: 35px;
+        border-color: #FFFFFF;
+    }
+    .owl-carousel .owl-nav [class*='owl-']:before {
+        line-height: 25px;
+    }
+    .cms-index-index section {
+        padding-bottom: 32px;
+        padding-top: 32px;
+    }
+    .category-grid-section .category-header .title h2 {
+        font-size: 24px;
+        line-height: 25px;
+    }
+    .category-grid-section .category-header .subtitle p {
+        font-size: 13px;
+        line-height: 22px;
+        font-weight: 500;
+    }
+
+    .category-header {
+        margin-bottom: 24px;
+    }
+
+    .cms-index-index .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .cms-index-index section .header {
+        margin-bottom: 24px;
+    }
+    .cms-index-index .header .title h2 {
+        font-size: 24px;
+        line-height: 25px;
+        margin-bottom: 12px;
+    }
+    .category-tags {
+        gap: 8px;
+        padding: 0 15px;
+        justify-content: flex-start;
+    }
+    .tag {
+        font-size: 13px;
+        line-height: 20px;
+        padding: 8px 16px;
+    }
+    .slide-overlay {
+        padding-inline: 100px;
+    }
 }
 
 @media (max-width: 576px) {
+    .category-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
     #shop_by_occasion .shop_by_occasion_grid {
         grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+
+    .slide-overlay {
+        padding-inline: 55px;
+    }
+    .slide-overlay p {
+        padding-bottom: 5px;
     }
 }
