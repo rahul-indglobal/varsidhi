@@ -1,0 +1,1845 @@
+<?php
+
+use Magento\Framework\App\Action\Action;
+
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$_optionHelper = $this->helper('Codazon\ThemeOptions\Helper\Data');
+$_mobileHelper = $this->helper('Codazon\ThemeOptions\Helper\Mobile');
+$labelHelper = $this->helper('Codazon\ProductLabel\Helper\Data');
+
+$showHover = $_optionHelper->getConfig('general_section/category_view/hover_product_effect');
+$showDescription = $_optionHelper->getConfig('general_section/category_view/show_short_description');
+$showCompareWishlist = $_optionHelper->getConfig('general_section/category_view/show_action');
+$showReviewRating = $_optionHelper->getConfig('general_section/category_view/review_rating_star');
+
+$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+// $prdoduct = $objectManager->get('Magento\Catalog\Api\ProductRepositoryInterface')->getById($productid);
+$store = $objectManager->get('Magento\Store\Model\StoreManagerInterface')->getStore();
+$mediaUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
+
+// $productImageUrl = $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $prdoduct->getImage();
+// $productUrl  = $product->getProductUrl();
+?>
+<div id="designer-wrapper" class="section-block pt-0">
+	<h1 class="text-center mb-5">Welcome to our Designer world</h1>
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-18">
+			<div class="galley-wrapper">
+
+				<!-- <div class="img-wrapper">
+					<a href="/saree">
+						<img src="/pub/media/sarees.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-wrapper">
+								<h4>SAREES</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+
+				<div class="img-wrapper">
+					<a href="/salwar">
+						<img src="/pub/media/salwar.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-wrapper">
+								<h4>SALWAR</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="img-wrapper">
+					<img src="/pub/media/bridal.png" class="img-responsive w-100" alt="">
+					<div class="content">
+						<div class="inner-wrapper">
+							<h4>BRIDAL COLLECTION</h4>
+						</div>
+					</div>
+				</div>
+				<div class="img-wrapper">
+					<img src="/pub/media/corporate-wear.png" class="img-responsive w-100" alt="">
+					<div class="content">
+						<div class="inner-wrapper">
+							<h4>CORPORATE WEAR</h4>
+						</div>
+					</div>
+				</div>
+				<div class="img-wrapper">
+					<a href="/gown">
+						<img src="/pub/media/dress-material.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-wrapper">
+								<h4>GOWNS</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+				<div class="img-wrapper">
+					<a href="/lehenga">
+						<img src="/pub/media/legha.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-wrapper">
+								<h4>LEGHA</h4>
+							</div>
+						</div>
+					</a>
+				</div>
+
+
+				<div class="img-wrapper">
+					<img src="/pub/media/others.png" class="img-responsive w-100" alt="">
+					<div class="content">
+						<div class="inner-wrapper">
+							<h4>OTHERS</h4>
+						</div>
+					</div>
+				</div> -->
+				<?php
+				echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage_grid_section_block')->toHtml();
+				?>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="arrival-wrapper" class="section-block products-grid">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">New Arrivals</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel product-items">
+				<?php
+
+				$blockObj= $block->getLayout()->createBlock('Mageplaza\Productslider\Block\NewProducts');
+				$collection = $blockObj->getProductCollection();
+				// print_r($collection);
+				// $collection = $block->getProductCollection();
+				//echo "Hi___________________";
+				foreach ($collection as $product) {
+					// echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="item">
+						<img src="/pub/media/search-3.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/pub/media/search-4.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="/pub/media/recent-2.png" class="img-responsive w-100" alt="">
+						<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+					</div> -->
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="video-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<!-- <div class="col-md-12 pr-0">
+			<div class="img-wrapper">
+				<img src="/pub/media/block-1.png" class="img-responsive w-100" alt="">
+				<div class="play-button">
+					<img src="/pub/static/version1599651308/frontend/Codazon/fastest_fashion/en_US/images/play.png" class="img-fluid" alt="">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 pl-0">
+			<div class="img-wrapper">
+				<img src="/pub/media/block-2.png" class="img-responsive w-100" alt="">
+				<div class="content">
+					<div class="inner-wrapper">
+						<h4 class="mb-4">SAREES</h4>
+						<p>Reem Sameer in Kalki Amber Yellow And Brown Shaded Sharara Suit in Georgette With Thread Embroidery</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 pr-0">
+			<div class="img-wrapper">
+				<img src="/pub/media/block-3.png" class="img-responsive w-100" alt="">
+				<div class="content">
+					<div class="inner-wrapper">
+						<h4 class="mb-4">SAREES</h4>
+						<p>Reem Sameer in Kalki Amber Yellow And Brown Shaded Sharara Suit in Georgette With Thread Embroidery</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12 pl-0">
+			<div class="img-wrapper">
+				<img src="/pub/media/block-4.png" class="img-responsive w-100" alt="">
+				<div class="play-button">
+					<img src="/pub/static/version1599651308/frontend/Codazon/fastest_fashion/en_US/images/play.png" class="img-fluid" alt="">
+				</div>
+			</div>
+		</div> -->
+		<!-- <div class="col-md-23">
+            <div class="row">
+                <?php
+		echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage_video_block')->toHtml();
+		?>
+
+            </div>
+        </div> -->
+		<div class="col-md-23">
+			<div class="row">
+				<div class="col-md-12 pr-0">
+					<div class="img-wrapper iframe-wrapper" style="background:url(/pub/media/block-1.png) no-repeat;background-size:cover;background-position:center;min-height:350px;">
+						<!-- <img src="/pub/media/block-1.png" class="img-responsive w-100" alt=""> -->
+						<div class="play-button">
+							<img src="/pub/media/play.png" class="img-fluid" alt="">
+						</div>
+						<iframe id="first-iframe" width="100%" height="350"  src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+				</div>
+				<div class="col-md-12 pl-0">
+					<div class="img-wrapper" style="background:url(/pub/media/block-2.png) no-repeat;background-size:cover;background-position:center;min-height:350px;">
+						<!-- <img src="/pub/media/block-2.png" class="img-responsive w-100" alt=""> -->
+						<div class="content">
+							<div class="inner-wrapper">
+								<a href="<?php echo $this->getBaseUrl().'sarees.html'?>">
+									<h4 class="mb-4">SAREES</h4>
+									<!-- <p>Reem Sameer in Kalki Amber Yellow And Brown Shaded Sharara Suit in Georgette With Thread Embroidery</p> -->
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 pr-0">
+					<div class="img-wrapper" style="background:url(/pub/media/block-3.png) no-repeat;background-size:cover;background-position:center;min-height:350px;">
+						<!-- <img src="/pub/media/block-3.png" class="img-responsive w-100" alt=""> -->
+						<div class="content">
+							<div class="inner-wrapper">
+								<h4 class="mb-4">SAREES</h4>
+								<!-- <p>Reem Sameer in Kalki Amber Yellow And Brown Shaded Sharara Suit in Georgette With Thread Embroidery</p> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-12 pl-0">
+					<div class="img-wrapper iframe-wrapper" style="background:url(/pub/media/block-4.png) no-repeat;background-size:cover;background-position:center;min-height:350px;">
+						<!-- <img src="/pub/media/block-4.png" class="img-responsive w-100" alt=""> -->
+						<div class="play-button">
+							<img src="/pub/media/play.png" class="img-fluid" alt="">
+						</div>
+						<iframe id="second-iframe" width="100%" height="350"  src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="trending-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">Trending now</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel">
+				<?php
+				$blockObj= $block->getLayout()->createBlock('Mageplaza\Productslider\Block\MostViewedProducts');
+				$collection = $blockObj->getProductCollection();
+				// print_r($collection);
+				// $collection = $block->getProductCollection();
+				//echo "Hi___________________";
+				foreach ($collection as $product) {
+					// echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<!-- <div class="item">
+					<img src="/pub/media/legha-1.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/search-1.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/recent-2.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="legha-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">Lehenga</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel">
+				<?php
+				$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+				$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+				$categoryRepository = $objectManager->get('\Magento\Catalog\Model\CategoryRepository');
+
+				$categoryId = 3; // YOUR CATEGORY ID
+				$category = $categoryFactory->create()->load($categoryId);
+
+				$categoryProducts = $category->getProductCollection()->addAttributeToSelect('*')->setPageSize('6');
+
+				foreach ($categoryProducts as $product) {
+					// print_r($product->getData());
+					// printing category name and url
+					// echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<!-- <div class="item">
+					<img src="/pub/media/search-2.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/search-3.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/search-4.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="material-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-24 p-0">
+			<!-- <div class="img-wrapper">
+				<img src="/pub/media/dress-bg.png" class="img-responsive w-100" alt="">
+				<div class="content">
+					<div class="row d-flex justify-content-center">
+						<div class="col-md-16 text-center inner-wrapper">
+							<h1 class="mb-4">Dress material</h1>
+							<p class="mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo tempore inventore, nulla cum repellat necessitatibus, commodi nostrum, explicabo unde incidunt asperiores earum. Non repellat tenetur, eius recusandae neque suscipit ipsum!</p>
+							<a href="javascript:" class="btn red-btn">SHOP NOW</a>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<?php
+			echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage_dress_material_block')->toHtml();
+			?>
+		</div>
+	</div>
+</div>
+<div id="salwar-wrapper" class="section-block">
+	<!-- <h1 class="mb-5 text-center">Salwars</h1>
+	<div class="row">
+		<div class="col-md-24 p-0">
+			<div class="row">
+				<div class="col-md-14">
+					<div class="img-wrapper">
+						<img src="/pub/media/salwar-main.png" class="img-responsive w-100" alt="">
+						<div class="play-button">
+							<img src="/pub/static/version1599651308/frontend/Codazon/fastest_fashion/en_US/images/play.png" class="img-fluid" alt="">
+						</div>
+					</div>
+				</div>
+				<div class="col-md-10">
+					<div class="row">
+						<div class="col-md-12 mb-5">
+							<img src="/pub/media/salwar-1.png" class="w-100" alt="">
+						</div>
+						<div class="col-md-12 mb-5">
+							<img src="/pub/media/salwar-2.png" class="w-100" alt="">
+						</div>
+						<div class="col-md-12">
+							<img src="/pub/media/salwar-3.png" class="w-100" alt="">
+						</div>
+						<div class="col-md-12">
+							<img src="/pub/media/salwar-4.png" class="w-100" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<?php
+	echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('homepage_salwar_block')->toHtml();
+	?>
+</div>
+
+
+<div id="corporate-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">Corporate wear</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel">
+				<?php
+				$categoryFactory = $objectManager->get('\Magento\Catalog\Model\CategoryFactory');
+				$categoryHelper = $objectManager->get('\Magento\Catalog\Helper\Category');
+				$categoryRepository = $objectManager->get('\Magento\Catalog\Model\CategoryRepository');
+
+				$categoryId = 11; // YOUR CATEGORY ID
+				$category = $categoryFactory->create()->load($categoryId);
+
+				$categoryProducts = $category->getProductCollection()->addAttributeToSelect('*')->setPageSize('6');
+
+				foreach ($categoryProducts as $product) {
+					// print_r($product->getData());
+					// printing category name and url
+					// echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<!-- <div class="item">
+					<img src="/pub/media/corporate-2.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/corporate-3.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div>
+				<div class="item">
+					<img src="/pub/media/corporate-4.png" class="img-responsive w-100" alt="">
+					<div class="content">
+							<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+							</div>
+						</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="recent-wrapper" class="section-block">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">Recently viewed</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel">
+				<?php
+				$blockObj1= $block->getLayout()->createBlock('Mageplaza\Productslider\Block\RecentProducts');
+				$collection1 = $blockObj1->getProductCollection();
+				//     echo $this->getLayout()
+				// ->createBlock("Magento\Reports\Block\Product\Widget\Viewed")
+				// ->setDisplayType("recently.view.products")
+				// ->setProductsCount("6")
+				// ->setTemplate("widget/viewed/content/viewed_list.phtml")
+				// ->toHtml();
+				// echo count($collection1);
+				// $collection1 = $block->getProductCollection();
+				//echo "Hi___________________";
+				foreach ($collection1 as $product) {
+					//echo $product1->getName() . ' - ' . $product1->getProductUrl() . '<br />';
+
+
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+			</div>
+		</div>
+	</div>
+</div>
+<?php //echo $this->getLayout()->createBlock("Magento\Reports\Block\Product\Widget\Viewed")->setDisplayType("recently.view.products")->setProductsCount("4")->setTemplate("widget/viewed/content/viewed_list.phtml")->toHtml(); ?>
+<?php
+//echo $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('recently_viewed_products')->toHtml();
+?>
+<!-- <div id="news-wrapper" class="section-block">
+    <div class="row justify-content-center d-flex">
+        <div class="col-md-20">
+            <div class="inner-bg">
+                <div class="row justify-content-center d-flex">
+                    <div class="col-md-24" style="padding:0;">
+                        <div class="title">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1 class="mb-5">Blog</h1>
+                                </div>
+                                <div class="col-md-12 carousel-navigation text-right">
+                                    <a href="javascript:" class="prev mr-4">
+                                        <img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+                                    </a>
+                                    <a href="javascript:" class="next">
+                                        <img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="owl-carousel">
+                        <?php
+$blockObj1= $block->getLayout()->createBlock('Magefan\Blog\Block\Post\PostList');
+$blogcollection = $blockObj1->getPostCollection();
+echo count($blogcollection);
+// print_r($blogcollection->getData());
+// $collection = $block->getProductCollection();
+//echo "Hi___________________";
+foreach ($blogcollection as $blog) {
+	// echo "hi";
+	//echo $blog->getTitle() . ' - ' . $blog->getCreationTime() . '<br />';
+	$date=date_create($blog->getCreationTime()); ?>
+                             <div class="item">
+                                <span class="mb-3"><?php echo date_format($date,"F d, Y"); ?></span>
+                                <p><?php echo $blog->getShortContent(); ?></p>
+                            </div>
+                         <?php   }
+?>
+                        </div>
+
+                        <div class="viewmore-wrapper text-right">
+                            <a href="javascript:">view More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<div id="popular-wrapper" class="section-block mb-5 pb-5">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="title">
+				<div class="row">
+					<div class="col-md-12">
+						<h1 class="mb-5">Popular Search</h1>
+					</div>
+					<div class="col-md-12 carousel-navigation text-right">
+						<a href="javascript:" class="prev mr-4">
+							<img src="<?php echo $mediaUrl.'left-chevron.svg' ?>" class="img-fluid" width="55" alt="">
+						</a>
+						<a href="javascript:" class="next">
+							<img src="<?php echo $mediaUrl.'right-chevron.svg'?>" class="img-fluid" width="55" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="owl-carousel">
+				<?php
+				$blockObj= $block->getLayout()->createBlock('Mageplaza\Productslider\Block\BestSellerProducts');
+				$collection = $blockObj->getProductCollection();
+				// print_r($collection);
+				// $collection = $block->getProductCollection();
+				//echo "Hi___________________";
+				foreach ($collection as $product) {
+					// echo $product->getName() . ' - ' . $product->getProductUrl() . '<br />';
+
+					?>
+					<div class="products-grid">
+						<div class="product-item">
+							<div class="product-item-info">
+								<div class="cdz-hover-section">
+									<div class="cdz-product-top product-item-info">
+										<div class="item">
+											<a href="<?php echo $product->getProductUrl(); ?>"><img src="<?php echo $store->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA) . 'catalog/product' . $product->getSmallImage(); ?>" class="img-responsive w-100" alt="">
+											</a>
+										</div>
+									</div>
+
+									<div class="cdz-product-wishlist show-tooltip">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow() && $showCompareWishlist): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Wish List')); ?>"
+											   data-post='<?php /* @escapeNotVerified */ echo $blockObj->getAddToWishlistParams($product); ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?php /* @escapeNotVerified */ echo __('Add to Wish List') ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+								<div class="product details product-item-details">
+									<?php
+									// $_productNameStripped = $block->stripTags($_product->getName(), null, true);
+									?>
+									<strong class="product name product-item-name">
+										<a class="product-item-link"
+										   href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>">
+											<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getName(), 'name'); ?>
+										</a>
+									</strong>
+
+									<?php /* @escapeNotVerified */ echo $blockObj->getProductPrice($product) ?>
+									<?php if($showReviewRating): ?>
+										<?php echo $blockObj->getReviewsSummaryHtml($product, $templateType); ?>
+									<?php endif ?>
+									<?php echo $blockObj->getProductDetailsHtml($product); ?>
+
+									<div class="product-item-inner">
+
+										<?php if ($showDescription):?>
+											<div class="product description product-item-description">
+												<?php /* @escapeNotVerified */ echo $_helper->productAttribute($product, $product->getShortDescription(), 'short_description') ?>
+												<a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" title="<?php /* @escapeNotVerified */ echo $_productNameStripped ?>"
+												   class="action more"><?php /* @escapeNotVerified */ echo __('Learn More') ?></a>
+											</div>
+										<?php endif; ?>
+
+									</div>
+
+									<!--quiclick-addtocart-->
+									<div class="cdz-product-bottom <?php echo $showHover ? 'hover-effect' : 'non-hover' ?>">
+										<div class="cdz-buttons-container">
+											<div class="cdz-buttons-inner">
+												<?php if ($product->isSaleable()): ?>
+													<?php $postParams = $blockObj->getAddToCartPostParams($product); ?>
+													<form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+														<input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+														<input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+														<?php echo $blockObj->getBlockHtml('formkey')?>
+														<button type="submit"
+														        title="<?php echo $blockObj->escapeHtml(__('Add to Cart')); ?>"
+														        class="action tocart primary show-tooltip">
+															<span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($product->getIsSalable()): ?>
+														<div class="stock available"><span><?php /* @escapeNotVerified */ echo __('In stock') ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?php /* @escapeNotVerified */ echo __('Out of stock') ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+												<?php echo $this->helper('Codazon\QuickShop\Helper\Data')->getQuickShopButton($product,'show-tooltip'); ?>
+												<?php
+												$compareHelper = $this->helper('Magento\Catalog\Helper\Product\Compare');
+												?>
+												<?php if($showCompareWishlist): ?>
+													<a href="#"
+													   class="action tocompare show-tooltip"
+													   title="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   aria-label="<?php echo $blockObj->escapeHtml(__('Add to Compare')); ?>"
+													   data-post='<?php /* @escapeNotVerified */ echo $compareHelper->getPostDataParams($product); ?>'
+													   role="button">
+														<span><?php /* @escapeNotVerified */ echo __('Add to Compare') ?></span>
+													</a>
+												<?php endif ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<?php } ?>
+				<!-- <div class="item">
+					<img src="/pub/media/search-4.png" class="img-responsive w-100" alt="">
+					<div class="content">
+						<div class="inner-content">
+								<a class="product-item-link" href="javascript:">Lorum Ipsum dolor</a>
+
+							<div class="price-box price-final_price" data-role="priceBox" data-product-id="5" data-price-box="product-id-5">
+								<span class="normal-price">
+										<span class="price-container price-final_price tax weee">
+											<span class="price-label">As low as</span>
+											 <span id="old-price-5-bestseller-tab" data-price-amount="3300" data-price-type="finalPrice" class="price-wrapper "><span class="price">₹3,300.00</span></span>
+										</span>
+								</span>
+							</div>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</div>
+<div id="icons-wrapper" class="section-block p-0">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="owl-carousel">
+				<div class="item text-center">
+					<img src="/pub/media/worldwide.svg" class="img-responsive w-100" width="25" alt="">
+					<p>Free Shipping Worldwide</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/price.svg" class="img-responsive w-100" width="25" alt="">
+					<p>Best Price</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/fit.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						Custom Fit
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/quality.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						Assured Quality
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/protection.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						100% Purchase Protection
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/ship.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						90% Ready to Ship
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<div id="appointment-wrapper" class="section-block p-0">
+	<div class="row justify-content-center d-flex">
+		<div class="col-md-23">
+			<div class="owl-carousel">
+				<div class="item text-center">
+					<img src="/pub/media/worldwide.svg" class="img-responsive w-100" width="25" alt="">
+					<p>Free Shipping Worldwide</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/price.svg" class="img-responsive w-100" width="25" alt="">
+					<p>Best Price</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/fit.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						Custom Fit
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/quality.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						Assured Quality
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/protection.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						100% Purchase Protection
+					</p>
+				</div>
+				<div class="item text-center">
+					<img src="/pub/media/ship.svg" class="img-responsive w-100" width="25" alt="">
+					<p>
+						90% Ready to Ship
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- <div class="footer-wrapper">
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-23">
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <ul>
+                            <li><a href="javascript:">BLOG</a></li>
+                            <li><a href="javascript:">ABOUT US</a></li>
+                            <li><a href="javascript:">CAREERS</a></li>
+                            <li><a href="javascript:">FAQ'S</a></li>
+                            <li><a href="javascript:">STORE LOCATOR</a></li>
+                            <li><a href="javascript:">BUSINESS ENQUIRY</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li><a href="javascript:">SHIPPPING</a></li>
+                            <li><a href="javascript:">RETURN POLICIES</a></li>
+                            <li><a href="javascript:">TERMS OF USE</a></li>
+                            <li><a href="javascript:">PRIVACY POLICIES</a></li>
+                            <li><a href="javascript:">CASH ON DELIVERY</a></li>
+                            <li><a href="javascript:">FREE SHIPPING</a></li>
+                            <li><a href="javascript:">FABRICS CARE</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li><a href="javascript:">SHIPPPING</a></li>
+                            <li><a href="javascript:">RETURN POLICIES</a></li>
+                            <li><a href="javascript:">TERMS OF USE</a></li>
+                            <li><a href="javascript:">PRIVACY POLICIES</a></li>
+                            <li><a href="javascript:">CASH ON DELIVERY</a></li>
+                            <li><a href="javascript:">FREE SHIPPING</a></li>
+                            <li><a href="javascript:">FABRICS CARE</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 about-wrapper">
+                        <h5 class="mb-4">ABOUT VARSIDHIA</h5>
+                        <h6>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus repudiandae similique commodi odio. Nostrum blanditiis cum tenetur vel quibusdam possimus. Perspiciatis, esse. Voluptas ullam magni nam! Repudiandae molestiae laborum hic.</h6>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-md-6">
+                        <ul>
+                            <li class="mb-5">
+                               <h5 class="mb-3 d-flex align-items-center"><img src="/pub/media/ship.png" class="mr-3" alt="" width="30"> 99% Ready To Ship</h5>
+                               <div class="content">
+                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                               </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li class="mb-5">
+
+                               <h5 class="mb-3 d-flex align-items-center"><img src="/pub/media/quality.png" class="mr-3" alt="" width="30">100% Original Quality</h5>
+                               <div class="content">
+                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                               </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <ul>
+                            <li class="mb-5">
+
+                               <h5 class="mb-3 d-flex align-items-center"><img src="/pub/media/challenge.png" class="mr-3" alt="" width="30">Best Price Challenge</h5>
+                               <div class="content">
+                                   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                               </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-4">
+                            <span class=" d-block mb-3">WE ACCEPT</span>
+                            <img src="/pub/media/payment.png" width="300" alt="">
+                        </div>
+                        <div class="mb-4">
+                            <span class=" d-block mb-3">SHIPPING PARTNER</span>
+                            <img src="/pub/media/dhl.png" width="65" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+<script type="text/javascript">
+    require(['jquery'], function(jQuery){
+
+        jQuery(window).scroll(function() {
+            var top_of_element = jQuery("#video-wrapper").offset().top;
+            var bottom_of_element = jQuery("#video-wrapper").offset().top + jQuery("#video-wrapper").outerHeight();
+            var bottom_of_screen = jQuery(window).scrollTop() + jQuery(window).innerHeight();
+            var top_of_screen = jQuery(window).scrollTop();
+
+            if ((bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)){
+                setTimeout(() => {
+                    jQuery('#video-wrapper .iframe-wrapper').addClass('active');
+                    jQuery('#video-wrapper iframe').css({'display': 'block'});
+                    if(jQuery("#video-wrapper iframe").attr('src') == ""){
+                        jQuery("#video-wrapper iframe#first-iframe").attr('src',"https://www.youtube.com/embed/o_rKoLY2OK4?autoplay=1&loop=1&mute=1&playlist=o_rKoLY2OK4");
+                        jQuery("#video-wrapper iframe#second-iframe").attr('src',"https://www.youtube.com/embed/o_rKoLY2OK4?autoplay=1&loop=1&mute=1&playlist=o_rKoLY2OK4");
+                    }
+                }, 1000);
+                return false;
+            } else {
+                jQuery('#video-wrapper .iframe-wrapper').removeClass('active');
+                jQuery('#video-wrapper iframe').attr('src',"");
+                jQuery('#video-wrapper iframe').css({'display': 'none'});
+            }
+        });
+    });
+
+    require(['jquery','owlSlider'], function(jQuery){
+
+        jQuery(document).ready(function(){
+
+            jQuery('#arrival-wrapper .owl-carousel,#trending-wrapper .owl-carousel,#legha-wrapper .owl-carousel,#corporate-wrapper .owl-carousel,#recent-wrapper .owl-carousel,#popular-wrapper .owl-carousel').owlCarousel({
+                items : 4,
+                lazyLoad: true,
+                loop : true,
+                smartSpeed:1000,
+                autoplay: true,
+                autoplayTimeout:5000,
+                margin: 25,
+                responsive:{
+                    0:{
+                        items: 1
+                    },
+                    768:{
+                        items: 2
+                    },
+                    1024:{
+                        items: 4
+                    }
+                }
+            });
+
+            jQuery('#icons-wrapper .owl-carousel').owlCarousel({
+                items : 6,
+                lazyLoad: true,
+                loop : true,
+                smartSpeed:1000,
+                autoplay: false,
+                autoplayTimeout:5000,
+                margin: 30,
+                responsive:{
+                    0:{
+                        items: 2
+                    },
+                    768:{
+                        items: 3
+                    },
+                    1024:{
+                        items: 6
+                    }
+                }
+            });
+
+            jQuery('#news-wrapper .owl-carousel').owlCarousel({
+                items : 3,
+                lazyLoad: true,
+                loop : true,
+                smartSpeed:3000,
+                autoplay: true,
+                autoplayTimeout:5000,
+                margin: 35,
+                responsive:{
+                    0:{
+                        items: 1
+                    },
+                    768:{
+                        items: 2
+                    },
+                    1024:{
+                        items: 3
+                    }
+                }
+            });
+
+            jQuery(document).on('click', '#arrival-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#arrival-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#arrival-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#arrival-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#trending-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#trending-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#trending-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#trending-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#legha-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#legha-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#legha-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#legha-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#corporate-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#corporate-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#corporate-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#corporate-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#recent-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#recent-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#recent-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#recent-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#popular-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#popular-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#popular-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#popular-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#news-wrapper .carousel-navigation .prev', function(event) {
+                jQuery('#news-wrapper .owl-carousel').trigger('prev.owl.carousel');
+            });
+
+            jQuery(document).on('click', '#news-wrapper .carousel-navigation .next', function(event) {
+                jQuery('#news-wrapper .owl-carousel').trigger('next.owl.carousel');
+            });
+
+
+        });
+
+        // function getRandomSize(min, max) {
+        //     return Math.round(Math.random() * (max - min) + min);
+        // }
+
+        // var allImages = "";
+
+        // for (var i = 0; i < 25; i++) {
+        // var width = getRandomSize(200, 400);
+        // var height =  getRandomSize(200, 400);
+        //     allImages += '<img src="https://placekitten.com/'+width+'/'+height+'" alt="pretty kitty">';
+        // }
+
+        // $('#photos').append(allImages);
+    });
+</script>
+<script type="text/javascript">
+
+    // require([ 'jquery', 'jgallery'], function(){
+    //         alert("goes here");
+    //         // jQuery(".gallery-wrapper").justifiedGallery({rowHeight: 250, margins: 20, captions: false});
+    //  });
+</script>
+
+
+
+
+
+
+
+<!-- <div id="video-shopping" class="section-block p-0">
+    <div class="row justify-content-center d-flex">
+        <div class="col-md-24">
+            <div class="row justify-content-center d-flex">
+                <div class="col-md-12 left-content">
+                    <h1 class="mb-5">BOOK A VIDEO SHOPPING APPOINTMENT</h1>
+                    <p>Samyakk one of the leading Indian ethnic store located in the Silicon Valley i.e. Bangalore has now launched the latest video shopping accessibility for a hassle-free shopping from your comfort zone.<br><br>Samyakk spells traditional heredity and weaver’s story through Indian assortments and western couture. This has presented online shopping in whole new dimension for an <span id="more">Read More</span> <span class="more">eminent customer service and contentment. <br>The exclusive ethnic store bestows a special customized co-operation to the clients by the excellent fashion designers and stylists via live video calls such as though<strong>&nbsp;Whats App, Skype, Google Duo and Facebook&nbsp;</strong>to serve them with the designer hand-picked product requirements.&nbsp;<br>The main advantage of this process is you can go through the entire store and choose from exquisite collection of sarees, salwars, gowns, kurtis, lehengas, classic men’s wear, traditional men’s wear and many more by sitting in your home or office.<br>The special designer team of Samyakk will help you through the live video calls as you fill the appointment form for the fixed time to provide you with excellent assistance.<br>This video call helps you to know about the texture, colors, embellishments and silhouette, our team member will be there to clarify your questions throughout the process.&nbsp;<br>Samyakk one of the prominent Indian fashion hub now making its headline in e-commerce field for an easiest shopping which is the smart move to make.</span></p>
+                </div>
+                <div class="col-md-12 right-form">
+                    <form id="video-shopping" method="post" action="javascript:">
+                        <div class="form-control element element-type-name">
+                            <label for="name-1-5fa36ff8942f2" class="label">Name <span class="required">*</span></label>
+                            <div class="control">
+                                <input data-validate="{&quot;required&quot;:true}" value="" data-element_type="0" type="text" name="name" id="name-1-5fa36ff8942f2" class="name">
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-email">
+                            <label for="email-3-5fa36ff894375" class="label">Email ID <span class="required">*</span></label>
+                            <div class="control">
+                                <input data-validate="{&quot;required&quot;:true}" value="" data-element_type="3" type="email" name="email" id="email-3-5fa36ff894375" class="email">
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-contact-no">
+                            <label for="contact-no-13-5fa36ff8943bc" class="label">Contact No  <span class="required">*</span></label>
+                            <div class="control">
+                                <input data-validate="{&quot;required&quot;:true,&quot;pattern&quot;:[&quot;^\\+?[0-9]{0&quot;,&quot;15}$&quot;]}" value="" data-element_type="0" type="text" name="contact" id="contact-no-13-5fa36ff8943bc" class="contact-no">
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-country ">
+                            <label for="country -4-5fa36ff89465d" class="label">Country <span class="required">*</span></label>
+                            <div class="control">
+                                <select data-validate="{&quot;required&quot;:true}" data-element_type="5" name="country" id="country -4-5fa36ff89465d" class="country ">
+                                                    <option value="" selected="">-- Please Select --</option>
+                                            <option value="Afghanistan">Afghanistan</option><option value="Åland Islands">Åland Islands</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Cocos [Keeling] Islands">Cocos [Keeling] Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo - Brazzaville">Congo - Brazzaville</option><option value="Congo - Kinshasa">Congo - Kinshasa</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Côte d’Ivoire">Côte d’Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands">Falkland Islands</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong SAR China">Hong Kong SAR China</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jersey">Jersey</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macau SAR China">Macau SAR China</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar [Burma]">Myanmar [Burma]</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="North Korea">North Korea</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestinian Territories">Palestinian Territories</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn Islands">Pitcairn Islands</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Réunion">Réunion</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Barthélemy">Saint Barthélemy</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Martin">Saint Martin</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="São Tomé and Príncipe">São Tomé and Príncipe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="South Korea">South Korea</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="U.S. Outlying Islands">U.S. Outlying Islands</option><option value="U.S. Virgin Islands">U.S. Virgin Islands</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option><option value="Afghanistan">Afghanistan</option><option value="Åland Islands">Åland Islands</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Cocos [Keeling] Islands">Cocos [Keeling] Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo - Brazzaville">Congo - Brazzaville</option><option value="Congo - Kinshasa">Congo - Kinshasa</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Côte d’Ivoire">Côte d’Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands">Falkland Islands</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong SAR China">Hong Kong SAR China</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jersey">Jersey</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macau SAR China">Macau SAR China</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar [Burma]">Myanmar [Burma]</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="North Korea">North Korea</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestinian Territories">Palestinian Territories</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn Islands">Pitcairn Islands</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Réunion">Réunion</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Barthélemy">Saint Barthélemy</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Martin">Saint Martin</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="São Tomé and Príncipe">São Tomé and Príncipe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="South Korea">South Korea</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="U.S. Outlying Islands">U.S. Outlying Islands</option><option value="U.S. Virgin Islands">U.S. Virgin Islands</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option><option value="Afghanistan">Afghanistan</option><option value="Åland Islands">Åland Islands</option><option value="Albania">Albania</option><option value="Algeria">Algeria</option><option value="American Samoa">American Samoa</option><option value="Andorra">Andorra</option><option value="Angola">Angola</option><option value="Anguilla">Anguilla</option><option value="Antarctica">Antarctica</option><option value="Antigua and Barbuda">Antigua and Barbuda</option><option value="Argentina">Argentina</option><option value="Armenia">Armenia</option><option value="Aruba">Aruba</option><option value="Australia">Australia</option><option value="Austria">Austria</option><option value="Azerbaijan">Azerbaijan</option><option value="Bahamas">Bahamas</option><option value="Bahrain">Bahrain</option><option value="Bangladesh">Bangladesh</option><option value="Barbados">Barbados</option><option value="Belarus">Belarus</option><option value="Belgium">Belgium</option><option value="Belize">Belize</option><option value="Benin">Benin</option><option value="Bermuda">Bermuda</option><option value="Bhutan">Bhutan</option><option value="Bolivia">Bolivia</option><option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option><option value="Botswana">Botswana</option><option value="Bouvet Island">Bouvet Island</option><option value="Brazil">Brazil</option><option value="British Indian Ocean Territory">British Indian Ocean Territory</option><option value="British Virgin Islands">British Virgin Islands</option><option value="Brunei">Brunei</option><option value="Bulgaria">Bulgaria</option><option value="Burkina Faso">Burkina Faso</option><option value="Burundi">Burundi</option><option value="Cambodia">Cambodia</option><option value="Cameroon">Cameroon</option><option value="Canada">Canada</option><option value="Cape Verde">Cape Verde</option><option value="Cayman Islands">Cayman Islands</option><option value="Central African Republic">Central African Republic</option><option value="Chad">Chad</option><option value="Chile">Chile</option><option value="China">China</option><option value="Christmas Island">Christmas Island</option><option value="Cocos [Keeling] Islands">Cocos [Keeling] Islands</option><option value="Colombia">Colombia</option><option value="Comoros">Comoros</option><option value="Congo - Brazzaville">Congo - Brazzaville</option><option value="Congo - Kinshasa">Congo - Kinshasa</option><option value="Cook Islands">Cook Islands</option><option value="Costa Rica">Costa Rica</option><option value="Côte d’Ivoire">Côte d’Ivoire</option><option value="Croatia">Croatia</option><option value="Cuba">Cuba</option><option value="Cyprus">Cyprus</option><option value="Czech Republic">Czech Republic</option><option value="Denmark">Denmark</option><option value="Djibouti">Djibouti</option><option value="Dominica">Dominica</option><option value="Dominican Republic">Dominican Republic</option><option value="Ecuador">Ecuador</option><option value="Egypt">Egypt</option><option value="El Salvador">El Salvador</option><option value="Equatorial Guinea">Equatorial Guinea</option><option value="Eritrea">Eritrea</option><option value="Estonia">Estonia</option><option value="Ethiopia">Ethiopia</option><option value="Falkland Islands">Falkland Islands</option><option value="Faroe Islands">Faroe Islands</option><option value="Fiji">Fiji</option><option value="Finland">Finland</option><option value="France">France</option><option value="French Guiana">French Guiana</option><option value="French Polynesia">French Polynesia</option><option value="French Southern Territories">French Southern Territories</option><option value="Gabon">Gabon</option><option value="Gambia">Gambia</option><option value="Georgia">Georgia</option><option value="Germany">Germany</option><option value="Ghana">Ghana</option><option value="Gibraltar">Gibraltar</option><option value="Greece">Greece</option><option value="Greenland">Greenland</option><option value="Grenada">Grenada</option><option value="Guadeloupe">Guadeloupe</option><option value="Guam">Guam</option><option value="Guatemala">Guatemala</option><option value="Guernsey">Guernsey</option><option value="Guinea">Guinea</option><option value="Guinea-Bissau">Guinea-Bissau</option><option value="Guyana">Guyana</option><option value="Haiti">Haiti</option><option value="Heard Island and McDonald Islands">Heard Island and McDonald Islands</option><option value="Honduras">Honduras</option><option value="Hong Kong SAR China">Hong Kong SAR China</option><option value="Hungary">Hungary</option><option value="Iceland">Iceland</option><option value="India">India</option><option value="Indonesia">Indonesia</option><option value="Iran">Iran</option><option value="Iraq">Iraq</option><option value="Ireland">Ireland</option><option value="Isle of Man">Isle of Man</option><option value="Israel">Israel</option><option value="Italy">Italy</option><option value="Jamaica">Jamaica</option><option value="Japan">Japan</option><option value="Jersey">Jersey</option><option value="Jordan">Jordan</option><option value="Kazakhstan">Kazakhstan</option><option value="Kenya">Kenya</option><option value="Kiribati">Kiribati</option><option value="Kuwait">Kuwait</option><option value="Kyrgyzstan">Kyrgyzstan</option><option value="Laos">Laos</option><option value="Latvia">Latvia</option><option value="Lebanon">Lebanon</option><option value="Lesotho">Lesotho</option><option value="Liberia">Liberia</option><option value="Libya">Libya</option><option value="Liechtenstein">Liechtenstein</option><option value="Lithuania">Lithuania</option><option value="Luxembourg">Luxembourg</option><option value="Macau SAR China">Macau SAR China</option><option value="Macedonia">Macedonia</option><option value="Madagascar">Madagascar</option><option value="Malawi">Malawi</option><option value="Malaysia">Malaysia</option><option value="Maldives">Maldives</option><option value="Mali">Mali</option><option value="Malta">Malta</option><option value="Marshall Islands">Marshall Islands</option><option value="Martinique">Martinique</option><option value="Mauritania">Mauritania</option><option value="Mauritius">Mauritius</option><option value="Mayotte">Mayotte</option><option value="Mexico">Mexico</option><option value="Micronesia">Micronesia</option><option value="Moldova">Moldova</option><option value="Monaco">Monaco</option><option value="Mongolia">Mongolia</option><option value="Montenegro">Montenegro</option><option value="Montserrat">Montserrat</option><option value="Morocco">Morocco</option><option value="Mozambique">Mozambique</option><option value="Myanmar [Burma]">Myanmar [Burma]</option><option value="Namibia">Namibia</option><option value="Nauru">Nauru</option><option value="Nepal">Nepal</option><option value="Netherlands">Netherlands</option><option value="New Caledonia">New Caledonia</option><option value="New Zealand">New Zealand</option><option value="Nicaragua">Nicaragua</option><option value="Niger">Niger</option><option value="Nigeria">Nigeria</option><option value="Niue">Niue</option><option value="Norfolk Island">Norfolk Island</option><option value="Northern Mariana Islands">Northern Mariana Islands</option><option value="North Korea">North Korea</option><option value="Norway">Norway</option><option value="Oman">Oman</option><option value="Pakistan">Pakistan</option><option value="Palau">Palau</option><option value="Palestinian Territories">Palestinian Territories</option><option value="Panama">Panama</option><option value="Papua New Guinea">Papua New Guinea</option><option value="Paraguay">Paraguay</option><option value="Peru">Peru</option><option value="Philippines">Philippines</option><option value="Pitcairn Islands">Pitcairn Islands</option><option value="Poland">Poland</option><option value="Portugal">Portugal</option><option value="Qatar">Qatar</option><option value="Réunion">Réunion</option><option value="Romania">Romania</option><option value="Russia">Russia</option><option value="Rwanda">Rwanda</option><option value="Saint Barthélemy">Saint Barthélemy</option><option value="Saint Helena">Saint Helena</option><option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option><option value="Saint Lucia">Saint Lucia</option><option value="Saint Martin">Saint Martin</option><option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option><option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option><option value="Samoa">Samoa</option><option value="San Marino">San Marino</option><option value="São Tomé and Príncipe">São Tomé and Príncipe</option><option value="Saudi Arabia">Saudi Arabia</option><option value="Senegal">Senegal</option><option value="Serbia">Serbia</option><option value="Seychelles">Seychelles</option><option value="Sierra Leone">Sierra Leone</option><option value="Singapore">Singapore</option><option value="Slovakia">Slovakia</option><option value="Slovenia">Slovenia</option><option value="Solomon Islands">Solomon Islands</option><option value="Somalia">Somalia</option><option value="South Africa">South Africa</option><option value="South Georgia and the South Sandwich Islands">South Georgia and the South Sandwich Islands</option><option value="South Korea">South Korea</option><option value="Spain">Spain</option><option value="Sri Lanka">Sri Lanka</option><option value="Sudan">Sudan</option><option value="Suriname">Suriname</option><option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option><option value="Swaziland">Swaziland</option><option value="Sweden">Sweden</option><option value="Switzerland">Switzerland</option><option value="Syria">Syria</option><option value="Taiwan">Taiwan</option><option value="Tajikistan">Tajikistan</option><option value="Tanzania">Tanzania</option><option value="Thailand">Thailand</option><option value="Timor-Leste">Timor-Leste</option><option value="Togo">Togo</option><option value="Tokelau">Tokelau</option><option value="Tonga">Tonga</option><option value="Trinidad and Tobago">Trinidad and Tobago</option><option value="Tunisia">Tunisia</option><option value="Turkey">Turkey</option><option value="Turkmenistan">Turkmenistan</option><option value="Turks and Caicos Islands">Turks and Caicos Islands</option><option value="Tuvalu">Tuvalu</option><option value="Uganda">Uganda</option><option value="Ukraine">Ukraine</option><option value="United Arab Emirates">United Arab Emirates</option><option value="United Kingdom">United Kingdom</option><option value="United States">United States</option><option value="Uruguay">Uruguay</option><option value="U.S. Outlying Islands">U.S. Outlying Islands</option><option value="U.S. Virgin Islands">U.S. Virgin Islands</option><option value="Uzbekistan">Uzbekistan</option><option value="Vanuatu">Vanuatu</option><option value="Vatican City">Vatican City</option><option value="Venezuela">Venezuela</option><option value="Vietnam">Vietnam</option><option value="Wallis and Futuna">Wallis and Futuna</option><option value="Western Sahara">Western Sahara</option><option value="Yemen">Yemen</option><option value="Zambia">Zambia</option><option value="Zimbabwe">Zimbabwe</option></select>
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-platform">
+                            <label for="platform-6-5fa36ff8946d3" class="label">Select Platform <span class="required">*</span></label>
+                            <div class="control">
+                                <select data-validate="{&quot;required&quot;:true}" data-element_type="5" name="platform" id="platform-6-5fa36ff8946d3" class="platform">
+                                                    <option value="" selected="">-- Please Select --</option>
+                                                    <option value="Face Time">Face Time</option>
+                                                    <option value="Skype">Skype</option>
+                                                    <option value="WhatsApp ">WhatsApp</option>
+                                                    <option value="Google Duo">Google Duo</option>
+                                            </select>
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-platformId">
+                            <label for="platformId-7-5fa36ff894746" class="label">Platform ID <span class="required">*</span></label>
+                            <div class="control">
+                                <input data-validate="{&quot;required&quot;:true}" value="" data-element_type="0" type="text" name="platform-id" id="platformId-7-5fa36ff894746" class="platform-Id">
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-date">
+                            <label for="date-8-5fa36ff8949ef" class="label">Appointment Date &amp; Time <span class="required">*</span></label>
+                            <div class="control">
+                                <input data-validate="{&quot;required&quot;:true}" value="" data-element_type="9" type="text" name="date" id="date-8-5fa36ff8949ef" class="date_time cal" autocomplete="off" readonly="true">
+                            </div>
+                        </div>
+                        <script type="text/javascript">
+                            require(['jquery', 'mage/calendar'], function ($) {
+                                $('#date-8-5fa36ff8949ef').calendar({
+                                    buttonText:"Select Date",
+                                    changeYear: true,
+                                    minDate: 0,
+                                    yearRange: "1970:2020",
+                                    showAnim: "puff"
+                                });
+                            });
+                        </script>
+                                    <div class="form-control element element-type-time-h">
+                            <label for="time-h-9-5fa36ff894a66" class="label" style="
+    max-width: 0;
+">&nbsp;</label>
+                            <div class="control">
+                                <select data-validate="{&quot;required&quot;:true}" data-element_type="5" name="hour" id="time-h-9-5fa36ff894a66" class="hour">
+                                                    <option value="00">00</option>
+                                                    <option value="01">01</option>
+                                                    <option value="02">02</option>
+                                                    <option value="03">03</option>
+                                                    <option value="04">04</option>
+                                                    <option value="05">05</option>
+                                                    <option value="06">06</option>
+                                                    <option value="07">07</option>
+                                                    <option value="08">08</option>
+                                                    <option value="09">09</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                            </select>
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-time-m">
+                            <label for="time-m-10-5fa36ff894ad4" class="label"><span class="time">:</span></label>
+                            <div class="control">
+                                <select data-validate="{&quot;required&quot;:true}" data-element_type="5" name="min" id="time-m-10-5fa36ff894ad4" class="min">
+                                                    <option value="00">00</option>
+                                                    <option value="05">05</option>
+                                                    <option value="10">10</option>
+                                                    <option value="15">15</option>
+                                                    <option value="20">20</option>
+                                                    <option value="25">25</option>
+                                                    <option value="30">30</option>
+                                                    <option value="35">35</option>
+                                                    <option value="40">40</option>
+                                                    <option value="45">45</option>
+                                                    <option value="50">50</option>
+                                                    <option value="55">55</option>
+                                            </select>
+                            </div>
+                        </div>
+                                    <div class="form-control element element-type-message">
+                            <label for="message-5-5fa36ff894d5f" class="label">Add Comments</label>
+                            <div class="control">
+                                <textarea data-validate="[]" data-element_type="1" name="message" id="message-5-5fa36ff894d5f" class="message"></textarea>
+                            </div>
+                        </div>
+                                <div class="control text-center">
+                                <button class="action-default action-submit action primary" type="submit">
+                                    <span>Submit</span>
+                                </button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ -->
