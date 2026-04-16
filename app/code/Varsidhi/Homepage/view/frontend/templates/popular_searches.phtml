@@ -1,0 +1,29 @@
+<?php
+/** @var \Varsidhi\Homepage\Block\PopularSearch $block */
+$categories = $block->getCategoryData();
+$title = $block->escapeHtml($block->getData('title'));
+$subTitle = $block->escapeHtml($block->getData('subtitle'));
+
+?>
+<?php if (!empty($categories)): ?>
+	<section class="popular-searches">
+		<div class="container">
+			<div class="header">
+				<div class="title"><h2><?= $block->escapeHtml('Popular Searches') ?></h2></div>
+				<div class="subtitle"><p><?= $block->escapeHtml('Quick access to trending categories') ?></p></div>
+				<div class="divider">
+					<img src="<?= $block->getViewFileUrl('Varsidhi_Homepage::images/icon/horizontal-devider.svg') ?>" alt="divider" loading="lazy">
+				</div>
+			</div>
+			<div class="content">
+				<div class="category-tags">
+					<?php foreach ($categories as $category): ?>
+						<a href="<?= $block->escapeUrl($category['url']) ?>" class="tag">
+							<?= $block->escapeHtml($category['name']) ?>
+						</a>
+					<?php endforeach; ?>
+				</div>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>

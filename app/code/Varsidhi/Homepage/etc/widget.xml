@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="varsidhi_category_grid" class="Varsidhi\Homepage\Block\CategoryGrid">
+        <label translate="true">Varsidhi: Category Grid</label>
+        <description translate="true">Display Category Grid by IDs</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Main Title</label>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Main Subtitle</label>
+            </parameter>
+            <parameter name="category_ids" xsi:type="block" visible="true">
+                <label translate="true">Categories</label>
+                <description translate="true">Select categories to display in the grid</description>
+                <block class="Varsidhi\Homepage\Block\Adminhtml\Category\Widget\Chooser" />
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::category_grid.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="varsidhi_new_arrivals" class="Varsidhi\Homepage\Block\NewArrivals">
+        <label translate="true">Varsidhi: New Arrivals</label>
+        <description translate="true">Display New Arrivals</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Main Title</label>
+                <value>New Arrivals</value>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Main Subtitle</label>
+                <value>Fresh styles added every day</value>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" visible="true">
+                <label translate="true">Products Count</label>
+                <description translate="true">Number of products to display (default: 10)</description>
+                <value>10</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::new_arrivals.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="varsidhi_trending" class="Mageplaza\Productslider\Block\MostViewedProducts">
+        <label translate="true">Varsidhi: Trending</label>
+        <description translate="true">Display Trending</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Main Title</label>
+                <value>Trending Now</value>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Main Subtitle</label>
+                <value>Most loved styles of the season</value>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" visible="true">
+                <label translate="true">Products Count</label>
+                <description translate="true">Number of products to display (default: 8)</description>
+                <value>8</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::trending.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="varsidhi_recent_viewed" class="Mageplaza\Productslider\Block\RecentProducts">
+        <label translate="true">Varsidhi: Recent Viewed</label>
+        <description translate="true">Display Recent Viewed Products</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Main Title</label>
+                <value>Recently Viewed</value>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Main Subtitle</label>
+                <value>Continue shopping from where you left</value>
+            </parameter>
+            <parameter name="products_count" xsi:type="text" visible="true">
+                <label translate="true">Products Count</label>
+                <description translate="true">Number of products to display (default: 8)</description>
+                <value>8</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::recently_viewed.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="varsidhi_popular_search" class="Varsidhi\Homepage\Block\PopularSearch">
+        <label translate="true">Varsidhi: Popular Search</label>
+        <description translate="true">Display Popular Categories</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Main Title</label>
+                <value>Popular Searches</value>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Main Subtitle</label>
+                <value>Quick access to trending categories</value>
+            </parameter>
+            <parameter name="category_ids" xsi:type="block" visible="true">
+                <label translate="true">Categories</label>
+                <description translate="true">Select categories to display in the popular section</description>
+                <block class="Varsidhi\Homepage\Block\Adminhtml\Category\Widget\Chooser" />
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::popular_searches.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="varsidhi_category_listing_grid" class="Varsidhi\Homepage\Block\CategoryListing">
+        <label translate="true">Varsidhi: Category Product Grid</label>
+        <description translate="true">Display Category Products</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" visible="true">
+                <label translate="true">Title</label>
+            </parameter>
+            <parameter name="subtitle" xsi:type="text" visible="true">
+                <label translate="true">Subtitle</label>
+            </parameter>
+            <parameter name="category_id" xsi:type="block" visible="true">
+                <label translate="true">Category</label>
+                <description translate="true">Select category to display products from</description>
+                <block class="Varsidhi\Homepage\Block\Adminhtml\Category\Widget\Chooser" />
+            </parameter>
+            <parameter name="products_count" xsi:type="text" visible="true">
+                <label translate="true">Products Count</label>
+                <description translate="true">Number of products to display (default: 8)</description>
+                <value>8</value>
+            </parameter>
+            <parameter name="template" xsi:type="select" visible="true">
+                <label translate="true">Template</label>
+                <options>
+                    <option name="default" value="Varsidhi_Homepage::category_product_listing.phtml" selected="true">
+                        <label translate="true">Default</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

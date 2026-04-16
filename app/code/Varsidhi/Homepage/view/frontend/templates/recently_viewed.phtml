@@ -1,0 +1,97 @@
+<?php
+use Mageplaza\Productslider\Block\RecentProducts;
+
+/**
+ * @var RecentProducts $block
+ */
+$collection = $block->getProductCollection();
+$title = $block->getData('title');
+$subTitle = $block->getData('subtitle');
+?>
+<?php if ($collection && $collection->getSize()): ?>
+	<section class="category-collection">
+		<div class="container">
+			<div class="header">
+				<div class="title"><h2><?= $block->escapeHtml($title) ?></h2></div>
+				<div class="subtitle"><p><?= $block->escapeHtml($subTitle) ?></p></div>
+				<div class="divider">
+					<img src="<?= $block->getViewFileUrl('Varsidhi_Homepage::images/icon/horizontal-devider.svg') ?>" alt="divider"  loading="lazy">
+				</div>
+			</div>
+			<div class="products wrapper grid products-grid">
+				<ol class="products list items product-items">
+					<?php foreach ($collection as $_product): ?>
+						<li class="item product product-item">
+							<div class="product-item-info" data-container="product-grid">
+
+								<div class="product-image-area">
+									<div class="product-ribbon"><span>NEW</span></div>
+
+									<?php
+									$productImage = $block->getImage($_product, 'new_products_content_widget_grid');
+									?>
+									<a href="<?= $block->escapeUrl($_product->getProductUrl()) ?>" class="product photo product-item-photo">
+                            <span class="product-image-container">
+                                <?= $productImage->toHtml() ?>
+                            </span>
+									</a>
+
+									<div class="actions-secondary" data-role="add-to-links">
+										<?php if ($this->helper('Magento\Wishlist\Helper\Data')->isAllow()): ?>
+											<a href="#"
+											   class="action towishlist"
+											   title="<?= $block->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+											   aria-label="<?= $block->escapeHtmlAttr(__('Add to Wishlist')) ?>"
+											   data-post='<?= /* @noEscape */ $block->getAddToWishlistParams($_product) ?>'
+											   data-action="add-to-wishlist"
+											   role="button">
+												<span><?= $block->escapeHtml(__('Add to Wishlist')) ?></span>
+											</a>
+										<?php endif; ?>
+									</div>
+
+									<div class="product-item-inner">
+										<div class="product-item-actions">
+											<div class="actions-primary">
+												<?php if ($_product->isSaleable()): ?>
+													<?php $postParams = $block->getAddToCartPostParams($_product); ?>
+													<form data-role="tocart-form" data-product-sku="<?= $block->escapeHtmlAttr($_product->getSku()) ?>" action="<?= $block->escapeUrl($postParams['action']) ?>" method="post">
+														<input type="hidden" name="product" value="<?= /* @noEscape */ $postParams['data']['product'] ?>">
+														<input type="hidden" name="<?= /* @noEscape */ Action::PARAM_NAME_URL_ENCODED ?>" value="<?= /* @noEscape */ $postParams['data'][Action::PARAM_NAME_URL_ENCODED] ?>">
+														<?= $block->getBlockHtml('formkey') ?>
+														<button type="submit"
+														        title="<?= $block->escapeHtmlAttr(__('Add to Cart')) ?>"
+														        class="action tocart primary">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shopping-cart h-4 w-4 mr-2"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+															<span><?= $block->escapeHtml(__('Add to Cart')) ?></span>
+														</button>
+													</form>
+												<?php else: ?>
+													<?php if ($_product->isAvailable()): ?>
+														<div class="stock available"><span><?= $block->escapeHtml(__('In stock')) ?></span></div>
+													<?php else: ?>
+														<div class="stock unavailable"><span><?= $block->escapeHtml(__('Out of stock')) ?></span></div>
+													<?php endif; ?>
+												<?php endif; ?>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="product details product-item-details">
+									<strong class="product name product-item-name">
+										<a class="product-item-link" href="<?= $block->escapeUrl($_product->getProductUrl()) ?>">
+											<?= $block->escapeHtml($_product->getName()) ?>
+										</a>
+									</strong>
+
+									<?= /* @noEscape */ $block->getProductPrice($_product) ?>
+								</div>
+							</div>
+						</li>
+					<?php endforeach; ?>
+				</ol>
+			</div>
+		</div>
+	</section>
+<?php endif; ?>

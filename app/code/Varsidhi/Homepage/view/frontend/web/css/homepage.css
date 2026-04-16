@@ -1,0 +1,981 @@
+:root {
+    --primary-red: #c10007;
+    --hover-red: #9f0712;
+    --text-dark: #1a202c;
+    --text-muted: #4a5568;
+}
+
+.cms-index-index .page-main {
+    max-width: 100% !important;
+}
+
+.cms-index-index .block-static-block.widget {
+    margin-bottom: 0 !important;
+}
+
+.cms-index-index section {
+    padding-top: 64px;
+    padding-bottom: 64px;
+}
+
+.cms-index-index .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+section.slider-wrap {
+    width: 100%;
+    padding: 0 !important;
+    margin: 0;
+    max-width: 1920px;
+    min-height: 550px;
+    position: relative;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+section.slider-wrap {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    max-width: 1920px;
+}
+
+div#hero-carousel {
+    padding-top: 0;
+}
+
+#hero-carousel .owl-nav {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    margin: 0 !important;
+}
+
+#hero-carousel .owl-nav .owl-prev, #hero-carousel .owl-nav .owl-next {
+    position: absolute !important;
+    pointer-events: all;
+    background: #FFFFFF !important;
+    color: #1E2939 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border-bottom: #FFFFFF;
+}
+
+#hero-carousel .owl-nav .owl-next {
+    right: 10px !important;
+}
+
+#hero-carousel .owl-nav .owl-prev {
+    left: 10px !important;
+}
+
+#hero-carousel .owl-nav .owl-prev span, #hero-carousel .owl-nav .owl-next span {
+    display: none;
+}
+
+#hero-carousel .owl-nav .owl-prev:before {
+    font-size: 16px;
+    font-weight: 600 !important;
+}
+
+#hero-carousel .item img {
+    width: 100%;
+    height: auto;
+    min-height: 550px;
+    max-height: 550px;
+    object-fit: cover;
+}
+
+#hero-carousel .item {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+}
+
+.slide-overlay-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    align-items: center;
+}
+
+.slide-overlay {
+    width: 100% !important;
+    max-width: 1280px !important;
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline: 32px;
+}
+
+.slide-overlay h2.inter-font {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 54.8px;
+    line-height: 75px;
+    vertical-align: middle;
+    color: #FFFFFF;
+    margin-bottom: 16px;
+}
+
+.slide-overlay p {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22.1px;
+    line-height: 32px;
+    vertical-align: middle;
+    color: #F3F4F6;
+    padding-bottom: 16px;
+    margin-bottom: 32px;
+}
+
+.slide-overlay a.action.primary {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 16.9px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 38px;
+    background: #FFFFFF;
+    border: #FFFFFF;
+    border-radius: 8px;
+    color: #101828;
+    text-transform: capitalize;
+}
+
+.slide-overlay .item {
+    position: relative;
+    overflow: hidden;
+}
+
+.slider-wrap:not(:has(.owl-loaded))::before {
+    content: "Loading...";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Inter', sans-serif;
+}
+
+.cms-index-index #promo-sale p {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFFFFF;
+    padding: 12px 0;
+}
+
+.cms-index-index .title h2 {
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 34px;
+    line-height: 40px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #0A0A0A;
+}
+
+.cms-index-index .subtitle p {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.cms-index-index section .header {
+    margin-bottom: 48px;
+}
+
+.bg-white {
+    background-color: #FFFFFF;
+}
+
+.bg-grey {
+    background-color: #fbf9fa;
+}
+
+.category-header {
+    margin-bottom: 48px;
+}
+
+.category-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    /*padding: 20px 0;*/
+}
+
+.category-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+
+.category-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 280px;
+    transition: transform 0.5s ease;
+}
+
+.category-image .category-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+    color: white;
+    pointer-events: none;
+}
+
+.category-item:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.category-grid-section .category-header .title, .category-grid-section .category-header .subtitle {
+    text-align: center;
+}
+
+.category-grid-section .category-header .title h2 {
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 33.8px;
+    line-height: 40px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #0A0A0A;
+    margin-bottom: 12px;
+}
+
+.category-grid-section .category-header .subtitle p {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.8px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    margin-bottom: 16px;
+}
+
+.category-grid-section .category-header .divider {
+    text-align: center;
+}
+
+.category-grid-section .category-header .divider img {
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+}
+
+.category-image .image-wrapper {
+    height: 280px;
+    background: linear-gradient(135deg, #101011 0%, #c3cfe2 100%);
+}
+
+.category-image .no-image {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    content: '';
+    justify-content: center;
+    background: linear-gradient(135deg, #101011 0%, #c3cfe2 100%);
+    color: #FFF;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.category-info .category-title-wrapper h3.category-title {
+    color: #FFFFFF;
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    margin-bottom: 0;
+}
+
+.product-count-wrapper span.product-count {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12.8px;
+    line-height: 20px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #E5E7EB;
+}
+
+/* ==== New Arrival ====*/
+.new-arrival-header {
+    margin-bottom: 35px;
+}
+
+.cms-index-index .new-arrival-header .title h2 {
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 33.8px;
+    line-height: 40px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #0A0A0A;
+}
+
+.cms-index-index .new-arrival-header .subtitle p {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14.8px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.divider {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.silk-saree-feature {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.feature-container {
+    display: flex;
+    background: #FBF6F0;
+    /*padding: 27px 0;*/
+    max-width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.feature-image {
+    flex: 1;
+    min-width: 45%;
+}
+
+.feature-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.feature-content {
+    flex: 1;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.feature-content .title {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.description {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 17px;
+    line-height: 29px;
+    vertical-align: middle;
+    color: #4A5565;
+}
+
+.feature-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 35px;
+}
+
+.feature-list li {
+    display: flex;
+    margin-bottom: 15px;
+    color: #364153;
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    align-items: center;
+    gap: 10px;
+}
+
+.feature-list i {
+    color: var(--primary-red);
+    margin-right: 12px;
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+
+.btn-discover {
+    display: inline-block;
+    width: fit-content;
+    background-color: var(--primary-red);
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.btn-discover:hover {
+    background-color: var(--hover-red);
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.cms-index-index {
+    .products-grid .product-item-actions {
+        margin: 0 0 0;
+    }
+
+    .product-items {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+        list-style: none;
+        padding: 0;
+
+        .product-item {
+            /* 4 Columns: (100% / 4) = 25% */
+            width: 25%;
+            padding: 0 10px;
+            margin-bottom: 30px;
+            box-sizing: border-box;
+        }
+    }
+
+    .product-item-info {
+        width: 100%;
+        position: relative;
+        border-radius: 12px 12px 0 0;
+
+        .product-image-area {
+            position: relative;
+            overflow: hidden; /* Important for the slide-up effect */
+            border-radius: 12px 12px 0 0;
+
+            .product-image-photo {
+                display: block;
+                width: 100%;
+                height: auto;
+                transition: transform 0.5s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+
+    /* Ribbon (New Tag) */
+
+    .product-ribbon {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: var(--primary-red);
+        color: #fff;
+        padding: 5px 13px;
+        font-size: 11px;
+        z-index: 2;
+        font-weight: 600;
+        border-radius: 33554400px;
+    }
+
+    /* Wishlist Icon Overlay */
+
+    .actions-secondary {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 3;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        .action.towishlist {
+            background: #FFFFFF;
+            width: 35px !important;
+            height: 35px !important;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border: 1px solid #FFFFFF !important;
+
+            &:before {
+                content: '\f08a'; /* Magento standard icon font heart */
+                font-family: 'FontAwesome';
+                color: var(--primary-red);
+                font-size: 18px;
+            }
+
+            span {
+                display: none;
+            }
+
+            /* Hide text */
+        }
+    }
+
+    /* Add to Cart Slide-up */
+
+    .product-item-inner {
+        position: absolute;
+        bottom: -50px; /* Hide below the image */
+        left: 0;
+        right: 0;
+        background: #bc0000; /* Dark red background */
+        transition: all 0.3s ease;
+        z-index: 4;
+
+        .actions-primary {
+            width: 100%;
+
+            &:hover {
+                background: var(--hover-red);
+            }
+
+            .action.tocart {
+                width: 100%;
+                border: none;
+                background: transparent;
+                color: #fff;
+                padding: 12px;
+                font-size: 13px;
+                text-transform: uppercase;
+                font-weight: 600;
+                cursor: pointer;
+                /*
+                &:hover {
+                    background: #a00000;
+                }*/
+            }
+        }
+    ;
+    }
+
+    /* Hover States */
+
+    .product-item:hover {
+        .actions-secondary {
+            opacity: 1;
+        }
+
+        .product-item-inner {
+            bottom: 0;
+        }
+    }
+
+    /* Details Styling */
+
+    .product-item-details {
+        padding: 15px 18px;
+        text-align: left;
+
+        .product-item-name {
+            display: block;
+            margin: 0 0 10px;
+            font-weight: 400;
+            font-size: 14px;
+
+            .product-item-link {
+                color: #0A0A0A;
+                text-decoration: none;
+                font-family: Inter, serif;
+                font-weight: 500;
+                font-style: normal;
+                font-size: 14px;
+                line-height: 20px;
+                letter-spacing: normal;
+                vertical-align: middle;
+                text-transform: capitalize;
+            }
+        }
+
+        .price-box {
+            /* 1. THE DEFAULT/NORMAL PRICE (The "Else" condition) */
+            /* This applies the 17px Red style to products NOT on sale */
+
+            .price-container .price {
+                font-family: Inter, serif;
+                font-size: 17px;
+                font-weight: 400;
+                color: var(--primary-red) !important;
+                text-decoration: none;
+            }
+
+            /* 2. THE OLD PRICE (The "If Sale" condition - Part A) */
+            /* We place this AFTER the default so it can override the Red if needed */
+            /* Note: Magento usually uses .old-price, not just .old */
+
+            .old-price .price,
+            .old .price {
+                font-size: 13px;
+                line-height: 20px;
+                color: #99A1AF !important;
+                text-decoration: line-through;
+            }
+
+            /* 3. THE SPECIAL PRICE (The "If Sale" condition - Part B) */
+            /* We keep this Red and 17px */
+
+            .special-price .price {
+                font-size: 17px;
+                line-height: 28px;
+                color: var(--primary-red);
+            !important;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.promo-section {
+    margin: 0 auto;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 32px 0 !important;
+}
+
+.promo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px;
+}
+
+.promo-card {
+    height: 350px;
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+/* Gradient overlay to make text pop */
+.promo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding: 30px;
+    z-index: 2; /* Sits above image */
+}
+
+.promo-content {
+    color: #ffffff;
+}
+
+.promo-title {
+    font-family: Inter, serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 28px;
+    line-height: 36px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.promo-subtitle {
+    font-family: Inter, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 17px;
+    line-height: 28px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #E5E7EB;
+}
+
+.promo-link {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Inter, serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: normal;
+    vertical-align: middle;
+}
+
+.promo-link i {
+    transition: transform 0.3s ease;
+    font-size: 15px; /* FontAwesome icon sizing */
+}
+
+/* Subtle arrow movement on hover */
+.promo-link:hover {
+    transition: transform 0.3s ease;
+    font-size: 15px;
+    transform: translateX(13px);
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.promo-card img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    transition: transform 0.5s ease;
+}
+
+.promo-card:hover img {
+    transition: transform 0.3s ease;
+    transform: scale(1.05);
+}
+
+section.category-collection:nth-child(odd) {
+    background-color: #FFFFFF;
+}
+
+section.category-collection:nth-child(even) {
+    background-color: #fbf9fa;
+}
+
+.minicart-wrapper .action.showcart .counter.qty {
+    background-color: #c10007 !important;
+    width: 20px !important;
+    height: 20px !important;
+    position: absolute !important;
+    left: 16px !important;
+}
+
+.shop_by_occasion_grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(286px, 1fr));
+}
+
+/* 2. The Card (Must be relative so the text can stick to it) */
+.shop_by_occasion_item_card {
+    position: relative;
+    height: 320px; /* Forced height as requested */
+    border-radius: 12px;
+    overflow: hidden; /* Crucial: crops the image when it scales up */
+}
+
+/* 3. The Image */
+.img_wrapper,
+.img_wrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.img_wrapper img {
+    object-fit: cover;
+    /* Smooth transition for the scale effect */
+    transition: transform 0.5s ease;
+}
+
+.shop_by_occasion_item_card:hover .img_wrapper img {
+    transform: scale(1.09);
+}
+
+/* 4. The Text Overlay (This puts text OVER the image) */
+.item-overlay {
+    position: absolute;
+    inset: 0; /* Shorthand for top, bottom, left, right: 0 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 25px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.7) 10%, transparent 50%);
+    color: #fff;
+}
+
+.img_wrapper img:hover {
+    transform: scale(1.09);
+    transition: transform 0.5s ease;
+}
+
+.item-overlay .item-title {
+    font-family: Inter;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #FFF;
+    margin-bottom: 0;
+}
+
+.item-content .item-subtitle {
+    font-family: Inter;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: normal;
+    vertical-align: middle;
+    color: #E5E7EB;
+}
+
+.item-link {
+    display: inline-block;
+    background-color: #C10007;
+    padding: 8px 24px;
+    text-decoration: none;
+    width: fit-content;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-family: Inter;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFFFFF;
+}
+
+.item-link:hover {
+    background-color: #9f0712;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.category-tags {
+    display: flex;
+    flex-wrap: wrap; /* Allows tags to move to the next row */
+    gap: 12px; /* Spacing between pills */
+    padding: 0 20px;
+    justify-content: center; /* Centers the tags horizontally */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tag {
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 33554400px;
+    transition: all 0.3s ease;
+    background-color: #ffffff;
+    white-space: nowrap;
+    font-family: Inter;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14.6px;
+    line-height: 24px;
+    letter-spacing: normal;
+    text-align: center;
+    vertical-align: middle;
+    color: #0A0A0A !important;
+    border: 1px solid #D1D5DC;
+    text-decoration: none !important;
+}
+
+/* Hover Effect */
+.tag:hover {
+    border-color: #c10007;
+    background-color: #f9fafb;
+    transform: translateY(-2px);
+    color: #c10007 !important;
+}
+
+/* Tablet/Mobile Responsive */
+@media (max-width: 1024px) {
+    #new-arrival-section .product-items .product-item {
+        width: 33.33%;
+    }
+
+    #shop_by_occasion .shop_by_occasion_grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    #new-arrival-section .product-items .product-item {
+        width: 50%;
+    }
+
+    .feature-container {
+        flex-direction: column;
+    }
+
+    .feature-content {
+        padding: 30px 20px;
+    }
+
+    .promo-grid {
+        grid-template-columns: 1fr; /* Stack banners on small screens */
+    }
+
+    .promo-card {
+        height: 300px;
+    }
+
+    .promo-title {
+        font-size: 1.5rem;
+    }
+
+    .category-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns for mobile */
+    }
+}
+
+@media (max-width: 576px) {
+    #shop_by_occasion .shop_by_occasion_grid {
+        grid-template-columns: 1fr; /* 1 column on mobile */
+    }
+}
