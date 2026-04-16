@@ -16,9 +16,10 @@ class PaymentMethodAvailable implements ObserverInterface
     protected $_cart;
 
     protected $helper;
+	protected \Psr\Log\LoggerInterface $_logger;
 
 
-    public function __construct(
+	public function __construct(
         \Psr\Log\LoggerInterface $logger,
         \Custom\PincodeChecker\Helper\Data $helper,
         \Magento\Checkout\Model\Cart $_cart
