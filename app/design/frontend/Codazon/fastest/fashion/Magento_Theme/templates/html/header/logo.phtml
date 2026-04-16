@@ -32,6 +32,14 @@
              <?php echo $block->getLogoHeight() ? 'height="' . $block->getLogoHeight() . '"' : '' ?>
         />      
     </a>
+    <a class="flex-shrink-0 mx-8 text-center cursor-pointer logo-text-wrapper"
+       href="<?php echo $block->getUrl(''); ?>"
+       data-discover="true"
+       title="<?php /* @escapeNotVerified */ echo $storeName ?>"
+    >
+        <h1 class="text-4xl font-serif text-red-800 tracking-wider logo-text">|| VARSIDHI ||</h1>
+        <p class="text-xs text-gray-600 italic mt-1 welcome-text">where tradition meets trend</p>
+    </a>
 <?php if($mobileLogo == $block->getLogoSrc()): ?>
 <script type="text/javascript">
 require(['jquery'],function($){      
