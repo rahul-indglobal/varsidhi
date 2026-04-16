@@ -8,6 +8,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
 	<head>
         <css src="Codazon_Lookbookpro::css/lookbook.css" />
+		<css src="css/font.css" />
 		<css src="css/promotionbar.css"/>
     </head>
     <body>
@@ -102,12 +103,14 @@
 			<container name="main.content.bottom" as="main_content_bottom" after="main.content" label="After Main Content" htmlTag="div" htmlId="bottomcontent" htmlClass="bottom-main-wrapper" /> 			
         </referenceContainer>
         <referenceContainer name="footer-container">
+			<block class="Magento\Framework\View\Element\Template" name="custom-footer" template="Magento_Theme::html/custom-footer.phtml" before="footer.container.bottom" />
             <container name="footer.container.top" before="-" htmlTag="div" htmlId="topfooter" htmlClass="top-footer-wrapper" label="Footer Container Top Full">
 				 <container name="footer.content.top" htmlTag="div" htmlClass="footer content footer-content-top" label="Footer Container Top" after="-"/>
 			</container>
 			<container name="footer.container.wrapper" label="Footer Container Wrapper" after="footer.container.top" htmlTag="div" htmlClass="footer content footer-container-wrapper" />
+
             <container name="footer.container.bottom" label="Footer Container Bottom" after="footer.container.wrapper" htmlTag="div" htmlId="bottomfooter" htmlClass="bottom-footer-wrapper">
-                <container name="footer.content.bottom" htmlTag="div" htmlClass="footer content" >
+				<container name="footer.content.bottom" htmlTag="div" htmlClass="footer content" >
                     <container name="footer.custom.block" htmlTag="div" htmlClass="footer-custom-block" label="Footer Custom Block" after="copyright" />
                 </container>
             </container>
@@ -115,7 +118,8 @@
         <referenceBlock name="footer_links" display="false" />
         <move element="footer" destination="footer.container.top" before="-" />
         <referenceBlock name="report.bugs" remove="true"/>
-        <move element="copyright" destination="footer.content.bottom" before="-" />
+        <!--<move element="copyright" destination="footer.content.bottom" before="-" />-->
+		<referenceBlock name="copyright" remove="true"/>
 		
 		<referenceContainer name="page.wrapper">
 			<container name="backtop" after="footer-container">
@@ -139,11 +143,11 @@
 				<!--<block class="Magento\Framework\View\Element\Template" name="customblock" after="logo" template="Magento_Theme::html/custom-header.phtml" />-->
 			</container>
         </referenceContainer>
-        <!-- <referenceContainer name="footer-container">
+        <!--<referenceContainer name="footer-container">
 		    <container name="my-new-footer" as="footer.new" label="Page new Footer" htmlTag="div" htmlClass="footer content">
-		        <block class="Magento\Framework\View\Element\Template" name="custom-footer" template="html/custom-footer.phtml" />
+		        <block class="Magento\Framework\View\Element\Template" name="custom-footer" template="Magento_Theme::html/custom-footer.phtml" />
 		    </container>
-		</referenceContainer> -->
+		</referenceContainer>-->
 		<referenceContainer name="header.panel.wrapper" remove="true" />
     </body>
 </page>
