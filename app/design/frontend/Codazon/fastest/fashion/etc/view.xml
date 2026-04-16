@@ -33,16 +33,16 @@
                 <height>772</height>
             </image>
             <image id="category_page_grid-1" type="small_image">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
             <image id="category_page_list" type="small_image">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
 			<image id="category_page_list_hover" type="thumbnail">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
             <image id="customer_account_my_tags_tag_view" type="small_image">
                 <width>100</width>
@@ -69,16 +69,16 @@
                 <height>110</height>
             </image>
             <image id="new_products_content_widget_grid" type="small_image">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
             <image id="new_products_content_widget_grid_hover" type="thumbnail">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
             <image id="new_products_content_widget_list" type="small_image">
-                <width>280</width>
-                <height>345</height>
+                <width>310</width>
+                <height>382</height>
             </image>
             <image id="new_products_images_only_widget" type="small_image">
                 <width>78</width>
