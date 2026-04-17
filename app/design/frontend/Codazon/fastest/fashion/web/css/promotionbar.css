@@ -1,23 +1,22 @@
 /*Promotion/Announcement Bar*/
 body header.page-header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
 }
 
-body .top-main-wrapper {
-    margin-top: 188px;
-}
+/*body .top-main-wrapper {*/
+/*    margin-top: 188px;*/
+/*}*/
 
 .container {
-    max-width: 1320px;
-    margin: 0 auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    max-width: 1280px;
+    margin: 0 auto !important;
+    padding-left: 32px;
+    padding-right: 32px;
 }
-
 
 div#promo-announcement-bar p {
     font-family: 'Inter' !important;
@@ -231,6 +230,7 @@ body .page-footer {
     --tw-leading: 1.625;
     line-height: 1.625;
     color: #5d4e37;
+    font-family: 'Inter' !important;
 }
 
 .app-wrapper .app-heading {
@@ -483,14 +483,14 @@ span.icon.icon-play {
     flex-shrink: 0;
 }
 .text-red-800 {
-    color: #9f0712;
+    color: #9f0712 !important;
 }
 .tracking-wider {
     --tw-tracking: 1.8px;
     letter-spacing: 1.8px;
 }
 .text-4xl {
-    font-size: 36px;
+    font-size: 36px !important;
     line-height: 1.11111;
 }
 .font-serif {
@@ -498,7 +498,7 @@ span.icon.icon-play {
 }
 .logo-text {
     margin-bottom: 0;
-    font-weight: 500;
+    font-weight: 500 !important;
 }
 .text-gray-600 {
     color: #4a5565;
@@ -521,4 +521,37 @@ span.icon.icon-play {
     color: #030213 !important;
     background-color: #e9ebef;
     border-radius: 8px !important;
+}
+.minicart-wrapper .action.showcart .counter.qty {
+    height: 18px;
+    line-height: 20px;
+    background: #C10007;
+    color: #fff;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    border-radius: 100%;
+    font-size: 11px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 0;
+    min-width: 18px;
+    overflow: hidden;
+    padding: 0 3px;
+    text-align: center;
+    white-space: normal;
+    position: absolute;
+    top: -3px;
+    left: 18px;
+    border: 0 solid #999999;
+}
+
+body .page-footer .container {
+    background: #e8dcc8;
+}
+
+body .page-footer .social-media .container {
+    background-color: rgb(93, 78, 55) !important;
+}
+body .page-footer .category .container {
+    background-color: rgb(212, 196, 168) !important;
 }
