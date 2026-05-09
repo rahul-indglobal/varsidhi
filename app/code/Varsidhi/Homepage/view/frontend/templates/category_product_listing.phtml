@@ -26,10 +26,13 @@ $subTitle = $block->getData('subtitle');
 					<?php foreach ($collection as $_product): ?>
 						<li class="item product product-item">
 							<div class="product-item-info" data-container="product-grid">
-
+                                <?php
+                                    $product_ribbon = $_product->getProductRibbon() ?? "";
+                                ?>
 								<div class="product-image-area">
-									<div class="product-ribbon"><span>NEW</span></div>
-
+                                    <?php if($product_ribbon): ?>
+									<div class="product-ribbon"><span><?= __($product_ribbon); ?></span></div>
+                                    <?php endif; ?>
 									<?php
 									    $productImage = $block->getImage($_product, 'new_products_content_widget_grid');
 									?>

@@ -26,7 +26,7 @@ $subTitle = $block->getData('subtitle');
                     <div class="product-item-info" data-container="product-grid">
 
                         <div class="product-image-area">
-                            <div class="product-ribbon"><span>NEW</span></div>
+                            <div class="product-ribbon"><span><?php echo __('New'); ?></span></div>
 
                             <?php
                             $productImage = $block->getImage($_product, 'new_products_content_widget_grid');
