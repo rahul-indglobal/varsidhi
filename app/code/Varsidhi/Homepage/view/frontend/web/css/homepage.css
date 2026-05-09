@@ -532,6 +532,7 @@ div#hero-carousel {
         z-index: 2;
         font-weight: 600;
         border-radius: 33554400px;
+        text-transform: uppercase;
     }
 
     /* Wishlist Icon Overlay */
