@@ -23,3 +23,20 @@ MUST create the following Static Block:
 
 Must Create the following Widget:
 - **Widget Title:** Homepage Main Slider
+- 
+### 5. Create Product Attribute
+- **Attribute Title:** Product Ribbon
+- **Attribute Code:** product_ribbon
+- **Attribute Type:** TEXT
+- **Assign Attribute to ALL Attribute Set**
+### 6. Update: CMS Homepage Configuration
+
+## Summary
+Removed the hardcoded template directive from the CMS Home Page to clean up legacy rendering and prepare for the new layout structure.
+
+## Changes
+- **Page Title:** Homepage
+- **Page ID:** `16`
+- **Action:** Removed the following block directive from the Content area:
+  ```html
+  {{block class="Magento\Framework\View\Element\Template" template="Magento_Theme::html/homepage.phtml"}}
