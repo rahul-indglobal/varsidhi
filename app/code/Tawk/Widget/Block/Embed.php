@@ -118,7 +118,7 @@ class Embed extends Template
 			$display = false;
 
 			$included_url_list = $this->model->getIncludeUrl();
-			if(strlen( $included_url_list ) > 0 )
+			if($included_url_list && strlen( $included_url_list ) > 0 )
 			{
 				$current_url = $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"];
 				$current_url = urldecode($current_url);
