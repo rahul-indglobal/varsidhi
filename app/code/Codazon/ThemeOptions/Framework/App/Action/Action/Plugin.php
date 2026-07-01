@@ -2,23 +2,6 @@
 namespace Codazon\ThemeOptions\Framework\App\Action\Action;
 class Plugin
 {
-	/**
-	 * @var \Magento\Store\Model\StoreManagerInterface
-	 */
-	protected $_storeManager;
-	/**
-	 * @var \Codazon\ThemeOptions\Helper\Data
-	 */
-	private $_optionHelper;
-	/**
-	 * @var \Magento\Framework\App\Config\ScopeConfigInterface
-	 */
-	private $_scopeConfig;
-	/**
-	 * @var \Magento\Framework\View\Design\Theme\ThemeProviderInterface
-	 */
-	private $_themeProvider;
-
 	public function __construct(
 		\Codazon\ThemeOptions\Helper\Data $optionHelper,
 		\Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,

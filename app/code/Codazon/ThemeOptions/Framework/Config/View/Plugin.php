@@ -3,16 +3,7 @@ namespace Codazon\ThemeOptions\Framework\Config\View;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 class Plugin
 {
-	/**
-	 * @var \Codazon\ThemeOptions\Helper\Data
-	 */
-	protected $_helper;
-	/**
-	 * @var \Magento\Framework\App\State
-	 */
-	protected $_state;
-
-	public function __construct(
+    public function __construct(
         \Codazon\ThemeOptions\Helper\Data $helper,
         \Magento\Framework\App\State $state
     ) {

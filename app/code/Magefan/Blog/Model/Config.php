@@ -99,12 +99,8 @@ class Config
     const XML_TAG_ROBOTS = 'mfblog/tag/robots';
     const XML_SEARCH_ROBOTS = 'mfblog/search/robots';
     const XML_AUTHOR_ROBOTS = 'mfblog/author/robots';
-	/**
-	 * @var ScopeConfigInterface
-	 */
-	protected $scopeConfig;
 
-	/**
+    /**
      * Config constructor.
      * @param ScopeConfigInterface $scopeConfig
      */

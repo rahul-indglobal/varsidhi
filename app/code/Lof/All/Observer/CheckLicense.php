@@ -45,14 +45,6 @@ class CheckLicense implements ObserverInterface
      * @var \Magento\Framework\HTTP\PhpEnvironment\RemoteAddress
      */
 	protected $_remoteAddress;
-	/**
-	 * @var \Magento\Store\Model\StoreManagerInterface
-	 */
-	protected $_storeManager;
-	/**
-	 * @var \Lof\All\Helper\Data
-	 */
-	protected $licenseHelper;
 
 	/**
 	 * @param \Lof\All\Model\License                               $licnese        

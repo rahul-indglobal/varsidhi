@@ -29,21 +29,8 @@ class Initial
      * @var array
      */
     protected $_metadata = [];
-	/**
-	 * @var Initial\Reader|\Magento\Framework\App\Config\Initial\Reader
-	 */
-	protected $reader;
-	/**
-	 * @var \Magento\Framework\App\Config
-	 */
-	protected $scopeConfig;
-	/**
-	 * @var \Magento\Framework\App\Cache\Type\Config
-	 */
-	protected $cache;
-	protected $themeId;
 
-	/**
+    /**
      * @param \Magento\Framework\App\Config\Initial\Reader $reader
      * @param \Magento\Framework\App\Cache\Type\Config $cache
      */

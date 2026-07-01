@@ -2,34 +2,7 @@
 namespace Codazon\ThemeOptions\Backend\Model\Menu\Builder;
 class Plugin
 {
-	/**
-	 * @var \Magento\Backend\Model\Menu\Item\Factory
-	 */
-	protected $_itemFactory;
-	protected $_config;
-	/**
-	 * @var \Magento\Store\Model\StoreManager
-	 */
-	protected $_storeManager;
-	/**
-	 * @var string
-	 */
-	private $session;
-	/**
-	 * @var string
-	 */
-	private $website;
-	/**
-	 * @var string
-	 */
-	private $store;
-	/**
-	 * @var string
-	 */
-	protected $code;
-	protected $currentThemeId;
-
-	public function __construct(
+    public function __construct(
         \Magento\Backend\Model\Menu\Item\Factory $menuItemFactory,
         \Magento\Config\Model\ConfigFactory $configFactory,
         \Magento\Store\Model\StoreManager $storeManager

@@ -32,12 +32,8 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      * @var \Magefan\Blog\Model\Category
      */
     protected $category;
-	/**
-	 * @var false
-	 */
-	protected $_previewFlag;
 
-	/**
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy

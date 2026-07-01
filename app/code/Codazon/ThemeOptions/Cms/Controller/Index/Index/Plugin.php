@@ -2,11 +2,6 @@
 namespace Codazon\ThemeOptions\Cms\Controller\Index\Index;
 class Plugin
 {
-	protected $_action;
-	protected $_scopeConfig;
-	protected $_helperPage;
-	protected $resultForwardFactory;
-	
 	public function __construct(
         \Magento\Cms\Controller\Index\Index $action,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,

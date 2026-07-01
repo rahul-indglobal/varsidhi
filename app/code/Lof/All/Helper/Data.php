@@ -57,17 +57,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      * @var \Magento\Framework\Registry
      */
     protected $_coreRegistry;
-	/**
-	 * @var \Lof\All\Model\License
-	 */
-	protected $_license;
-	protected $_remoteAddress;
-	/**
-	 * @var Dir\Reader
-	 */
-	protected $_moduleReader;
 
-	public function __construct(
+    public function __construct(
         \Magento\Framework\App\Helper\Context $context,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
         \Magento\Cms\Model\Template\FilterProvider $filterProvider,

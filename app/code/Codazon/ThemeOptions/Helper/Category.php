@@ -54,16 +54,8 @@ class Category extends AbstractHelper
      * @var CategoryRepositoryInterface
      */
     protected $categoryRepository;
-	/**
-	 * @var \Magento\Catalog\Model\ResourceModel\Category\FlatFactory
-	 */
-	protected $_categoryFlatFactory;
-	/**
-	 * @var \Magento\Catalog\Model\Indexer\Category\Flat\State
-	 */
-	protected $categoryFlatState;
 
-	/**
+    /**
      * @param \Magento\Framework\App\Helper\Context $context
      * @param \Magento\Catalog\Model\CategoryFactory $categoryFactory
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager

@@ -22,13 +22,8 @@ class Scoped extends \Magento\Framework\Model\ResourceModel\Db\Collection\Abstra
      * @var int
      */
     protected $_scopeId;
-	protected $themeId;
-	/**
-	 * @var \Magento\Theme\Model\Design
-	 */
-	protected $design;
 
-	/**
+    /**
      * @param \Magento\Framework\Data\Collection\EntityFactory $entityFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param \Magento\Framework\Data\Collection\Db\FetchStrategyInterface $fetchStrategy
@@ -53,7 +48,7 @@ class Scoped extends \Magento\Framework\Model\ResourceModel\Db\Collection\Abstra
     ) {
         $this->_scope = $scope;
         $this->_scopeId = $scopeId;
-        $this->themeId = $scopeConfig->getValue('design/theme/theme_id',$scope, $scopeId);
+        $this->themeId = $this->themeId = $scopeConfig->getValue('design/theme/theme_id',$scope, $scopeId);
         $this->design = $design;
         if($design->getDesign()){
             $this->themeId = $design->getDesign();

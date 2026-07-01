@@ -46,16 +46,8 @@ class Reader
      * @var Filesystem\Directory\ReadFactory
      */
     protected $readFactory;
-	/**
-	 * @var \Magento\Theme\Model\Theme
-	 */
-	private $theme;
-	/**
-	 * @var ComponentRegistrar
-	 */
-	private $componentRegistrar;
 
-	/**
+    /**
      * @param Dir $moduleDirs
      * @param ModuleListInterface $moduleList
      * @param FileIteratorFactory $fileIteratorFactory

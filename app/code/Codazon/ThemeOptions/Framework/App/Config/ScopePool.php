@@ -40,13 +40,8 @@ class ScopePool
      * @var \Magento\Framework\App\ScopeResolverPool
      */
     protected $_scopeResolverPool;
-	/**
-	 * @var \Magento\Framework\App\Config
-	 */
-	protected $scopeConfig;
-	private $themeId;
 
-	/**
+    /**
      * @param \Magento\Framework\App\Config\Scope\ReaderPoolInterface $readerPool
      * @param DataFactory $dataFactory
      * @param \Magento\Framework\Cache\FrontendInterface $cache

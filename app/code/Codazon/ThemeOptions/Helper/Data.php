@@ -10,24 +10,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
 	protected $_scopeConfig;
 	protected $_pageConfig;
 	/**
-	 * @var \Codazon\ThemeOptions\Framework\App\Config
-	 */
-	protected $_themeConfig;
-	/**
-	 * @var \Codazon\ThemeOptions\Model\ConfigFactory
-	 */
-	protected $_configFactory;
-	/**
-	 * @var \Magento\Catalog\Model\ProductFactory
-	 */
-	protected $_productLoader;
-	/**
-	 * @var \Magento\Catalog\Helper\Image
-	 */
-	protected $_imageHelper;
-	protected $_storeId;
-
-	/**
      * @param \Magento\Framework\App\Helper\Context $context
      */
 	public function __construct(

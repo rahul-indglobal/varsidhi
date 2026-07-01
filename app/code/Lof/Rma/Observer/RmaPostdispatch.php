@@ -27,12 +27,7 @@ use Magento\Framework\Event\ObserverInterface;
 
 class RmaPostdispatch implements ObserverInterface
 {
-	/**
-	 * @var \Magento\Framework\ObjectManagerInterface
-	 */
-	protected $objectManager;
-
-	public function __construct(
+    public function __construct(
         \Magento\Framework\ObjectManagerInterface $objectManager
     ) {
         $this->objectManager = $objectManager;

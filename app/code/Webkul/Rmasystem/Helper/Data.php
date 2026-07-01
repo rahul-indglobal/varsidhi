@@ -41,8 +41,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
      */
     protected $fileSystem;
 
-	protected $httpContext;
-
     /**
      * Escaper
      *

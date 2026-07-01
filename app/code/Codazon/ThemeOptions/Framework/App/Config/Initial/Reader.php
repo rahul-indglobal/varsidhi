@@ -50,12 +50,8 @@ class Reader
      * @var string
      */
     protected $_schemaFile;
-	/**
-	 * @var \Magento\Framework\Config\DomFactory
-	 */
-	protected $domFactory;
 
-	/**
+    /**
      * @param \Magento\Framework\Config\FileResolverInterface $fileResolver
      * @param \Magento\Framework\Config\ConverterInterface $converter
      * @param SchemaLocator $schemaLocator
