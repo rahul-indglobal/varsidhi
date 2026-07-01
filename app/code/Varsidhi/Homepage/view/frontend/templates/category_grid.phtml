@@ -16,7 +16,7 @@ $subTitle = $block->escapeHtml($block->getData('subtitle'));
         <div class="category-grid">
         <div class="category-items category-container">
             <?php foreach ($categories as $category): ?>
-                <div class="category-item">
+                <div class="category-item" data-category-id="<?= $block->escapeHtmlAttr($category['id']) ?>">
                     <a href="<?= $block->escapeUrl($category['url']) ?>">
                         <div class="category-image">
                             <?php if ($category['image']): ?>

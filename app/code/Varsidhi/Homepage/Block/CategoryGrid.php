@@ -84,6 +84,7 @@ class CategoryGrid extends Template
         $categoryData = [];
         foreach ($collection as $category) {
             $categoryData[] = [
+				'id' => $category->getId(),
                 'name' => $category->getName(),
                 'url' => $category->getUrl(),
                 'image' => $this->getCustomCategoryImage($category),

@@ -5,20 +5,20 @@
     --text-muted: #4a5568;
 }
 
-.cms-index-index .page-main {
+.cms-index-index .page-main, .cms-new-homepage .page-main {
     max-width: 100% !important;
 }
 
-.cms-index-index .block-static-block.widget {
+.cms-index-index .block-static-block.widget, .cms-new-homepage .block-static-block.widget {
     margin-bottom: 0 !important;
 }
 
-.cms-index-index section {
+.cms-index-index section, .cms-new-homepage section {
     padding-top: 64px;
     padding-bottom: 64px;
 }
 
-.cms-index-index .container {
+.cms-index-index .container, .cms-new-homepage .container {
     max-width: 1280px;
     margin: 0 auto;
     padding-left: 32px;
@@ -168,7 +168,7 @@ div#hero-carousel {
     font-family: 'Inter' !important;
 }
 
-.cms-index-index #promo-sale p {
+.cms-index-index #promo-sale p, .cms-new-homepage #promo-sale p {
     font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
@@ -181,7 +181,7 @@ div#hero-carousel {
     padding: 12px 0;
 }
 
-.cms-index-index .title h2 {
+.cms-index-index .title h2, .cms-new-homepage .title h2 {
     font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
@@ -193,7 +193,7 @@ div#hero-carousel {
     color: #0A0A0A;
 }
 
-.cms-index-index .subtitle p {
+.cms-index-index .subtitle p, .cms-new-homepage .subtitle p {
     font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
@@ -204,7 +204,7 @@ div#hero-carousel {
     vertical-align: middle;
 }
 
-.cms-index-index section .header {
+.cms-index-index section .header, .cms-new-homepage section .header {
     margin-bottom: 48px;
 }
 
@@ -341,7 +341,7 @@ div#hero-carousel {
     margin-bottom: 35px;
 }
 
-.cms-index-index .header .title h2 {
+.cms-index-index .header .title h2, .cms-new-homepage .header .title h2 {
     font-family: 'Inter' !important;
     font-weight: 500;
     font-style: normal;
@@ -353,7 +353,7 @@ div#hero-carousel {
     color: #0A0A0A;
 }
 
-.cms-index-index .new-arrival-header .subtitle p {
+.cms-index-index .new-arrival-header .subtitle p, .cms-new-homepage .new-arrival-header .subtitle p {
     font-family: 'Inter' !important;
     font-weight: 400;
     font-style: normal;
@@ -475,7 +475,7 @@ div#hero-carousel {
     text-decoration: none;
 }
 
-.cms-index-index {
+.cms-index-index, .cms-new-homepage {
     .products-grid .product-item-actions {
         margin: 0 0 0;
     }
@@ -1024,7 +1024,7 @@ section.category-collection:nth-child(even) {
     .owl-carousel .owl-nav [class*='owl-']:before {
         line-height: 25px;
     }
-    .cms-index-index section {
+    .cms-index-index section, .cms-new-homepage section {
         padding-bottom: 32px;
         padding-top: 32px;
     }
@@ -1042,14 +1042,14 @@ section.category-collection:nth-child(even) {
         margin-bottom: 24px;
     }
 
-    .cms-index-index .container {
+    .cms-index-index .container, .cms-new-homepage .container {
         padding-left: 15px;
         padding-right: 15px;
     }
-    .cms-index-index section .header {
+    .cms-index-index section .header, .cms-new-homepage section .header {
         margin-bottom: 24px;
     }
-    .cms-index-index .header .title h2 {
+    .cms-index-index .header .title h2, .cms-new-homepage .header .title h2 {
         font-size: 24px;
         line-height: 25px;
         margin-bottom: 12px;

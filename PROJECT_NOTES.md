@@ -40,3 +40,17 @@ Removed the hardcoded template directive from the CMS Home Page to clean up lega
 - **Action:** Removed the following block directive from the Content area:
   ```html
   {{block class="Magento\Framework\View\Element\Template" template="Magento_Theme::html/homepage.phtml"}}
+
+### Separate homepage Plan
+- **Page Title:** New Homepage
+- **Page URL:** `new-homepage`
+- **Create the CMS Static blank page with above Title and url**
+- **Created page_types.xml and layout files to add new homepage layout in widget display on dropdown in admin panel**
+- **File paths:**
+- ```html
+  app/code/Varsidhi/Homepage/etc/frontend/page_types.xml
+  app/code/Varsidhi/Homepage/view/frontend/layout/cms_page_view_id_new-homepage.xml
+
+- **Update All the widgets records Display on section with new page types:**
+- **Changes From "CMS Home Page" to "New Homepage (Custom)"**
+- **Updated homepage.css files as the css was for homepage only"**
