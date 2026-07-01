@@ -10,6 +10,8 @@ $street_line1        = $templateBlock->getConfigValue('general/store_information
 $merchant_vat_number = $templateBlock->getConfigValue('general/store_information/merchant_vat_number', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
 ?>
+<?= $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('new_footer_block')->toHtml(); ?>
+<!--
 <div class="bg-star"></div>
 <div class="container">
     <div class="footer-wrapper">
@@ -214,6 +216,7 @@ $merchant_vat_number = $templateBlock->getConfigValue('general/store_information
         </div>
     </div>
 </div>
+-->
 <div class="copyright-section bg-[#5D4E37] text-white text-center py-4 text-sm">
     <?php /* @escapeNotVerified */
     echo $copyrightBlock->getCopyright() ?>
